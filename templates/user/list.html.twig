@@ -1,0 +1,127 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello UserController!{% endblock %}
+
+{% block body %}
+  <body id="page-top">
+       {{include('_layout/admin/_nav.html.twig')}}
+    <div id="wrapper">
+
+      <!-- Sidebar -->
+      {{include('_layout/admin/_siderbar.html.twig')}}
+
+      <div id="content-wrapper">
+
+        <div class="container-fluid">
+
+          <!-- Breadcrumbs-->
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+              <a href="/admin">Dashboard</a>
+            </li>
+            
+            <li class="breadcrumb-item active">utilisateurs</li>
+          </ol>
+        
+          <!-- les tarifs -->
+            <center><h2> List des utilisateurs </h2></center>
+            <div class="card mb-3">
+            <div class="card-header">
+              <i class="fas fa-table"></i>
+              List des utilisateurs</div>
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                  <thead>
+                    <tr>
+                      <th>ID</th>
+                      <th>Photo</th>
+                      <th>Name</th>
+                      <th>prenom</th>
+                      <th>agence</th>
+                      <th>Status</th>
+                      <th>Actions</th>
+                    </tr>
+                  </thead>
+                  <tfoot>
+                  <tr>
+                      <tr>
+                      <th>ID</th>
+                      <th>Photo</th>
+                      <th>Name</th>
+                      <th>prenom</th>
+                      <th>agence</th>
+                      <th>Status</th>
+                      <th>Actions</th>
+                    </tr>
+                  </tfoot>
+                  <tbody>
+
+                  {% if users is empty %}
+                      <h4>Aucun utilisateur enregistre </h4>
+                    {% else %}
+
+                      {% for user in users %}
+                        <tr>
+                         <td>#{{user.id}}</td>
+                         <td>
+                           {# <img class="card-img-top" src="{{ vich_uploader_asset(user, 'imageFile')}}" alt="image" style="width:100px"> #}
+                          
+                           {% if user.image != null %}
+                  
+                            <img class="card-img-top" src="{{ vich_uploader_asset(user, 'imageFile')}}" alt=" image" style="width:100px">
+                            {% else %}
+                              {% if user.sex == 'F' %}
+                                      <img class="card-img-top" src="{{asset('images/femme.jfif')}}" alt=" image" style="width:100px">
+                                      {% else %}
+                                        <img class="card-img-top" src="{{asset('images/homme.png')}}" alt=" image" style="width:100px">
+                                {% endif %}
+                            {% endif %}
+                          </td>
+                          <td>{{user.nom}}</td>
+                          <td>{{user.prenom}}</td>
+                          <td>{{user.agence}}</td>
+                          <td>{{user.getChoiceroles()}}</td>
+                          <td>
+                            <a href='{{path('user_show',{'id': user.id})}}'><button type="button" class="btn btn-info">Voire</button><a>
+                            {% if  is_granted('ROLE_SUPER_ADMIN') %}
+                              <a href='{{path('update_ActionUser',{'id': user.id})}}'><button type="button" class="btn btn-primary">Modifier</button><a>
+                              <a href='{{path('user_delete',{'id':user.id})}}'><button type="button" class="btn btn-danger">supprimer</button><a>
+                            {% endif %}
+                            
+                          </td> 
+                        </tr>
+                      {% endfor %}
+                   {% endif %}
+                  
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="card-footer small text-muted">Updated {{'now' | date("m/d/Y  H:m:s")}}</div>
+          </div>
+         
+        </div>
+        <!-- /.container-fluid -->
+
+        <!-- Sticky Footer -->
+        {{include('_layout/_footer.html.twig')}}
+
+      </div>
+      <!-- /.content-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+      <i class="fas fa-angle-up"></i>
+    </a>
+
+    <!-- Logout Modal-->
+    {{include('_layout/_logout_modal.html.twig')}}
+
+  </body>
+
+{% endblock %}
+

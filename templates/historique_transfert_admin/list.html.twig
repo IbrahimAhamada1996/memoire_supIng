@@ -1,0 +1,106 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello OperationController!{% endblock %}
+
+{% block body %}
+   <body id="page-top">
+    {{include('_layout/admin/_nav.html.twig')}}}
+    <div id="wrapper">
+      <!-- Sidebar -->
+     {{include('_layout/admin/_siderbar.html.twig')}} 
+   
+      <div id="content-wrapper">
+
+        <div class="container-fluid">
+
+          <!-- Breadcrumbs-->
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+              <a href="{{path('admin_home')}}">Dashboard</a>
+            </li>
+            <li class="breadcrumb-item active">trasferts</li>
+          </ol>
+
+          <!-- DataTables Example -->
+         <center><h2> Liste des transferts </h2></center>
+            <div class="card mb-3">
+            <div class="card-header">
+              <i class="fas fa-table"></i>
+              Transferts</div>
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                  <thead>
+                    <tr>
+                      <th>ID</th>
+                      <th>Operateur </th>
+                      <th>Ville</th>
+                      <th>Agence</th>
+                      <th>Montant</th>
+                      <th>Actions</th>
+                    </tr> 
+                  </thead>
+                  <tfoot>
+                    <tr>
+                      <th>ID</th>
+                      <th>Operateur </th>
+                      <th>Ville</th>
+                      <th>Agence</th>
+                      <th>Montant</th>
+                      <th>Actions</th>
+                    </tr>
+                  </tfoot>
+                  <tbody>
+                  {% if transferts is empty %}
+                  <h2> Aucune Transfert éffectué </h2>
+                    {% else %}
+                      {% for transfert in transferts | sort %}
+                    <tr>
+                        <td>{{transfert.id}}</td>
+                        <td>{{transfert.user.prenom}} {{transfert.user.nom}}</td>
+                        <td>{{transfert.villeEnvoi}}</td>
+                        <td>{{transfert.user.agence}}</td>
+                        <td>{{transfert.Montant | number_format}} </td>
+                        <td>
+                          <a href='{{path('historique_admin_transfert_show',{'id':transfert.id})}}'><button type="button" class="btn btn-info">Voire</button><a>
+                        </td> 
+                    </tr>
+                     {% endfor %}
+                  {% endif %}
+            
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="card-footer small text-muted">Updated {{'now' | date("m/d/Y  H:m:s")}}</div>
+          </div>
+         
+
+          <p class="small text-center text-muted my-5">
+            <em>More table examples coming soon...</em>
+          </p>
+
+        </div>
+        <!-- /.container-fluid -->
+
+        <!-- Sticky Footer -->
+        {{include('_layout/_footer.html.twig')}}
+
+      </div>
+      <!-- /.content-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+      <i class="fas fa-angle-up"></i>
+    </a>
+
+    <!-- Logout Modal-->
+     {{include('_layout/_logout_modal.html.twig')}}
+
+
+  </body>
+{% endblock %}
+

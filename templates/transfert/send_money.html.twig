@@ -1,0 +1,153 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello TransfertController!{% endblock %}
+
+{% form_theme formTransfert 'bootstrap_4_layout.html.twig' %}
+{% block body %}
+  <body id="page-top">
+
+      {{include('_layout/operateur/_nav.html.twig')}}
+
+    <div id="wrapper">
+
+      <!-- Sidebar -->
+       {{include('_layout/operateur/_siderbar.html.twig')}}
+
+      <div id="content-wrapper">
+
+        <div class="container-fluid">
+
+          <!-- Breadcrumbs-->
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+              <a href="{{path('operateur_home')}}">Dashboard</a>
+            </li>
+            <li class="breadcrumb-item active">Envoie</li>
+          </ol>
+
+          <!-- Formulaire d'envoie -->
+            <div class="row">
+              <div class="col-6 ">
+                <center>
+                  <button  class="btn btn-success">1</button>
+                 EXPÉDITEUR 
+                 <hr>
+                 </center>
+              </div>
+              <div class="col-6">
+                <center>
+                <button class="btn btn-success">2</button>
+                BÉNÉFICIAIRE
+                <hr>
+                 </center>
+              </div>
+              
+            </div>
+            <div class="col-12">
+              {% for message in app.flashes('succes') %}
+              <div class="alert alert-success"> {{message}} </div> 
+              {% endfor %}
+                  {% for message in app.flashes('danger') %}
+              <div class="alert alert-danger"> {{message}} </div> 
+              {% endfor %}
+            </div>
+              {{form_start(formTransfert,{'method':'POST'})}} 
+                <div class="row">
+                  <div class="col-6 ">
+
+                    <div class="form-group">
+                       {{form_row(formTransfert.prenomExpediteur, {'label':'Prénom','attr': {'placeholder':"Prénom d'expéditeur "}})}}
+                    </div>
+                    <div class="form-group">
+                      {{form_row(formTransfert.nomExpediteur, {'label':'Nom','attr': {'placeholder':"Nom d'expéditeur "}})}}
+                    </div>
+                    <div class="form-group">
+                       {{form_row(formTransfert.phoneExpediteur, {'label':'phone','attr': {'placeholder':"numero de téléphone d'expéditeur "}})}}
+                    </div>
+                    <div class="form-group">
+                       {{form_row(formTransfert.numeroPieceId, {'label':'N° de piéce'})}}
+                    </div>
+                    <div class="form-group">
+                       {{form_row(formTransfert.montant, {'label':'Montant','attr': {'placeholder':"Montant "}})}}
+                    </div>
+                    <div class="form-group">
+                       {{form_row(formTransfert.tarif, {'label':'Choisi l\'intervale du montant'})}}
+                    </div>
+
+                  </div>
+                 
+                  <div class="col-6">
+                     <div class="form-group">
+                       {{form_row(formTransfert.prenomBeneficiaire, {'label':'Prénom','attr': {'placeholder':"Prénom de bénéficiaire "}})}}
+                    </div>
+                    <div class="form-group">
+                      {{form_row(formTransfert.nomBeneficiaire, {'label':'Nom','attr': {'placeholder':"Nom de bénéficiaire "}})}}
+                    </div>
+                    <div class="form-group">
+                       {{form_row(formTransfert.phoneBeneficiaire, {'label':'phone','attr': {'placeholder':"numero de téléphone de bénéficiaire "}})}}
+                    </div>
+              <pre>
+                {{ dump(impression) }}
+              </pre>
+                {% if impression == true %}
+                  <table class="table table-bordered table-info">
+                    <thead>
+                      <tr>
+                        <th scope="col" style="color: green" colspan="2">Code: <b> {{dataTransfert[0].codeTransfert}} <b></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <th scope="col">Nom Complet (Beneficiaire)</th>
+                        <td>{{dataTransfert[0].prenomBeneficiaire}} {{dataTransfert[0].nomBeneficiaire}}</td>
+                      </tr>
+                       <tr>
+                        <th scope="col">Phone (Beneficiaire)</th>
+                        <td>{{dataTransfert[0].phoneBeneficiaire}}</td>
+                      </tr>
+                      <tr>
+                        <th scope="col">Montant</th>
+                        <td colspan="2"><b>{{dataTransfert[0].montant | number_format}} FCFA</b> </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  
+                 <center> <a href="{{path('pdf_recuTransfert')}}" <button type="button" class="btn btn-success" >Imprimer</button> </a></center>
+                {% endif %}
+                  
+                  </div>
+                </div>
+                    <center> 
+                    <button type="submit" class="btn btn-success">Envoyer</button>
+                    <button type="reset" class="btn btn-success">Annuler</button> 
+                    </center> 
+              {{form_end(formTransfert)}}
+              
+
+         </div>
+
+        <!-- /.container-fluid -->
+
+        <!-- Sticky Footer -->
+        {{include('_layout/_footer.html.twig')}}
+
+      </div>
+      <!-- /.content-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+      <i class="fas fa-angle-up"></i>
+    </a>
+
+    <!-- Logout Modal-->
+    {{include('_layout/_logout_modal.html.twig')}}
+
+
+    {% block javascripts %}
+      <script src="{{asset('collapse.js')}}"></script>
+    {% endblock %}
+  </body>
+{% endblock %}

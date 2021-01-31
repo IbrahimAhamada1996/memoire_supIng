@@ -1,0 +1,136 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello UserController!{% endblock %}
+
+{% block body %}
+  <body id="page-top">
+
+    {{include('_layout/admin/_nav.html.twig')}}
+    <div id="wrapper">
+
+      <!-- Sidebar -->
+      {{include('_layout/admin/_siderbar.html.twig')}}
+
+      <div id="content-wrapper">
+
+        <div class="container-fluid">
+
+          <!-- Breadcrumbs-->
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+              <a href="{{path('admin_home')}}">Dashboard</a>
+            </li>
+            <li class="breadcrumb-item ">
+              <a href="{{path('users_list')}}">utilisateurs </a>
+            </li>
+            <li class="breadcrumb-item active">{{user.prenom }} {{user.nom}}</li>
+          </ol>
+
+          <!-- les tarifs -->
+            <center><h2> Détail de l'utilisateur </h2></center>
+            <div class="row ">  
+               <div class="col-md-3">
+                  <div class="card" style="width:200px">
+
+                    {% if user.image != null %}
+                      <img class="card-img-top" src="{{ vich_uploader_asset(user, 'imageFile')}}" alt=" image">
+                      {% else %}
+                        {% if user.sex == 'F' %}
+                                <img class="card-img-top" src="{{asset('images/femme.jfif')}}" alt=" image">
+                                {% else %}
+                                  <img class="card-img-top" src="{{asset('images/homme.png')}}" alt=" image">
+                        {% endif %}
+                    {% endif %}
+                   
+                    <div class="card-body">
+                      <h4 class="card-title">{% if user.sex !='F' %}Mr {% else %}
+                        Mme {% endif %}  {{user.prenom | title}} {{user.nom | title }}</h4>
+                      <p class="card-text">stauts:
+                      {% if user.getChoiceroles() == 'ROLE_SUPER_ADMIN' %}
+                        <b>Super administrateur</b>
+                        {% else %}
+                          {% if user.getChoiceroles() == 'ROLE_ADMIN' %}
+                            <b>Super administrateur</b>
+                            {% else %}
+                                 <b>Operateur </b>
+                          {% endif %}
+                          
+                       {% endif %}</p>
+                    
+                    </div>
+                 </div>
+               </div>
+              <div class="col-md-9">
+                 {# {{ dump(app.user) }} #}
+                <table class="table table-bordered table-Primary">
+                  <tbody>
+                     <tr>
+                        <th scope="col" colspan="4"> <center>Informations personnels </center></th>
+                    </tr>
+                    <tr>
+                        <th scope="col">Email</th>
+                        <td scope="col"> {{user.email}} </th>
+                        <th scope="col">Phone</th>
+                        <td scope="col">{{user.tel}} </th>
+                    </tr>
+                    <tr>
+                        <th scope="col">Date de naissance</th>
+                        <td scope="col"> {{user.dateNaiss | date("m/d/Y")}} </th>
+                        <th scope="col">Lieu de naissance</th>
+                        <td scope="col"> {{user.lieuNaiss}} </th>
+                    </tr>
+                    <pre>
+                      {# {{ dump() }} #}
+                    </pre>
+                  
+                  {% if user.roles[0] == "ROLE_OPERATEUR" %}
+                    
+                   <tr>
+                        <th scope="col" colspan="2"> <center> Agence </center></th>
+                        <th scope="col" colspan="2"> <center> Compte </center> </th>
+                    </tr>
+                    <tr>
+                        <th scope="col">Non</th>
+                        <td scope="col"> {{user.agence.nomAgence}} </th>
+                        <th scope="col">Montant actuel </th>
+                        <td scope="col"> {{user.compte.solde | number_format}} FCFA</th>
+                    </tr>
+                    <tr>
+                        <th scope="col">Ville</th>
+                        <td scope="col"> {{user.agence.ville.libelle}} </th>
+                        <th scope="col">Date de creation du compte</th>
+                        <td scope="col"> {{user.compte.date | date("m/d/Y", "Africa/Dakar")}} </th>
+                    </tr>
+                    <tr>
+                        <th scope="col">Adresse</th>
+                        <td scope="col"> {{user.agence.adresse}} </th>
+                    </tr>
+                   
+                  {% endif %}
+                  </tbody>
+                </table>
+              </div>
+          </div> 
+         
+        </div>
+        <!-- /.container-fluid -->
+
+        <!-- Sticky Footer -->
+       {{include('_layout/_footer.html.twig')}}
+
+      </div>
+      <!-- /.content-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+      <i class="fas fa-angle-up"></i>
+    </a>
+
+    {{include('_layout/_logout_modal.html.twig')}}
+
+
+  </body>
+{% endblock %}

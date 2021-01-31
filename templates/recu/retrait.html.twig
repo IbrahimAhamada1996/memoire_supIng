@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {% block stylesheets %}
+        <style>
+            .container{
+                margin-left: 100px;
+                margin-top: 50px;
+            }
+            .table{
+                border: 1px solid black;
+                width: 70%;
+
+            }
+            .table .thead{
+                border-bottom: 1px solid black;
+               
+            }
+            .table ul{
+                list-style-type: none;
+                padding: 0;
+                margin:0
+            }
+            .date{
+                text-align: right;
+            }
+            .logo{
+                text-align: left;
+            }
+            .signature{
+                text-decoration: underline;
+            }
+            td{
+                padding: 12px;
+                border: 1px solid black;
+            }
+            .infoTrans{
+                border-left: 11px black;
+                
+            }
+            .tr td{
+                text-indent: 50%;
+                font-size: 100px;
+            }
+            .titre{
+                text-align: center;
+                font-size: 25px;
+            }
+            ul li{
+                padding: 10px;
+            }
+        </style>
+        <meta charset="UTF-8" >
+    {% endblock %}
+</head>
+
+{% block body %}
+ 
+<div class="container">
+    <div class="row ">  
+        <table class="table">
+            <thead >
+                <tr class="thead">
+                    <th class="logo">sendMoney</th><th class="date">Date: {{dataRetrait[0].dateRetrait | date("d/m/Y")}} </th>
+                </tr>
+            </thead>
+            <tr>
+                <td class="titre">Information du bénéficiaire</td>
+                <td class="titre">Information du transfert </td>
+            </tr>
+            <tr>
+                <td>
+                    <ul>
+                        <li> -Prénom : {{dataRetrait[0].prenomBeneficiaire}}</li>
+                        <li> -Nom : {{dataRetrait[0].nomBeneficiaire}}</li>
+                        <li> -Téléphone : +221 {{dataRetrait[0].phoneBeneficiaire}}</li>
+
+                    </ul>
+                </td>
+                    <td rowspan="3" class="infoTrans">
+                        <ul>
+                            <li> -Montant : {{dataRetrait[0].montant}} FCFA</li>
+                            <li> -Tarif : {{dataRetrait[0].tarif}} FCFA</li>
+                            <li> -Montant reçu : <b> {{(dataRetrait[0].montant - dataRetrait[0].tarif) | number_format }} FCFA </b></li>
+                            <li> -Agence : {{dataRetrait[0].user.agence.nomAgence}} </li>
+                            <li>
+                                <div class="signature">-Signature:</div>
+                            </li>
+                        </ul>
+                    </td>
+            </tr>
+                <tr>
+                
+                    <td class="titre">Information d'expediteur</td>     
+            </tr>
+                <tr>
+                <td>
+                    <ul>
+                        <li> -Prénom : {{dataRetrait[0].prenomExpediteur}}</li>
+                        <li> -Nom : {{dataRetrait[0].nomExpediteur}}</li>
+                        <li> -Téléphone : +221 {{dataRetrait[0].phoneExpediteur}}</li>
+
+                    </ul>
+                </td>
+                    
+            </tr>
+        </table>
+                   
+    
+    </div>   
+</div>
+
+{% endblock %}
+</html>

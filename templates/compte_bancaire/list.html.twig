@@ -1,0 +1,98 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello CompteBancaireController!{% endblock %}
+
+{% block body %}
+  <body id="page-top">
+       {{include('_layout/admin/_nav.html.twig')}}
+    <div id="wrapper">
+
+      <!-- Sidebar -->
+      {{include('_layout/admin/_siderbar.html.twig')}}
+
+      <div id="content-wrapper">
+
+        <div class="container-fluid">
+
+          <!-- Breadcrumbs-->
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+              <a href="/admin">Dashboard</a>
+            </li>
+            
+            <li class="breadcrumb-item active">liste</li>
+          </ol>
+        
+          <!-- les tarifs -->
+            <center><h2> List des comptes des operateurs </h2></center>
+            <div class="card mb-3">
+            <div class="card-header">
+              <i class="fas fa-table"></i>
+              List des comptes</div>
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                  <thead>
+                    <tr>
+                      <th>ID</th>
+                      <th>solde</th>
+                      <th>date</th>
+                      <th>operateur</th>
+                      <th>Actions</th>
+                    </tr>
+                  </thead>
+                  <tfoot>
+                  <tr>
+                      <tr>
+                      <th>ID</th>
+                      <th>solde</th>
+                      <th>date</th>
+                      <th>operateur</th>
+                      <th>Actions</th>
+                    </tr>
+                  </tfoot>
+                  <tbody>
+                  {% for compte in comptes %}
+                    <tr>
+                      <td>#{{compte.id}}</td>
+                      <td>{{compte.solde}}</td>
+                      <td>{{compte.date | date('Y/M/D')}}</td>
+                      <td>{{compte.user}}</td>
+                      <td>    
+                        <a href='{{path('update_ActionCompte',{'id':compte.id})}}'><button type="button" class="btn btn-primary">Modifier</button><a>
+                        <a href='{{path('tarif_delete',{'id':compte.id})}}'><button type="button" class="btn btn-danger">supprimer</button><a>
+                      </td>
+                  </tr>
+                  {% endfor %}
+                  
+                  
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="card-footer small text-muted">Updated {{'now' | date("m/d/Y  H:m:s")}}</div>
+          </div>
+         
+        </div>
+        <!-- /.container-fluid -->
+
+        <!-- Sticky Footer -->
+        {{include('_layout/_footer.html.twig')}}
+
+      </div>
+      <!-- /.content-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+      <i class="fas fa-angle-up"></i>
+    </a>
+
+    <!-- Logout Modal-->
+    {{include('_layout/_logout_modal.html.twig')}}
+
+  </body>
+{% endblock %}
+

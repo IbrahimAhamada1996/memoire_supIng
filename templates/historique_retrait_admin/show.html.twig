@@ -1,0 +1,138 @@
+{# {% extends 'base.html.twig' %}
+
+{% block title %}Hello UserController!{% endblock %}
+
+{% block body %}
+  <body id="page-top">
+
+    {{include('_layout/admin/_nav.html.twig')}}
+    <div id="wrapper">
+
+      <!-- Sidebar -->
+      {{include('_layout/admin/_siderbar.html.twig')}}
+
+      <div id="content-wrapper">
+
+        <div class="container-fluid">
+
+          <!-- Breadcrumbs-->
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+              <a href="{{path('admin_home')}}">Dashboard</a>
+            </li>
+            <li class="breadcrumb-item ">
+              <a href="{{path('historique_admin_retrait')}}">retraits </a>
+            </li>
+            <li class="breadcrumb-item active">{{retrait.user.nom}} {{retrait.user.prenom }}</li>
+          </ol>
+
+          <!-- les tarifs -->
+            <center><h2> Détail d'un retrait </h2></center> <br>
+            <div class="row ">  
+              <div class="col-md-12">
+                <table class="table table-bordered table-Primary">
+                  <tbody>
+                     <tr>
+                        <th scope="col" colspan="4"> <center>Informations operateur </center></th>
+                    </tr>
+                    <tr>
+                        <th scope="col" > Nom</th>
+                        <td scope="col"> <a href="{{path('user_show',{'id':retrait.user.id})}}"> {{retrait.user.nom}} </a></th>
+                        <th scope="col" > Prénom</th>
+                        <td scope="col"> <a href="{{path('user_show',{'id':retrait.user.id})}}">{{retrait.user.prenom }} </a></th>
+                    </tr>
+                    <tr>
+                        <th scope="col" > Sex</th>
+                        <td scope="col"> {{retrait.user.sex}} </th>
+                        <th scope="col" > Phone</th>
+                        <td scope="col"> {{retrait.user.tel }} </th>
+                    </tr>
+                    <tr>
+                        <th scope="col" > Email</th>
+                        <td scope="col"> {{retrait.user.email}} </th>
+                        <th scope="col" > Date de naisssance</th>
+                        <td scope="col"> {{retrait.user.dateNaiss | format_datetime('short', 'none', locale='fr') }} </th>
+                    </tr>
+                     <tr>
+                        <th scope="col" >Lieu de naissance</th>
+                        <td scope="col"> {{retrait.user.lieuNaiss}} </th>
+                    </tr>
+                     <tr>
+                        <th scope="col" colspan="2"> <center>Informations Expediteur </center></th>
+                        <th scope="col" colspan="2"> <center>Informations Beneficiaire </center></th>
+                    </tr>
+                    <tr>
+                        <th scope="col">Nom</th>
+                        <td scope="col"> {{retrait.nomExpediteur}} </th>
+                        <th scope="col">Nom</th>
+                        <td scope="col">{{retrait.nomBeneficiaire}} </th>
+                    </tr>
+                    <tr>
+                        <th scope="col">Prénom</th>
+                        <td scope="col"> {{retrait.prenomBeneficiaire}} </th>
+                        <th scope="col">Prénom</th>
+                        <td scope="col"> {{retrait.prenomBeneficiaire}} </th>
+                    </tr>
+                    <tr>
+                        <th scope="col">Phone</th>
+                        <td scope="col"> {{retrait.phoneExpediteur}} </th>
+                        <th scope="col">Phone </th>
+                        <td scope="col">{{retrait.phoneBeneficiaire}} </th>
+                    </tr>
+                    <tr>
+                        <th scope="col" colspan="4"> <center>Informations opération </center></th>
+                    </tr>
+                    <tr>
+                        <th scope="col" > Code</th>
+                        <td scope="col"> {{retrait.coderetrait}} </th>
+                        <th scope="col" > Montant</th>
+                        <td scope="col"> {{(retrait.montant + retrait.tarif.tarifClient) | number_format}} FCFA </th>
+                    </tr>
+                     <tr>
+                        <th scope="col" > Tarif</th>
+                        <td scope="col">{{ retrait.tarif.tarifClient}} FCFA </th>
+                        <th scope="col" > Montant reçu</th>
+                        <td scope="col"> {{retrait.montant | number_format}} FCFA </th>
+                    </tr>
+                    <tr>
+                        <th scope="col" > Date</th>
+                        <td scope="col">{{ retrait.dateretrait | format_datetime(locale='fr')}}</th>
+                         <th scope="col" > Ville d'envoie</th>
+                        <td scope="col">{{ retrait.villeEnvoi}}</th>
+                    </tr>
+                     <tr>
+                        <th scope="col" colspan="4"> <center> Autre Informations </center></th>
+                    </tr>
+                    <tr>
+                        <th scope="col" >Agence</th>
+                        <td scope="col">{{ retrait.user.agence}}</th>
+                        <th scope="col" > Son compte</th>
+                        <td scope="col">{{ retrait.user.compte}}</th>
+                  </tbody>
+                </table>
+              </div>
+          </div> 
+         
+        </div>
+        <!-- /.container-fluid -->
+
+        <!-- Sticky Footer -->
+       {{include('_layout/_footer.html.twig')}}
+
+      </div>
+      <!-- /.content-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+      <i class="fas fa-angle-up"></i>
+    </a>
+
+    {{include('_layout/_logout_modal.html.twig')}}
+
+   
+
+  </body>
+{% endblock %} #}

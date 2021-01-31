@@ -1,0 +1,156 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello SeuilTransfertController!{% endblock %}
+{% form_theme formSeuilTransfert 'bootstrap_4_layout.html.twig' %}
+{% block body %}
+  <body id="page-top">
+
+    {{include('_layout/admin/_nav.html.twig')}}
+    <div id="wrapper">
+
+      <!-- Sidebar -->
+      {{include('_layout/admin/_siderbar.html.twig')}}
+
+      <div id="content-wrapper">
+
+        <div class="container-fluid">
+
+          <!-- Breadcrumbs-->
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+              <a href="{{path('admin_home')}}">Dashboard</a>
+            </li>
+            <li class="breadcrumb-item active">seuil</li>
+          </ol>
+
+          <!-- les tarifs -->
+            <center><h2> Le seuil de transfert </h2></center>
+         
+            <div class="col-12">
+              {% for message in app.flashes('succes') %}
+              <div class="alert alert-success"> {{message}} </div> 
+              {% endfor %}
+                  {% for message in app.flashes('danger') %}
+              <div class="alert alert-danger"> {{message}} </div> 
+              {% endfor %}
+          </div>
+            <div class='row'>
+            {% if seuilTransferts is empty %}
+           
+              <div class='col-4'>
+                {{form_start(formSeuilTransfert,{'methode':'GET'})}}
+                  <div class="form-group">
+
+                    {{form_row(formSeuilTransfert.min, {'label':'Valeure minimale','attr': {'placeholder':"minimale"}})}}
+              
+                  </div>
+                  <div class="form-group">
+
+                    {{form_row(formSeuilTransfert.max, {'label':'Valeure maximale','attr': {'placeholder':"maximale"}})}}
+                    
+                  </div>
+                  <div class="form-group">
+                    
+                  <center>
+                    <a href='{{path('create_actionSeuilTransfert')}}'><button type="submit" class="btn btn-success">Ajouter</button> </a>
+                    
+                  </center>
+
+                  </div>
+                {{form_end(formSeuilTransfert)}}
+              </div>
+                  {% else %}
+                    {% if seuilTransferts is not empty and cacheForm == true %}
+                    
+                    
+              <div class='col-4'>
+                {{form_start(formSeuilTransfert,{'methode':'GET'})}}
+                  <div class="form-group">
+
+                    {{form_row(formSeuilTransfert.min, {'label':'Valeure minimale','attr': {'placeholder':"minimale"}})}}
+              
+                  </div>
+                  <div class="form-group">
+
+                    {{form_row(formSeuilTransfert.max, {'label':'Valeure maximale','attr': {'placeholder':"maximale"}})}}
+                    
+                  </div>
+                  <div class="form-group">
+                    
+                  <center>
+                    <a href='{{path('create_actionSeuilTransfert')}}'><button type="submit" class="btn btn-success">Modifier</button> </a>
+                    
+                  </center>
+
+                  </div>
+                {{form_end(formSeuilTransfert)}}
+              </div>
+                    
+                    {% endif %}
+                    
+               {% endif %}
+              <div class="col-7">
+                  <table class="table table-bordered table-info">
+                    <thead>
+                    {% if seuilTransferts is empty %}
+                    <tr>
+                        <th scope="col" style="color: red">Oups! Aucun seuil defini</th>
+                        
+                    </tr>
+                      {% else %}
+                         <tr>
+                        <th scope="col" style="color: green">Le montant qu'on doit transferer est prise entre:</th>
+                        
+                      </tr>
+                    
+                    </thead>
+                    <tbody>
+                    {% for seuilTransfert in seuilTransferts %}
+                      <tr>
+                        <th scope="col">Montant minimale</th>
+                        <td scope="col">{{seuilTransfert.min | format_number}} FCFA</th>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <th scope="col">Montant maximale</th>
+                        <td>{{seuilTransfert.max | format_number}} FCFA</td>
+                      </tr>
+                      <tr>
+                        <td> 
+                         <a href='{{path('update_ActionSeuilTransfert',{'id':seuilTransfert.id})}}'><button type="submit" class="btn btn-success">Changer</button> </a>
+                         <a href='{{path('compte_delete',{'id':seuilTransfert.id})}}'><button type="submit" class="btn btn-success">Supprimer</button> </a>
+                         </td>
+                      </tr>
+                     
+                    {% endfor %}
+                    </tbody>
+                    {% endif %}
+                  </table>
+                  
+                </div>
+            </div>
+            </div>
+         
+        </div>
+        <!-- /.container-fluid -->
+
+        <!-- Sticky Footer -->
+       {{include('_layout/_footer.html.twig')}}
+
+      </div>
+      <!-- /.content-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+      <i class="fas fa-angle-up"></i>
+    </a>
+
+    {{include('_layout/_logout_modal.html.twig')}}
+
+
+  </body>
+{% endblock %}
+

@@ -1,0 +1,83 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello CompteBancaireController!{% endblock %}
+{% form_theme formCompte 'bootstrap_4_layout.html.twig' %}
+{% block body %}
+  
+  <body id="page-top">
+
+    {{include('_layout/admin/_nav.html.twig')}}
+    <div id="wrapper">
+
+      <!-- Sidebar -->
+      {{include('_layout/admin/_siderbar.html.twig')}}
+
+      <div id="content-wrapper">
+
+        <div class="container-fluid">
+
+          <!-- Breadcrumbs-->
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+              <a href="{{path('admin_home')}}">Dashboard</a>
+            </li>
+             <li class="breadcrumb-item">
+              <a href="{{path('compte_list')}}">comptes</a>
+            </li>
+            <li class="breadcrumb-item active">{% if editMode %}Modifier{% else %}Ajouter{% endif %}</li>
+          </ol>
+            <div class="col-12">
+              {% for message in app.flashes('succes') %}
+              <div class="alert alert-success"> {{message}} </div> 
+              {% endfor %}
+                  {% for message in app.flashes('danger') %}
+              <div class="alert alert-danger"> {{message}} </div> 
+              {% endfor %}
+          </div>
+          <!-- les tarifs -->
+            <center><h2> {% if editMode %}Modifier le compte de rechargenment{% else %}Recharger le compte{% endif %} </h2></center>
+          {{form_start(formCompte,{'methode':'GET'})}}
+
+            <div class="row">
+                <div class="col-6 ">
+
+                    <div class="form-group">
+                        {{form_row(formCompte.solde, {'label':'Solde','attr': {'placeholder':"le solde "}})}}
+                    </div>
+                    <div class="form-group">
+                        {{form_row(formCompte.user, {'label':'User'})}}
+                    </div>
+                     <div class="form-group">
+                     <center>  <button type="submit" class="btn btn-success">{% if editMode %}Modifier{% else %}Valider{% endif %}</button> </center>
+                    </div>
+
+
+                  </div>
+                 
+
+          {{form_end(formCompte)}}
+         
+        </div>
+        <!-- /.container-fluid -->
+
+        <!-- Sticky Footer -->
+       {{include('_layout/_footer.html.twig')}}
+
+      </div>
+      <!-- /.content-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+      <i class="fas fa-angle-up"></i>
+    </a>
+
+    {{include('_layout/_logout_modal.html.twig')}}
+
+    
+
+  </body>
+{% endblock %}
+

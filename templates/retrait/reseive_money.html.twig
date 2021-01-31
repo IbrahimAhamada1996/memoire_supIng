@@ -1,0 +1,117 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello TransfertController!{% endblock %}
+
+{% block body %}
+  <body id="page-top">
+
+    {{include('_layout/operateur/_nav.html.twig')}}
+
+    <div id="wrapper">
+
+      <!-- Sidebar -->
+      {{include('_layout/operateur/_siderbar.html.twig')}} 
+      
+      <div id="content-wrapper">
+
+        <div class="container-fluid">
+
+          <!-- Breadcrumbs-->
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+              <a href="{{path('operateur_home')}}">Dashboard</a>
+            </li>
+            <li class="breadcrumb-item active">Retrait</li>
+          </ol>
+
+          <!-- Formulaire d'reseive -->
+          <div class="col-12">
+            {% for message in app.flashes('succes') %}
+              <div class="alert alert-success"> {{message}} </div> 
+            {% endfor %}
+            {% for message in app.flashes('danger') %}
+              <div class="alert alert-danger"> {{message}} </div> 
+            {% endfor %}
+          </div>
+        
+          <div class='row'>
+            <div class="col-4">
+              <form method='get'>
+                <div class='form-group'>
+                  <input type="search" class="form-control" required="required" autocomplete="off"  name="codeTransfert" placeholder="Tapez Le CODE" aria-label="Tapez votre matricule" aria-describedby="button-search">
+                </div> 
+                <button type="submit" class="btn btn-success">Verification</button>
+              </form>
+            </div>
+            <div class="col-7">
+              {% if cache == false %}
+                <table class="table table-bordered table-info">
+                  <thead>
+                    <tr>
+                      <th scope="col" style="color: green" colspan="2">Le code <b> {{retrait.codeTransfert}} <b>est valide</th>
+                      
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <th scope="col">Prénom</th>
+                      <td scope="col">{{retrait.prenomBeneficiaire}}</th>
+                    </tr>
+                    <tr>
+                      <th scope="col">Nom</th>
+                      <td>{{retrait.nomBeneficiaire}}</td>
+                    </tr>
+                    <tr>
+                      <th scope="col">Phone</th>
+                      <td>{{retrait.phoneBeneficiaire}}</td>
+                    </tr>
+                    <tr>
+                      <th scope="col">Montant</th>
+                      <td colspan="2"><b> {{retrait.montant | number_format }} FCFA</b> </td>
+                    </tr>
+                  </tbody>
+                </table>
+                  {% if formRetrait is defined %}
+                    {{form_start(formRetrait)}}
+                      <button type="submit" class="btn btn-success">Valider</button>
+                      {% if impression == true %}
+                       <a href="{{path('pdf_recuRetrait')}}"  <button type="submit" class="btn btn-success">Imprimer</button> </a>
+                      {% endif %}
+                    {{form_end(formRetrait)}}
+                  {% endif %}
+              {% endif %}   
+            </div>
+          </div>
+          <div class='row'>
+                  
+          </div>
+  
+        </div>
+        <!-- /.container-fluid -->
+
+        <!-- Sticky Footer -->
+        
+        {{include('_layout/_footer.html.twig')}}
+      </div>
+      <!-- /.content-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+      <i class="fas fa-angle-up"></i>
+    </a>
+
+    <!-- Logout Modal-->
+    {{include('_layout/_logout_modal.html.twig')}}
+
+    
+    {% block javascripts %}
+
+   
+    {% endblock %}
+
+  </body>
+{% endblock %}
+

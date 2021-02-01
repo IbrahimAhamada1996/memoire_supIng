@@ -71,14 +71,14 @@ class TransfertController extends AbstractController
             $transfert->setvilleEnvoi($user->getAgence()->getVille()->getLibelle());
             $transfert->setEtatTransfert(true);
             // $transfert->setMontant($montantService->montantRecu($transfert->getMontant()));
-            dd($transfert->setTarif($tarif->getId()));
+            // dd($transfert->setTarif($tarif->getId()));
 
             $miseAjourSolde  = $repCompte->getSolde() - $montant;
             $compte = new Compte();
             
             $compte->setSolde($miseAjourSolde);
             $compte->setDate($repCompte->getDate());
-            $compte->setUser($user);
+            // $compte->setUser($user);
             // Comment modifier un registrement du le compte sans changer la clé du l'utilisateur
             $manager->persist($compte);
             $manager->persist($transfert);

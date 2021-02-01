@@ -61,12 +61,12 @@
         <table class="table">
             <thead >
                 <tr class="thead">
-                    <th class="logo">sendMoney</th><th class="date">Date: {{dataRetrait[0].dateRetrait | date("d/m/Y")}} </th>
+                    <th class="logo">SendMoney</th><th class="date">Date: {{dataRetrait[0].dateRetrait | date("d/m/Y")}} </th>
                 </tr>
             </thead>
             <tr>
                 <td class="titre">Information du bénéficiaire</td>
-                <td class="titre">Information du transfert </td>
+                <td class="titre">Information du retrait </td>
             </tr>
             <tr>
                 <td>
@@ -82,6 +82,7 @@
                             <li> -Montant : {{dataRetrait[0].montant}} FCFA</li>
                             <li> -Tarif : {{dataRetrait[0].tarif}} FCFA</li>
                             <li> -Montant reçu : <b> {{(dataRetrait[0].montant - dataRetrait[0].tarif) | number_format }} FCFA </b></li>
+                            <li> -Code : <b>{{dataRetrait[0].codeRetrait}} </b></li>
                             <li> -Agence : {{dataRetrait[0].user.agence.nomAgence}} </li>
                             <li>
                                 <div class="signature">-Signature:</div>

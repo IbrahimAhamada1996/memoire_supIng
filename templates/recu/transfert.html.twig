@@ -63,7 +63,7 @@
         <table class="table">
             <thead >
                 <tr class="thead">
-                     <th class="logo">sendMoney</th><th class="date">Date:  {{transfert[0].dateTransfert | date("d/m/Y")}}</th>
+                     <th class="logo">SendMoney</th><th class="date">Date:  {{transfert[0].dateTransfert | date("d/m/Y")}}</th>
                 </tr>
             </thead>
         
@@ -85,6 +85,7 @@
                             <li> -Montant : {{(transfert[0].montant + transfert[0].tarif.tarifClient) | number_format}} FCFA</li>
                             <li> -Tarif : {{transfert[0].tarif.tarifClient | number_format}} FCFA</li>
                             <li> -Montant reçu : <b> {{transfert[0].montant | number_format}} FCFA</b></li>
+                            <li> -Code : <b> {{transfert[0].codeTransfert}}</b></li>
                             <li> -Agence : {{transfert[0].user.agence.nomAgence |capitalize}}</li>
                             <li>
                                 <div class="signature">-Signature:</div>

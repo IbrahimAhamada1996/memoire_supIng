@@ -89,7 +89,7 @@
               <pre>
                 {{ dump(impression) }}
               </pre>
-                {% if impression == false %}
+                {% if impression == false  and dataTransfert is not empty %}
                   <table class="table table-bordered table-info">
                     <thead>
                       <tr>

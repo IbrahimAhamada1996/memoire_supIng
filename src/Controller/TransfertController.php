@@ -50,42 +50,40 @@ class TransfertController extends AbstractController
         $tarif = new Tarif();
         
         // $t = $tarif->setTarifClient(1);
+        $tarif = $montantService->tarif();
+        // dd($tarif);
        
-        // dd($user);
-        // $solde = $manager->getRepository(Compte::class)->findBy([
-        //     'solde' => $user->getCompte()->getSolde(),
-        //     ]);
-        $repCompte = $manager->getRepository(Compte::class)->find($user);
-        // dd($compte->getSolde());
-        
+      
         if ($form->isSubmitted() && $form->isValid()) {
-            $montant = $transfert->getMontant();
-            $montantService->montantRecu($montant);
-            $impression = true;
-            $cache = false;
-            $tarif = new Tarif();
-            // dd($montant);
-            $transfert->setDateTransfert(new \DateTime());
-            $transfert->setCodeTransfert($codeGenerate->generate());
-            $transfert->setUser($user);
-            $transfert->setvilleEnvoi($user->getAgence()->getVille()->getLibelle());
-            $transfert->setEtatTransfert(true);
-            // $transfert->setMontant($montantService->montantRecu($transfert->getMontant()));
-            // dd($transfert->setTarif($tarif->getId()));
+            if ($user->getCompte()->getSolde() >= $transfert->getMontant()) {
+               
+                $impression = true;
+                $cache = false;
+                $tarif = new Tarif();
+                // dd($montant);
+                $transfert->setDateTransfert(new \DateTime());
+                $transfert->setCodeTransfert($codeGenerate->generate());
+                $transfert->setUser($user);
+                $transfert->setvilleEnvoi($user->getAgence()->getVille()->getLibelle());
+                $transfert->setEtatTransfert(true);
+                // $transfert->setMontant($montantService->montantRecu($transfert->getMontant()));
+                // $transfert->setTarif($montantService->id());
+    
+               
+               
+                $compte = $manager->getRepository(Compte::class)->find($user->getCompte()->setSolde($user->getCompte()->getSolde() - $transfert->getMontant()));
+               
+                $manager->persist($compte);
+                $manager->persist($transfert);
+    
+                $manager->flush();
+                $this->addFlash('succes','Le transfert se dérouler avec succès');
+                return $this->redirectToRoute('operation_send');
+            }else {
 
-            $miseAjourSolde  = $repCompte->getSolde() - $montant;
-            $compte = new Compte();
-            
-            $compte->setSolde($miseAjourSolde);
-            $compte->setDate($repCompte->getDate());
-            // $compte->setUser($user);
-            // Comment modifier un registrement du le compte sans changer la clé du l'utilisateur
-            $manager->persist($compte);
-            $manager->persist($transfert);
-
-            $manager->flush();
-            $this->addFlash('succes','Le transfert se dérouler avec succès');
-            return $this->redirectToRoute('operation_send');
+                $this->addFlash( 'danger','Votre solde est insuffisant');
+            }
+           
        
         }elseif($form->isSubmitted() && !$form->isValid()) {
             $this->addFlash( 'danger','Reéssaye encore!!');
@@ -97,9 +95,6 @@ class TransfertController extends AbstractController
         $data = $this->getDoctrine()->getManager();
         $dataTransfert  = $data->getRepository(Transfert::class)->findBy([
                 'user' => $user,],['id' =>'desc',],1,0);
-        // if (null !== $dataTransfert) {
-        //    $cache = false;
-        // }
      
         return $this->render('transfert/send_money.html.twig',[
                 'formTransfert'=> $form->createView(),

@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello UserController!{% endblock %}
+{% block title %}Hello compteController!{% endblock %}
 
 {% block body %}
   <body id="page-top">
@@ -24,7 +24,7 @@
           </ol>
         
           <!-- les tarifs -->
-            <center><h2> List des utilisateurs </h2></center>
+            <center><h2> Liste des comptes des utilisateurs </h2></center>
             <div class="card mb-3">
             <div class="card-header">
               <i class="fas fa-table"></i>
@@ -39,7 +39,7 @@
                       <th>Name</th>
                       <th>prenom</th>
                       <th>agence</th>
-                      <th>Status</th>
+                      <th>Montant actuel</th>
                       <th>Actions</th>
                     </tr>
                   </thead>
@@ -51,44 +51,39 @@
                       <th>Name</th>
                       <th>prenom</th>
                       <th>agence</th>
-                      <th>Status</th>
+                      <th>Montant actuel</th>
                       <th>Actions</th>
                     </tr>
                   </tfoot>
                   <tbody>
 
-                  {% if users is empty %}
+                  {% if comptes is empty %}
                       <h4>Aucun utilisateur enregistre </h4>
                     {% else %}
 
-                      {% for user in users %}
+                      {% for compte in comptes %}
                         <tr>
-                         <td>#{{user.id}}</td>
+                         <td>#{{compte.id}}</td>
                          <td>
-                           {# <img class="card-img-top" src="{{ vich_uploader_asset(user, 'imageFile')}}" alt="image" style="width:100px"> #}
+                           {# <img class="card-img-top" src="{{ vich_uploader_asset(compte, 'imageFile')}}" alt="image" style="width:100px"> #}
                           
-                           {% if user.image != null %}
+                           {% if compte.user.image != null %}
                   
-                            <img class="card-img-top" src="{{ vich_uploader_asset(user, 'imageFile')}}" alt=" image" style="width:100px">
+                            <img class="card-img-top" src="{{ vich_uploader_asset(compte.user, 'imageFile')}}" alt=" image" style="width:100px">
                             {% else %}
-                              {% if user.sex == 'F' %}
+                              {% if compte.user.sex == 'F' %}
                                       <img class="card-img-top" src="{{asset('images/femme.jfif')}}" alt=" image" style="width:100px">
                                       {% else %}
                                         <img class="card-img-top" src="{{asset('images/homme.png')}}" alt=" image" style="width:100px">
                                 {% endif %}
                             {% endif %}
                           </td>
-                          <td>{{user.nom}}</td>
-                          <td>{{user.prenom}}</td>
-                          <td>{{user.agence}}</td>
-                          <td>{{user.getChoiceroles()}}</td>
+                          <td>{{compte.user.nom}}</td>
+                          <td>{{compte.user.prenom}}</td>
+                          <td>{{compte.user.agence}}</td>
+                          <td>{{compte.solde}}</td>
                           <td>
-                            <a href='{{path('user_show',{'id': user.id})}}'><button type="button" class="btn btn-info"><i class="far fa-eye"></i></button><a>
-                            {% if  is_granted('ROLE_SUPER_ADMIN') %}
-                              <a href='{{path('update_ActionUser',{'id': user.id})}}'><button type="button" class="btn btn-primary"><i class="far fa-edit"></i></button><a>
-                              <a href='{{path('user_delete',{'id':user.id})}}'><button type="button" class="btn btn-danger"><i class="far fa-trash-alt"></i></button><a>
-                            {% endif %}
-                            
+                            <a href='{{path('update_ActionCompte',{'id': compte.id})}}'><button type="button" class="btn btn-info">Virement</button><a>   
                           </td> 
                         </tr>
                       {% endfor %}

@@ -25,21 +25,25 @@ class CompteBancaireController extends AbstractController
       * @Route("/admin/update/{id}/compte" , name="update_ActionCompte")
      * @Route("/admin/compte/new", name="create_actionCompte")
      */
-    public function actionCompte(Request $request,Compte $compte=null): Response
+    public function actionCompte(Request $request,Compte $compte=null,$id): Response
     {
         $manager = $this->getDoctrine()->getManager();
+        
         if (!$compte) {
             $compte = new Compte();
         }
         
         $form = $this->createForm(CompteType::class,$compte);
         $form->handleRequest($request);
-        
+        // $solde  = $manager->getRepository(Compte::class)->findBy(['id'=>$id]);
+        //  $addSolde = $solde[0]->getSolde() + (float)$request->request->get('compte')['solde'];
         if($form->isSubmitted() && $form->isValid()){
-            $compte->setDate(new \DateTime());
-            $manager->persist($compte);
-            $manager->flush();
-            $this->addFlash('succes','l\'enregistrement a été bien reçu');
+            
+                $compte->setDate(new \DateTime());
+                $manager->persist($compte);
+                $manager->flush();
+                $this->addFlash('succes','l\'enregistrement a été bien reçu');
+
 
             // return $this->redirectToRoute('compte_list');
 
@@ -72,7 +76,7 @@ class CompteBancaireController extends AbstractController
      /**
      *@Route("/admin/compte/{id}/show", name="compte_show")
      */
-    public function show(Compte $ville){
+    public function show(Compte $compte){
        
 
         return $this->render("user/show.html.twig",[
@@ -82,7 +86,7 @@ class CompteBancaireController extends AbstractController
     /**
      * @Route("admin/compte/{id}/delete" ,name="compte_delete")
      */
-    public function delete(Compte $ville){
+    public function delete(Compte $compte){
        $manager = $this->getDoctrine()->getManager();
        $manager->remove($compte);
        $manager->flush();

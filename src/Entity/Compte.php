@@ -35,6 +35,11 @@ class Compte
      * @ORM\Column(type="datetime")
      */
     private $date;
+    
+    public function __construct()
+    {
+        
+    }
 
     public function getId(): ?int
     {
@@ -51,7 +56,7 @@ class Compte
 
     public function setSolde(?float $solde): self
     {
-        $this->solde = $solde;
+        $this->solde += $solde;
 
         return $this;
     }

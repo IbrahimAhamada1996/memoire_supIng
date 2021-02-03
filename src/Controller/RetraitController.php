@@ -60,6 +60,8 @@ class RetraitController extends AbstractController
         $form = $this->createForm(RetraitType::class, $retrait);
         $form->handleRequest($request);
         $manager = $this->getDoctrine()->getManager();
+
+       
         
         if ($form->isSubmitted() && $form->isValid()) {
             // dd($transfert);
@@ -86,7 +88,13 @@ class RetraitController extends AbstractController
                 $retrait->setTarif($transfert->getTarif()->getTarifClient());
                 $retrait->setNumeroPieceIdExpediteur($transfert->getNumeroPieceId());
 
+                $transfert = $manager->getRepository(Transfert::class)->findBy(['codeTransfert'=>$codeTransfert])[0]->setEtatTransfert(true);
+                // $transfert[0]->setEtatTransfert(true);
+                // dd($transfert);
+               
+                $manager->persist($transfert);
                 $manager->persist($retrait);
+
                 $manager->flush();
                 $this->addFlash('succes',"L'operation s'est dérouler avec succès");
                 $impression = true;

@@ -63,9 +63,9 @@
                         <td>{{agence.ville}}</td>
                         
                         <td>
-                            <a href='{{path('agence_show',{'id':agence.id})}}'><button type="button" class="btn btn-info">Voire</button><a>
-                            <a href='{{path('update_ActionAgence',{'id':agence.id})}}'><button type="button" class="btn btn-primary">Modifier</button><a>
-                            <a href='{{path('agence_delete',{'id':agence.id})}}'><button type="button" class="btn btn-danger">supprimer</button><a>
+                            <a href='{{path('agence_show',{'id':agence.id})}}'><button type="button" class="btn btn-info"><i class="far fa-eye"></i></button><a>
+                            <a href='{{path('update_ActionAgence',{'id':agence.id})}}'><button type="button" class="btn btn-primary"><i class="far fa-edit"></i></button><a>
+                            <a href='{{path('agence_delete',{'id':agence.id})}}'><button type="button" class="btn btn-danger"><i class="far fa-trash-alt"></i></button><a>
                         </td>
                      </tr>
                     {% endfor %}

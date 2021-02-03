@@ -66,7 +66,7 @@
                         <td>{{(transfert.Montant + transfert.tarif.tarifClient) | number_format}} </td>
                         <td>
                           <a href='{{path('historique_operateur_show',{'id':transfert.id})}}'><button type="button" class="btn btn-info">Voire</button><a>
-                          <a href='{{path('update_ActionCompte',{'id':transfert.id})}}'><button type="button" class="btn btn-primary">Modifier</button><a>
+                          <a href='{{path('update_ActionTransfert',{'id':transfert.id})}}'><button type="button" class="btn btn-primary">Modifier</button><a>
                         </td> 
                     </tr>
                      {% endfor %}

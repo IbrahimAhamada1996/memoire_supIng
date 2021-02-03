@@ -52,7 +52,7 @@
                           {% if user.getChoiceroles() == 'ROLE_ADMIN' %}
                             <b>Super administrateur</b>
                             {% else %}
-                                 <b>Operateur </b>
+                                 <b>Agent </b>
                           {% endif %}
                           
                        {% endif %}</p>
@@ -71,7 +71,7 @@
                         <th scope="col">Email</th>
                         <td scope="col"> {{user.email}} </th>
                         <th scope="col">Phone</th>
-                        <td scope="col">{{user.tel}} </th>
+                        <td scope="col">+221 {{user.tel}} </th>
                     </tr>
                     <tr>
                         <th scope="col">Date de naissance</th>
@@ -98,7 +98,7 @@
                     <tr>
                         <th scope="col">Ville</th>
                         <td scope="col"> {{user.agence.ville.libelle}} </th>
-                        <th scope="col">Date de creation du compte</th>
+                        <th scope="col">Date de création du compte</th>
                         <td scope="col"> {{user.compte.date | date("m/d/Y", "Africa/Dakar")}} </th>
                     </tr>
                     <tr>

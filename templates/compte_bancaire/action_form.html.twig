@@ -35,7 +35,7 @@
               {% endfor %}
           </div>
           <!-- les tarifs -->
-            <center><h2> {% if editMode %}Modifier le compte de rechargenment{% else %}Recharger le compte{% endif %} </h2></center>
+            <center><h2> {% if editMode %}rechargenment{% else %}Recharger le compte{% endif %} </h2></center>
           {{form_start(formCompte,{'methode':'GET'})}}
 
             <div class="row">
@@ -51,10 +51,8 @@
                      <center>  <button type="submit" class="btn btn-success">{% if editMode %}Modifier{% else %}Valider{% endif %}</button> </center>
                     </div>
 
-
                   </div>
-                 
-
+              
           {{form_end(formCompte)}}
          
         </div>

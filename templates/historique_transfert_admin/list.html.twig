@@ -33,9 +33,11 @@
                   <thead>
                     <tr>
                       <th>ID</th>
-                      <th>Operateur </th>
+                      <th>Agent</th>
                       <th>Ville</th>
                       <th>Agence</th>
+                      <th>Retirer?</th>
+                      <th>Date</th>
                       <th>Montant</th>
                       <th>Actions</th>
                     </tr> 
@@ -43,9 +45,11 @@
                   <tfoot>
                     <tr>
                       <th>ID</th>
-                      <th>Operateur </th>
+                      <th>Agent </th>
                       <th>Ville</th>
                       <th>Agence</th>
+                      <th>Retirer?</th>
+                      <th>Date</th>
                       <th>Montant</th>
                       <th>Actions</th>
                     </tr>
@@ -60,9 +64,11 @@
                         <td>{{transfert.user.prenom}} {{transfert.user.nom}}</td>
                         <td>{{transfert.villeEnvoi}}</td>
                         <td>{{transfert.user.agence}}</td>
+                        <td>{% if false != transfert.etatTransfert %} Oui {% else %} Non{% endif %}</td>
+                        <td scope="col">{{ transfert.dateTransfert | date("Y/m/d")}}</th>
                         <td>{{transfert.Montant | number_format}} </td>
                         <td>
-                          <a href='{{path('historique_admin_transfert_show',{'id':transfert.id})}}'><button type="button" class="btn btn-info">Voire</button><a>
+                          <a href='{{path('historique_admin_transfert_show',{'id':transfert.id})}}'><button type="button" class="btn btn-info"><i class="far fa-eye"></i></button><a>
                         </td> 
                     </tr>
                      {% endfor %}

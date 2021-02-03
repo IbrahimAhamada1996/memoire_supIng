@@ -31,7 +31,7 @@ class TransfertController extends AbstractController
 
      /**
      * @Route("/operateur/update/{id}/compte" , name="update_Compte")
-     * @Route("/operateur/update/{id}/transfert" , name="update_ActionCompte")
+     * @Route("/operateur/update/{id}/transfert" , name="update_ActionTransfert")
      * @Route("operateur/operation/transfert", name="operation_send")
      */
     public function send(Request $request, Transfert $transfert=NULL, UserInterface $user, CodeGenerate $codeGenerate,MontantService $montantService)
@@ -65,7 +65,7 @@ class TransfertController extends AbstractController
                 $transfert->setCodeTransfert($codeGenerate->generate());
                 $transfert->setUser($user);
                 $transfert->setvilleEnvoi($user->getAgence()->getVille()->getLibelle());
-                $transfert->setEtatTransfert(true);
+                // $transfert->setEtatTransfert(true);
                 // $transfert->setMontant($montantService->montantRecu($transfert->getMontant()));
                 // $transfert->setTarif($montantService->id());
     

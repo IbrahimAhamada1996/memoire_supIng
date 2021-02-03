@@ -96,7 +96,7 @@ class Transfert
     /**
      * @ORM\Column(type="boolean")
      */
-    private $etatTransfert;
+    private $etatTransfert = false;
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="transferts")

@@ -86,17 +86,21 @@
                         <th scope="col" > Code</th>
                         <td scope="col"> {{transfert.codeTransfert}} </th>
                         <th scope="col" > Montant</th>
-                        <td scope="col"> {{(transfert.montant + transfert.tarif.tarifClient) | number_format}} FCFA </th>
+                        <td scope="col"> {{(transfert.montant) | number_format}} FCFA </th>
                     </tr>
                      <tr>
                         <th scope="col" > Tarif</th>
-                        <td scope="col">{{ transfert.tarif.tarifClient}} FCFA </th>
+                        <td scope="col">{{ transfert.tarif.tarifClient | number_format}} FCFA </th>
                         <th scope="col" > Montant reçu</th>
-                        <td scope="col"> {{transfert.montant | number_format}} FCFA </th>
+                        <td scope="col"> {{(transfert.montant - transfert.tarif.tarifClient)| number_format}} FCFA </th>
+                    </tr>
+                    <tr>
+                    <th scope="col" > Retirer</th>
+                    <td>{% if false != transfert.etatTransfert %} Oui {% else %} Non{% endif %}</td>
                     </tr>
                     <tr>
                         <th scope="col" > Date</th>
-                        <td scope="col">{{ transfert.dateTransfert | format_datetime(locale='fr')}}</th>
+                        <td scope="col">{{ transfert.dateTransfert | date("Y/m/d")}}</th>
                          <th scope="col" > Ville d'envoie</th>
                         <td scope="col">{{ transfert.villeEnvoi}}</th>
                     </tr>
@@ -105,9 +109,9 @@
                     </tr>
                     <tr>
                         <th scope="col" >Agence</th>
-                        <td scope="col">{{ transfert.user.agence}}</th>
+                        <td scope="col">{{ transfert.user.agence.nomAgence}}</th>
                         <th scope="col" > Son compte</th>
-                        <td scope="col">{{ transfert.user.compte}}</th>
+                        <td scope="col">{{ transfert.user.compte.solde | number_format}} FCFA</th>
                   </tbody>
                 </table>
               </div>

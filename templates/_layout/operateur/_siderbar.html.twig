@@ -1,4 +1,4 @@
-<ul class="sidebar navbar-nav">
+<ul class="sidebar navbar-nav navbar-dark bg-light">
   <li class="nav-item">
     <a class="nav-link" href="{{path('operateur_home')}}">
       <i class="fas fa-fw fa-tachometer-alt"></i>
@@ -20,21 +20,11 @@
     <a class="dropdown-item" href="/404">page 404</a>
     <a class="dropdown-item" href="/page-blanche">Page blanche</a>
   </div>
-  </li>
+  </li> 
   <li class="nav-item">
-    <a class="nav-link" href="/operateur/virements">
-    <i class="fas fa-box"></i>
-    <span>Virements d'argent</span></a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="/operateur/depense">
-    <i class="fas fa-external-link-square-alt"></i>
-    <span>Dépenses</span></a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="/operateur/statistique">
-    <i class="fas fa-poll"></i>
-    <span>Statistique</span></a>
+    <a class="nav-link" href="{{path('depense_home')}}">
+    <i class="fas fa-user"></i>
+    <span>Compte</span></a>
   </li>
   <li class="nav-item dropdown">
     <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

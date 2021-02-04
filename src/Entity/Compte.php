@@ -54,10 +54,15 @@ class Compte
         return $this->solde;
     }
 
-    public function setSolde(?float $solde): self
+    public function setSolde(?float $solde,$benefice=null): self
     {
-        $this->solde += $solde;
-
+        if (null != $benefice) {
+            $this->solde = $solde;
+           
+        }else {
+            $this->solde += $solde;
+        }
+       
         return $this;
     }
 

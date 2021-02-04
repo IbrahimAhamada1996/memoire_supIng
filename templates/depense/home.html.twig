@@ -1,16 +1,14 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello UserController!{% endblock %}
+{% block title %}Hello OperationController!{% endblock %}
 
 {% block body %}
-  <body id="page-top">
-
-    {{include('_layout/admin/_nav.html.twig')}}
+   <body id="page-top">
+    {{include('_layout/operateur/_nav.html.twig')}}}
     <div id="wrapper">
-
       <!-- Sidebar -->
-      {{include('_layout/admin/_siderbar.html.twig')}}
-
+     {{include('_layout/operateur/_siderbar.html.twig')}} 
+   
       <div id="content-wrapper">
 
         <div class="container-fluid">
@@ -18,16 +16,12 @@
           <!-- Breadcrumbs-->
           <ol class="breadcrumb">
             <li class="breadcrumb-item">
-              <a href="{{path('admin_home')}}">Dashboard</a>
+              <a href="{{path('operateur_home')}}">Dashboard</a>
             </li>
-            <li class="breadcrumb-item ">
-              <a href="{{path('users_list')}}">utilisateurs </a>
-            </li>
-            <li class="breadcrumb-item active">{{user.prenom }} {{user.nom}}</li>
+            <li class="breadcrumb-item active">Depense</li>
           </ol>
 
-          <!-- les tarifs -->
-            <center><h2> Détail de l'utilisateur </h2></center>
+          <center><h2> Détail de l'utilisateur </h2></center>
             <div class="row ">  
                <div class="col-md-3">
                   <div class="card" style="width:200px">
@@ -71,7 +65,7 @@
                         <th scope="col">Email</th>
                         <td scope="col"> {{user.email}} </th>
                         <th scope="col">Phone</th>
-                        <td scope="col">{{user.tel}} </th>
+                        <td scope="col">+221 {{user.tel}} </th>
                     </tr>
                     <tr>
                         <th scope="col">Date de naissance</th>
@@ -79,20 +73,10 @@
                         <th scope="col">Lieu de naissance</th>
                         <td scope="col"> {{user.lieuNaiss}} </th>
                     </tr>
-                    {% if user.roles[0] == "ROLE_SUPER_ADMIN"  %}
-                    
-                      <tr>
-                          <th scope="col" colspan="4"> <center>Compte de SendMoney </center></th>
-                      </tr>
-                      <tr>
-                          <th scope="col"> Solde : </th>
-                          <th scope="col" colspan="3"><center>{{user.compte.solde | number_format}} FCFA</center></th>
-                          
-                      </tr>
-                    
-                    {% endif %}
-                    
-                    
+                    <pre>
+                      {# {{ dump() }} #}
+                    </pre>
+                  
                   {% if user.roles[0] == "ROLE_OPERATEUR" %}
                     
                    <tr>
@@ -103,7 +87,7 @@
                         <th scope="col">Non</th>
                         <td scope="col"> {{user.agence.nomAgence}} </th>
                         <th scope="col">Montant actuel </th>
-                        <td scope="col"> {{user.compte.solde | number_format}} FCFA</th>
+                        <td scope="col"> <b>{{user.compte.solde | number_format}} FCFA </b></th>
                     </tr>
                     <tr>
                         <th scope="col">Ville</th>
@@ -121,12 +105,14 @@
                 </table>
               </div>
           </div> 
-         
+
+          
+
         </div>
         <!-- /.container-fluid -->
 
         <!-- Sticky Footer -->
-       {{include('_layout/_footer.html.twig')}}
+        {{include('_layout/_footer.html.twig')}}
 
       </div>
       <!-- /.content-wrapper -->
@@ -139,8 +125,10 @@
       <i class="fas fa-angle-up"></i>
     </a>
 
-    {{include('_layout/_logout_modal.html.twig')}}
+    <!-- Logout Modal-->
+     {{include('_layout/_logout_modal.html.twig')}}
 
 
   </body>
 {% endblock %}
+

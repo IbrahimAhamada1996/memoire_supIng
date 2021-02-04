@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use App\Validator\Constraints as MyAssert;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
@@ -69,7 +70,7 @@ class User implements UserInterface
     /**
      * @var string The hashed password
      * @ORM\Column(type="string")
-     *  * @Assert\Length(
+     * @Assert\Length(
      *      min = 4,
      *      minMessage = "Le mot de passe doit contenir au moins  {{ limit }} characteres"
      * )
@@ -93,6 +94,7 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @MyAssert\Tel
      */
     private $tel;
 

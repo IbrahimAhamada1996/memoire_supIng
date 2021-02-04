@@ -7,6 +7,7 @@ use App\Entity\SeuilTransfert;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\TransfertRepository;
 use Symfony\Component\Validator\Constraints as Assert;
+use App\Validator\Constraints as MyAssert;
 
 /**
  * @ORM\Entity(repositoryClass=TransfertRepository::class)
@@ -57,6 +58,7 @@ class Transfert
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @MyAssert\Tel
      */
     private $phoneExpediteur;
 
@@ -111,6 +113,7 @@ class Transfert
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @MyAssert\Tel
      */
     private $phoneBeneficiaire;
 

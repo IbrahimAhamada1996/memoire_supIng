@@ -34,6 +34,8 @@ class UserController extends AbstractController
             $passwordHash = $encoder->encodePassword($user, $user->getPassword());
             $user->setPassword($passwordHash);
             $user->setDateCreation(new \DateTime());
+           
+            
             $manager->persist($user);
             $manager->flush();
             $this->addFlash('succes','l\'enregistrement a été bien reçu');

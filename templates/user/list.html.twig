@@ -81,7 +81,18 @@
                           <td>{{user.nom}}</td>
                           <td>{{user.prenom}}</td>
                           <td>{{user.agence}}</td>
-                          <td>{{user.getChoiceroles()}}</td>
+                          <td>
+                            {% if user.getChoiceroles() =='ROLE_SUPER_ADMIN' %}
+                              Super Admin
+                              {% else %}
+                                {% if user.getChoiceroles() =='ROLE_OPERATEUR' %}
+                                  Agent
+                                  {% else %}
+                                    Employé
+                                {% endif %}
+                                
+                            {% endif %}
+                          </td>
                           <td>
                             <a href='{{path('user_show',{'id': user.id})}}'><button type="button" class="btn btn-info"><i class="far fa-eye"></i></button><a>
                             {% if  is_granted('ROLE_SUPER_ADMIN') %}

@@ -9,7 +9,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-class HistoriqueOperateurController extends AbstractController
+class HistoriqueOperateurTransfertController extends AbstractController
 {
     /**
      * @Route("/operateur/historique/operateur", name="historique_operateur")
@@ -31,37 +31,24 @@ class HistoriqueOperateurController extends AbstractController
             'user' => $user,
         ]);
         // dd($transferts);
-        return $this->render('operation/transfert_list.html.twig', [
+        return $this->render('operation_transfert/list.html.twig', [
             'transferts'=> $transferts,
         ]);
     }
 
      /**
-     * @Route("operateur/historique/{id}/transfert", name="historique_operateur_show")
+     * @Route("operateur/historique/{id}/transfert", name="historique_operateur_transfert_show")
      */
     public function show(UserInterface $user,Transfert $transfert): Response
     {
        
         // dd($retraits);
-        return $this->render('operation/transfert_show.html.twig', [
+        return $this->render('operation_transfert/show.html.twig', [
             'transfert'=> $transfert,
         ]);
     }
 
-    /**
-     * @Route("operateur/historique/retrait", name="historique_operateur_retrait")
-     */
-    public function retrait(UserInterface $user): Response
-    {
-        $rep = $this->getDoctrine()->getRepository(Retrait::class);
-        $retraits = $rep->findBy([
-            'user' => $user,
-        ]);
-        // dd($retraits);
-        return $this->render('operation/retrait_list.html.twig', [
-            'retraits'=> $retraits,
-        ]);
-    }
+    
 
     
 }

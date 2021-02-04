@@ -5,11 +5,11 @@
 {% block body %}
   <body id="page-top">
 
-    {{include('_layout/admin/_nav.html.twig')}}
+    {{include('_layout/operateur/_nav.html.twig')}}
     <div id="wrapper">
 
       <!-- Sidebar -->
-      {{include('_layout/admin/_siderbar.html.twig')}}
+      {{include('_layout/operateur/_siderbar.html.twig')}}
 
       <div id="content-wrapper">
 
@@ -23,7 +23,7 @@
             <li class="breadcrumb-item ">
               <a href="{{path('historique_operateur_transfert')}}">transferts </a>
             </li>
-            <li class="breadcrumb-item active">{{transfert.nomBeneficiaire}} {{transfert.nomExpediteur}}</li>
+            <li class="breadcrumb-item active">{{transfert.nomExpediteur}} {{transfert.nomExpediteur}}</li>
           </ol>
 
           <!-- les tarifs -->
@@ -61,17 +61,17 @@
                         <th scope="col" > Code</th>
                         <td scope="col"> {{transfert.codeTransfert}} </th>
                         <th scope="col" > Montant</th>
-                        <td scope="col"> {{(transfert.montant + transfert.tarif.tarifClient) | number_format}} FCFA </th>
-                    </tr>
-                     <tr>
-                        <th scope="col" > Tarif</th>
-                        <td scope="col">{{ transfert.tarif.tarifClient}} FCFA </th>
-                        <th scope="col" > Montant reçu</th>
                         <td scope="col"> {{transfert.montant | number_format}} FCFA </th>
                     </tr>
                      <tr>
+                        <th scope="col" > Tarif</th>
+                        <td scope="col">{{  transfert.tarif.tarifClient}} FCFA </th>
+                        <th scope="col" > Montant reçu</th>
+                        <td scope="col"> {{transfert.montant- transfert.tarif.tarifClient | number_format}} FCFA </th>
+                    </tr>
+                     <tr>
                         <th scope="col" > Date</th>
-                        <td scope="col">{{ transfert.dateTransfert | format_datetime(locale='fr')}}</th>
+                        <td scope="col">{{ transfert.dateTransfert | date('Y/m/d')}}</th>
                     </tr>
                   </tbody>
                 </table>

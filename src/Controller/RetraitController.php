@@ -2,9 +2,12 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
+use App\Entity\Compte;
 use App\Entity\Retrait;
 use App\Entity\Transfert;
 use App\Form\RetraitType;
+use App\Services\BeneficeService;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -18,7 +21,7 @@ class RetraitController extends AbstractController
      /**
      * @Route("/operateur/operation/retrait", name="operation_reseive")
      */
-    public function retrait(Request $request, UserInterface $user)
+    public function retrait(Request $request, UserInterface $user ,BeneficeService $beneficeService)
     {
         $cache = true;
         $impression = false;
@@ -53,15 +56,18 @@ class RetraitController extends AbstractController
         }
            
 
-        
-
-
         $retrait = new Retrait();
         $form = $this->createForm(RetraitType::class, $retrait);
         $form->handleRequest($request);
         $manager = $this->getDoctrine()->getManager();
 
-       
+        $compteSuperAdmin = $manager->getRepository(User::class)->findAll();
+        foreach ($compteSuperAdmin as $key => $value) {
+            if ($value->getChoiceroles() === "ROLE_SUPER_ADMIN") {
+                dump("ok");
+                $compteSuperAdmin = $manager->getRepository(User::class)->findAll()[$key];
+            }
+        }
         
         if ($form->isSubmitted() && $form->isValid()) {
             // dd($transfert);
@@ -89,9 +95,15 @@ class RetraitController extends AbstractController
                 $retrait->setNumeroPieceIdExpediteur($transfert->getNumeroPieceId());
 
                 $transfert = $manager->getRepository(Transfert::class)->findBy(['codeTransfert'=>$codeTransfert])[0]->setEtatTransfert(true);
-                // $transfert[0]->setEtatTransfert(true);
-                // dd($transfert);
+                
+                
+                $updateSolde = $user->getCompte()->getSolde() - $transfert->getMontant() + $beneficeService->tabBenefice($retrait->getMontant())['retrait_agent'];
+                $compte = $manager->getRepository(Compte::class)->find($user->getCompte()->setSolde($updateSolde,1));
+                
+                $compteSuperAdmin->getCompte()->setSolde($beneficeService->tabBenefice($retrait->getMontant())['retrait_operateur']);
                
+                $manager->persist($compteSuperAdmin);
+                $manager->persist($compte);
                 $manager->persist($transfert);
                 $manager->persist($retrait);
 

@@ -1,0 +1,103 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello UserController!{% endblock %}
+
+{% block body %}
+  <body id="page-top">
+
+    {{include('_layout/operateur/_nav.html.twig')}}
+    <div id="wrapper">
+
+      <!-- Sidebar -->
+      {{include('_layout/operateur/_siderbar.html.twig')}}
+
+      <div id="content-wrapper">
+
+        <div class="container-fluid">
+
+          <!-- Breadcrumbs-->
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+              <a href="{{path('operateur_home')}}">Dashboard</a>
+            </li>
+            <li class="breadcrumb-item ">
+              <a href="{{path('historique_operateur_retrait')}}">retraits </a>
+            </li>
+            <li class="breadcrumb-item active">{{retrait.prenomBeneficiaire}} {{retrait.nomBeneficiaire}}</li>
+          </ol>
+
+          <!-- les tarifs -->
+            <center><h2> Détail d'un retrait </h2></center> <br>
+            <div class="row ">  
+              <div class="col-md-12">
+                <table class="table table-bordered table-Primary">
+                  <tbody>
+                     <tr>
+                        <th scope="col" colspan="2"> <center>Informations Beneficiaire </center></th>
+                        <th scope="col" colspan="2"> <center>Informations Expediteur </center></th>
+                    </tr>
+                    <tr>
+                        <th scope="col">Prénom</th>
+                        <td scope="col"> {{retrait.prenomBeneficiaire}} </th>
+                        <th scope="col">Prénom</th>
+                        <td scope="col"> {{retrait.prenomBeneficiaire}} </th>
+                    </tr>
+                    <tr>
+                        <th scope="col">Nom</th>
+                        <td scope="col"> {{retrait.nomExpediteur}} </th>
+                        <th scope="col">Nom</th>
+                        <td scope="col">{{retrait.nomBeneficiaire}} </th>
+                    </tr>
+                    <tr>
+                        <th scope="col">Phone</th>
+                        <td scope="col"> {{retrait.phoneExpediteur}} </th>
+                        <th scope="col">Phone </th>
+                        <td scope="col">{{retrait.phoneBeneficiaire}} </th>
+                    </tr>
+                    <tr>
+                        <th scope="col" colspan="4"> <center>Informations opération </center></th>
+                    </tr>
+                    <tr>
+                        <th scope="col" > Code</th>
+                        <td scope="col"> {{retrait.coderetrait}} </th>
+                        <th scope="col" > Montant</th>
+                        <td scope="col"> {{retrait.montant | number_format}} FCFA </th>
+                    </tr>
+                     <tr>
+                        <th scope="col" > Tarif</th>
+                        <td scope="col">{{  retrait.tarif}} FCFA </th>
+                        <th scope="col" > Montant reçu</th>
+                        <td scope="col"> {{(retrait.montant - retrait.tarif) | number_format}} FCFA </th>
+                    </tr>
+                     <tr>
+                        <th scope="col" > Date</th>
+                        <td scope="col">{{ retrait.dateretrait | date('Y/m/d')}}</th>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+          </div> 
+         
+        </div>
+        <!-- /.container-fluid -->
+
+        <!-- Sticky Footer -->
+       {{include('_layout/_footer.html.twig')}}
+
+      </div>
+      <!-- /.content-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+      <i class="fas fa-angle-up"></i>
+    </a>
+
+    {{include('_layout/_logout_modal.html.twig')}}
+
+   
+
+  </body>
+{% endblock %}

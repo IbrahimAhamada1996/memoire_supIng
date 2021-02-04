@@ -3,8 +3,8 @@
 {% block title %}Hello OperationController!{% endblock %}
 
 {% block body %}
-   <body id="page-top">
-    {{include('_layout/operateur/_nav.html.twig')}}}
+  <body id="page-top">
+    {{include('_layout/operateur/_nav.html.twig')}}
     <div id="wrapper">
       <!-- Sidebar -->
      {{include('_layout/operateur/_siderbar.html.twig')}} 
@@ -16,62 +16,64 @@
           <!-- Breadcrumbs-->
           <ol class="breadcrumb">
             <li class="breadcrumb-item">
-              <a href="{{path('operateur_home')}}">Dashboard</a>
+              <a href="/admin">Dashboard</a>
             </li>
-            <li class="breadcrumb-item active">trasferts</li>
+            <li class="breadcrumb-item active">retraits</li>
           </ol>
 
           <!-- DataTables Example -->
-         <center><h2> Liste des transferts </h2></center>
+         <center><h2> Liste des retraits </h2></center>
             <div class="card mb-3">
             <div class="card-header">
               <i class="fas fa-table"></i>
-              Transferts</div>
+              Retraits</div>
             <div class="card-body">
               <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                   <thead>
-                    <tr>
-                      <th>ID</th>
+                   <tr>
                       <th>Nom <br> Expediteur</th>
                       <th>Prenom <br>Expediteur</th>
                       <th>Nom <br>Bénéficiaire</th>
                       <th>Prenom <br>Bénéficiaire</th>
-                      <th>Montant</th>
+                      <th>Code</th>
+                      <th>Montant Reçu</th>
+                      <th>Date</th>
                       <th>Actions</th>
-                    </tr> 
+                    </tr>
                   </thead>
                   <tfoot>
-                    <tr>
-                      <th>ID</th>
-                      <th>Nom <br> Expediteur</th>
-                      <th>Prenom <br>Expediteur</th>
-                      <th>Nom <br>Bénéficiaire</th>
+                   <tr>
+                      <th>Nom <br>Bénéficiaire </th>
                       <th>Prenom <br>Bénéficiaire</th>
-                      <th>Montant</th>
+                      <th>Nom <br>Expediteur</th>
+                      <th>Prenom <br> Expediteur</th>
+                      <th>Code</th>
+                      <th>Montant Reçu</th>
+                      <th>Date</th>
                       <th>Actions</th>
                     </tr>
                   </tfoot>
                   <tbody>
-                  {% if transferts is empty %}
-                  <h2> Aucune Transfert éffectué </h2>
+                
+                  {% if retraits is empty %}
+                  <h2> Aucune retrait éffectué </h2>
                     {% else %}
-                      {% for transfert in transferts | sort %}
+                      {% for retrait in retraits %}
                     <tr>
-                        <td>{{transfert.id}}</td>
-                        <td>{{transfert.nomExpediteur}}</td>
-                        <td>{{transfert.prenomExpediteur}}</td>
-                        <td>{{transfert.nomBeneficiaire}}</td>
-                        <td>{{transfert.prenomBeneficiaire}}</td>
-                        <td>{{(transfert.Montant + transfert.tarif.tarifClient) | number_format}} </td>
+                        <td>{{retrait.nomBeneficiaire}}</td>
+                        <td>{{retrait.prenomBeneficiaire }}</td>
+                        <td>{{retrait.nomExpediteur}}</td>
+                        <td>{{retrait.prenomExpediteur}}</td>
+                        <td>{{retrait.codeRetrait}}</td>
+                        <td>{{(retrait.Montant - retrait.tarif) | number_format}} FCFA</td>
+                        <td>{{retrait.dateRetrait | date('Y/m/d') }}</td>
                         <td>
-                          <a href='{{path('historique_operateur_show',{'id':transfert.id})}}'><button type="button" class="btn btn-info">Voire</button><a>
-                          <a href='{{path('update_ActionTransfert',{'id':transfert.id})}}'><button type="button" class="btn btn-primary">Modifier</button><a>
-                        </td> 
+                          <a href='{{path('historique_operateur_retrait_show',{'id':retrait.id})}}'><button type="button" class="btn btn-info"><i class="far fa-eye"></i></button><a>
+                        </td>
                     </tr>
                      {% endfor %}
                   {% endif %}
-            
                   </tbody>
                 </table>
               </div>

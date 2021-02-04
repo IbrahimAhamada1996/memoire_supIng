@@ -10,7 +10,7 @@ use App\Entity\Transfert;
 use App\Form\TransfertType;
 use App\Entity\SeuilTransfert;
 use App\Services\CodeGenerate;
-use App\Services\MontantService;
+use App\Services\BeneficeService;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -34,45 +34,48 @@ class TransfertController extends AbstractController
      * @Route("/operateur/update/{id}/transfert" , name="update_ActionTransfert")
      * @Route("operateur/operation/transfert", name="operation_send")
      */
-    public function send(Request $request, Transfert $transfert=NULL, UserInterface $user, CodeGenerate $codeGenerate,MontantService $montantService)
+    public function send(Request $request, Transfert $transfert=NULL, UserInterface $user, CodeGenerate $codeGenerate,BeneficeService $beneficeService)
     {   
         if (!$transfert) {
             $transfert = new Transfert();
         }
         
         $impression = false;
-        $m = $montantService->montantRecu(200);
+      
         $cache = true;
         $manager = $this->getDoctrine()->getManager();
         $transfert = new Transfert();
         $form = $this->createForm(TransfertType::class,$transfert);
         $form->handleRequest($request);
-        $tarif = new Tarif();
-        
-        // $t = $tarif->setTarifClient(1);
-        $tarif = $montantService->tarif();
-        // dd($tarif);
-       
-      
+   
+        $compteSuperAdmin = $manager->getRepository(User::class)->findAll();
+        foreach ($compteSuperAdmin as $key => $value) {
+            if ($value->getChoiceroles() === "ROLE_SUPER_ADMIN") {
+                dump("ok");
+                $compteSuperAdmin = $manager->getRepository(User::class)->findAll()[$key];
+            }
+        }
+        // dd($compteSuperAdmin->getCompte()->setSolde(600));
+
         if ($form->isSubmitted() && $form->isValid()) {
             if ($user->getCompte()->getSolde() >= $transfert->getMontant()) {
                
                 $impression = true;
                 $cache = false;
-                $tarif = new Tarif();
-                // dd($montant);
+                // $tarif = new Tarif();
+                
                 $transfert->setDateTransfert(new \DateTime());
                 $transfert->setCodeTransfert($codeGenerate->generate());
                 $transfert->setUser($user);
                 $transfert->setvilleEnvoi($user->getAgence()->getVille()->getLibelle());
-                // $transfert->setEtatTransfert(true);
-                // $transfert->setMontant($montantService->montantRecu($transfert->getMontant()));
-                // $transfert->setTarif($montantService->id());
-    
-               
-               
-                $compte = $manager->getRepository(Compte::class)->find($user->getCompte()->setSolde($user->getCompte()->getSolde() - $transfert->getMontant()));
-               
+                
+              
+                $updateSolde = $user->getCompte()->getSolde() - $transfert->getMontant() + $beneficeService->tabBenefice($transfert->getMontant())['transfert_agent'];
+             
+                $compte = $manager->getRepository(Compte::class)->find($user->getCompte()->setSolde($updateSolde,1));
+            
+                $compteSuperAdmin->getCompte()->setSolde($beneficeService->tabBenefice($transfert->getMontant())['transfert_operateur']);
+                $manager->persist($compteSuperAdmin);
                 $manager->persist($compte);
                 $manager->persist($transfert);
     

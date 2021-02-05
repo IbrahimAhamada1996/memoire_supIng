@@ -34,7 +34,7 @@
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                   <thead>
                     <tr>
-                      <th>ID</th>
+                      <th>N° de Compte</th>
                       <th>Photo</th>
                       <th>Name</th>
                       <th>prenom</th>
@@ -46,7 +46,7 @@
                   <tfoot>
                   <tr>
                       <tr>
-                      <th>ID</th>
+                      <th>N° de Compte</th>
                       <th>Photo</th>
                       <th>Name</th>
                       <th>prenom</th>
@@ -63,7 +63,7 @@
 
                       {% for user in users %}
                         <tr>
-                         <td>#{{user.id}}</td>
+                         <td>{% if user.compte != null %} {{user.compte.numeroCompte}} {% else %} pas de compte{% endif %}</td>
                          <td>
                            {# <img class="card-img-top" src="{{ vich_uploader_asset(user, 'imageFile')}}" alt="image" style="width:100px"> #}
                           
@@ -80,7 +80,7 @@
                           </td>
                           <td>{{user.nom}}</td>
                           <td>{{user.prenom}}</td>
-                          <td>{{user.agence}}</td>
+                          <td>{% if user.agence != null %}{{user.agence}} {% else %} pas d'agence{% endif %}</td>
                           <td>
                             {% if user.getChoiceroles() =='ROLE_SUPER_ADMIN' %}
                               Super Admin

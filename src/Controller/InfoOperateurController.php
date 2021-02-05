@@ -7,10 +7,10 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\User\UserInterface;
 
-class DepenseController extends AbstractController
+class InfoOperateurController extends AbstractController
 {
     /**
-     * @Route("/depense", name="depense")
+     * @Route("/operateur/depense", name="depense")
      */
     public function index(): Response
     {
@@ -20,12 +20,12 @@ class DepenseController extends AbstractController
     }
 
      /**
-     * @Route("/operateur/depense", name="depense_home")
+     * @Route("/operateur/info/agent", name="info_agent_show")
      */
-    public function home(UserInterface $userInterface): Response
+    public function show(UserInterface $userInterface): Response
     {
        
-        return $this->render('depense/home.html.twig', [
+        return $this->render('info_agent/show.html.twig', [
             'user' => $userInterface,
         ]);
     }

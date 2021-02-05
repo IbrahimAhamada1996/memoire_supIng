@@ -2,13 +2,19 @@
 
 namespace App\Entity;
 
-use App\Repository\CompteRepository;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
 use App\Validator\Constraints as C;
+use App\Repository\CompteRepository;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass=CompteRepository::class)
+ * @UniqueEntity(
+ *     fields={"numeroCompte"},
+ *     errorPath="numeroCompte",
+ *     message="Ce numero de compte existe déja, Veuillez réessayer!!"
+ * )
  */
 class Compte
 {
@@ -35,6 +41,11 @@ class Compte
      * @ORM\Column(type="datetime")
      */
     private $date;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $numeroCompte;
     
     public function __construct()
     {
@@ -46,7 +57,7 @@ class Compte
         return $this->id;
     }
     public function __toString(){
-        return "".$this->solde;
+        return "N° Compte: $this->numeroCompte | $this->user";
     }
 
     public function getSolde(): ?float
@@ -56,7 +67,7 @@ class Compte
 
     public function setSolde(?float $solde,$benefice=null): self
     {
-        if (null != $benefice) {
+        if (1 == $benefice) {
             $this->solde = $solde;
            
         }else {
@@ -86,6 +97,18 @@ class Compte
     public function setDate(\DateTimeInterface $date): self
     {
         $this->date = $date;
+
+        return $this;
+    }
+
+    public function getNumeroCompte(): ?string
+    {
+        return $this->numeroCompte;
+    }
+
+    public function setNumeroCompte(string $numeroCompte): self
+    {
+        $this->numeroCompte = $numeroCompte;
 
         return $this;
     }

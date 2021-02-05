@@ -65,7 +65,7 @@
                         <th scope="col">Email</th>
                         <td scope="col"> {{user.email}} </th>
                         <th scope="col">Phone</th>
-                        <td scope="col">+221 {{user.tel}} </th>
+                        <td scope="col">{{user.tel}} </th>
                     </tr>
                     <tr>
                         <th scope="col">Date de naissance</th>
@@ -85,19 +85,23 @@
                     </tr>
                     <tr>
                         <th scope="col">Non</th>
-                        <td scope="col"> {{user.agence.nomAgence}} </th>
+                        <td scope="col">{% if user.agence != null %}{{ user.agence.nomAgence}} {% else %} Rien{% endif %}
+                          </td>
                         <th scope="col">Montant actuel </th>
-                        <td scope="col"> <b>{{user.compte.solde | number_format}} FCFA </b></th>
+                        <td scope="col"> {% if user.compte != null %}<b> {{user.compte.solde | number_format}} FCFA </b> {% else %} Rien{% endif %}
+                         </th>
                     </tr>
                     <tr>
                         <th scope="col">Ville</th>
-                        <td scope="col"> {{user.agence.ville.libelle}} </th>
+                        <td scope="col">{% if user.agence != null %}{{user.agence.ville.libelle}} {% else %} Rien{% endif %}  </th>
                         <th scope="col">Date de création du compte</th>
-                        <td scope="col"> {{user.compte.date | date("m/d/Y", "Africa/Dakar")}} </th>
+                        <td scope="col">{% if user.compte != null %}{{user.compte.date | date("m/d/Y")}}{% else %} Rien{% endif %}</td>
                     </tr>
                     <tr>
                         <th scope="col">Adresse</th>
-                        <td scope="col"> {{user.agence.adresse}} </th>
+                        <td scope="col"> {% if user.agence != null %}{{user.agence.adresse}} {% else %} Rien{% endif %}</td>
+                        <th scope="col">N° de compte</th>
+                        <td scope="col">{% if user.compte != null %}{{user.compte.numeroCompte }}{% else %} Rien{% endif %}</td>
                     </tr>
                    
                   {% endif %}

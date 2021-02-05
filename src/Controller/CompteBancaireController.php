@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Compte;
 use App\Form\CompteType;
+use App\Services\NumeroCompte;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -25,7 +26,7 @@ class CompteBancaireController extends AbstractController
       * @Route("/admin/update/{id}/compte" , name="update_ActionCompte")
      * @Route("/admin/compte/new", name="create_actionCompte")
      */
-    public function actionCompte(Request $request,Compte $compte=null,$id): Response
+    public function actionCompte(Request $request,Compte $compte=null, NumeroCompte $numeroCompte): Response
     {
         $manager = $this->getDoctrine()->getManager();
         
@@ -40,6 +41,7 @@ class CompteBancaireController extends AbstractController
         if($form->isSubmitted() && $form->isValid()){
             
                 $compte->setDate(new \DateTime());
+                $compte->setNumeroCompte($numeroCompte->numero());
                 $manager->persist($compte);
                 $manager->flush();
                 $this->addFlash('succes','l\'enregistrement a été bien reçu');

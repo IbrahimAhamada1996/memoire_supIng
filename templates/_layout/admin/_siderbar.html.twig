@@ -1,6 +1,6 @@
 <ul class="sidebar navbar-nav navbar-dark bg-light">
   <li class="nav-item"> 
-    <a class="nav-link" href="{{path('admin_home')}}">
+    <a class="nav-link " href="{{path('admin_home')}}">
       <i class="fas fa-fw fa-tachometer-alt"></i>
       <span>Dashboard</span>
     </a>
@@ -71,9 +71,11 @@
     <div class="dropdown-menu" aria-labelledby="pagesDropdown" >
       <h6 class="dropdown-header">listes:</h6>
       <a class="dropdown-item" href="{{path('users_list')}}">Utilisateurs </a>
-      <div class="dropdown-divider"></div>
-      <h6 class="dropdown-header">formualires:</h6>
-      <a class="dropdown-item" href="{{path('create_ActionUser')}}">Ajouter </a>
+      {% if is_granted('ROLE_SUPER_ADMIN') %}
+        <div class="dropdown-divider"></div>
+        <h6 class="dropdown-header">formualires:</h6>
+        <a class="dropdown-item" href="{{path('create_ActionUser')}}">Ajouter </a>
+      {% endif %}
     </div>
   </li>
   <li class="nav-item dropdown">
@@ -90,7 +92,7 @@
     </div>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="/admin/statistique">
+    <a class="nav-link active" href="/admin/statistique">
     <i class="fas fa-poll"></i>
     <span>Statistique</span></a>
   </li>

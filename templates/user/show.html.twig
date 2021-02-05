@@ -50,7 +50,7 @@
                         <b>Super administrateur</b>
                         {% else %}
                           {% if user.getChoiceroles() == 'ROLE_ADMIN' %}
-                            <b>Super administrateur</b>
+                            <b>Employé</b>
                             {% else %}
                                  <b>Agent </b>
                           {% endif %}
@@ -79,23 +79,34 @@
                         <th scope="col">Lieu de naissance</th>
                         <td scope="col"> {{user.lieuNaiss}} </th>
                     </tr>
-                    {% if user.roles[0] == "ROLE_SUPER_ADMIN"  %}
+                    {% if is_granted('ROLE_SUPER_ADMIN') %}
                     
-                      <tr>
-                          <th scope="col" colspan="4"> <center>Compte de SendMoney </center></th>
-                      </tr>
-                      <tr>
-                          <th scope="col"> Solde : </th>
-                          <th scope="col" colspan="3"><center>{{user.compte.solde | number_format}} FCFA</center></th>
-                          
-                      </tr>
-                    
+                       {% if user.roles[0] == "ROLE_SUPER_ADMIN"  %}
+                        {% if user.compte != null %}
+                           <tr>
+                              <th scope="col" colspan="4"> <center>Compte de SendMoney </center></th>
+                          </tr>
+                          <tr>
+                              <th scope="col"> N° de Compte : </th>
+                              <th scope="col" ><center>{{user.compte.numeroCompte }} </center></th>
+                              <th scope="col" colspan="2"> <center> Solde<i class="fas fa-arrow-down"></i> </center></th>
+                             
+                              
+                          </tr>
+                          <tr>
+                              <th scope="col"> Date de creation : </th>
+                              <th scope="col" ><center>{{user.compte.date | date("m/d/Y") }} </center></th>
+                               <th scope="col" colspan="2"><center>{{user.compte.solde | number_format}} FCFA</center></th>          
+                          </tr>
+                      
+                        {% endif %} 
+                      {% endif %}
+
                     {% endif %}
                     
-                    
                   {% if user.roles[0] == "ROLE_OPERATEUR" %}
-                    
-                   <tr>
+                    {% if user.compte != null %}
+                      <tr>
                         <th scope="col" colspan="2"> <center> Agence </center></th>
                         <th scope="col" colspan="2"> <center> Compte </center> </th>
                     </tr>
@@ -115,7 +126,16 @@
                         <th scope="col">Adresse</th>
                         <td scope="col"> {{user.agence.adresse}} </th>
                     </tr>
-                   
+                     {% else %}
+                       <tr> 
+                       <th scope="col" colspan="4">
+                        <h3 scope="col"> <i style="color:red">Pas de compte bancaire <i></h3>
+                       </th>
+                        
+                        
+                    </tr>
+                    {% endif %}
+                     
                   {% endif %}
                   </tbody>
                 </table>

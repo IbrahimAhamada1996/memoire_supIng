@@ -24,7 +24,7 @@
           </ol>
         
           <!-- les tarifs -->
-            <center><h2> Liste des comptes des operateurs </h2></center>
+            <center><h2> Liste des comptes des utilisteurs </h2></center>
             <div class="card mb-3">
             <div class="card-header">
               <i class="fas fa-table"></i>
@@ -34,9 +34,10 @@
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                   <thead>
                     <tr>
-                      <th>ID</th>
+                      <th>N° de compte</th>
+                      <th>Status</th>
                       <th>solde</th>
-                      <th>date</th>
+                      <th>date de création</th>
                       <th>agent</th>
                       <th>Actions</th>
                     </tr>
@@ -44,20 +45,36 @@
                   <tfoot>
                   <tr>
                       <tr>
-                      <th>ID</th>
+                      <th>N° de compte</th>
+                      <th>Status</th>
                       <th>solde</th>
-                      <th>date</th>
+                      <th>date de création</th>
                       <th>agent</th>
                       <th>Actions</th>
                     </tr>
                   </tfoot>
                   <tbody>
+                  <pre>
+                    {{ dump(comptes) }}
+                  </pre>
                   {% for compte in comptes %}
                     <tr>
-                      <td>#{{compte.id}}</td>
-                      <td>{{compte.solde}}</td>
+                      <td>{{compte.numeroCompte}}</td>
+                      <td>
+                         {% if compte.user.roles[0] =='ROLE_SUPER_ADMIN' %}
+                            Super Admin
+                            {% else %}
+                              {% if compte.user.roles[0] =='ROLE_OPERATEUR' %}
+                                Agent
+                                {% else %}
+                                  Employé
+                            {% endif %}
+                                
+                         {% endif %}
+                      </td>
+                      <td>{{compte.solde}} FCFA</td>
                       <td>{{compte.date | date('Y/m/d')}}</td>
-                      <td>{{compte.user}}</td>
+                      <td> <a href='{{path('user_show',{'id':compte.user.id})}}'>{{compte.user}} </a></td>
                       <td>    
                         <a href='{{path('update_ActionCompte',{'id':compte.id})}}'><button type="button" class="btn btn-primary"><i class="far fa-edit"></i></button><a>
                         <a href='{{path('tarif_delete',{'id':compte.id})}}'><button type="button" class="btn btn-danger"><i class="far fa-trash-alt"></i></button><a>

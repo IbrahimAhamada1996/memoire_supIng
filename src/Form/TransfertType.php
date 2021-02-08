@@ -18,12 +18,7 @@ class TransfertType extends AbstractType
             ->add('nomExpediteur')
             ->add('prenomExpediteur')
             ->add('phoneExpediteur')
-            ->add('numeroPieceId',ChoiceType::class,[
-                'choices'=>[
-                    'piece d\'identite'=>'piece d\'identite',
-                    'passport' =>'Passport',
-                ]
-                ])
+            ->add('numeroPieceId')
             ->add('nomBeneficiaire')
             ->add('prenomBeneficiaire')
             ->add('phoneBeneficiaire')

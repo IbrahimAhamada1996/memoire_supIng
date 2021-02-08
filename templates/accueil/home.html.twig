@@ -4,7 +4,7 @@
 
 {% block body %}
      <!-- ======= Header ======= -->
-  {{include('accueil/header.html.twig')}}
+  
 
   <!-- ======= Hero Section ======= -->
   <section id="hero" class="hero d-flex align-items-center">
@@ -34,7 +34,7 @@
   <main id="main">
     {{include('accueil/service.html.twig')}}
     <!-- ======= About Section ======= -->
-    {{include('accueil/about.html.twig')}}
+   
     <!-- End About Section -->
 
     <!-- ======= Values Section ======= -->
@@ -58,7 +58,7 @@
 
           <div class="col-lg-3 col-md-6">
             <div class="count-box">
-              <i class="bi bi-journal-richtext" style="color: #ee6c20;"></i>
+              <i class="fas fa-home" style="color: #ee6c20;"></i>  
               <div>
                 <span data-purecounter-start="0" data-purecounter-end="521" data-purecounter-duration="1" class="purecounter"></span>
                 <p>Agences</p>
@@ -68,7 +68,7 @@
 
           <div class="col-lg-3 col-md-6">
             <div class="count-box">
-              <i class="bi bi-headset" style="color: #15be56;"></i>
+             <i class="fas fa-city" style="color: #15be56;"></i> 
               <div>
                 <span data-purecounter-start="0" data-purecounter-end="1463" data-purecounter-duration="1" class="purecounter"></span>
                 <p>Villes (Sénégal)</p>
@@ -100,117 +100,7 @@
 
     
     <!-- ======= F.A.Q Section ======= -->
-    <section id="faq" class="faq">
-
-      <div class="container" data-aos="fade-up">
-
-        <header class="section-header">
-          <h2>Q.F.P</h2>
-          <p>Questions fréquemment posées</p>
-        </header>
-
-        <div class="row">
-          <div class="col-lg-6">
-            <!-- F.A.Q List 1-->
-            <div class="accordion accordion-flush" id="faqlist1">
-              <div class="accordion-item">
-                <h2 class="accordion-header">
-                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-content-1">
-                    Qui utilise les services de transfert d'argent SEND MONEY?
-                  </button>
-                </h2>
-                <div id="faq-content-1" class="accordion-collapse collapse" data-bs-parent="#faqlist1">
-                  <div class="accordion-body">
-                    Les services de SEND MONEY s'adressent à toute personne ayant besoin d'envoyer ou de recevoir 
-                    de l'argent rapidement. Des voyageurs aux personnes aidant des amis ou des proches vivant d'une ville à un aute ou d'un region à un autre, voire meme d'une quartier à un autre,
-                    en passant par des personnes en déplacement professionnel 
-                    ayant besoin de faire rapidement des virements au niveau national.
-                  </div>
-                </div>
-              </div>
-
-              <div class="accordion-item">
-                <h2 class="accordion-header">
-                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-content-2">
-                    Qui sont les agents SEND MONEY au sénégal?
-                  </button>
-                </h2>
-                <div id="faq-content-2" class="accordion-collapse collapse" data-bs-parent="#faqlist1">
-                  <div class="accordion-body">
-                    Ce sont les partenaires bancaires de SEND MONEY qui vous aideront à envoyer ou recevoir de l'argent.
-                  </div>
-                </div>
-              </div>
-
-              <div class="accordion-item">
-                <h2 class="accordion-header">
-                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-content-3">
-                    Comment puis-je trouver une agence SEND MONEY au Sénégal?
-                  </button>
-                </h2>
-                <div id="faq-content-3" class="accordion-collapse collapse" data-bs-parent="#faqlist1">
-                  <div class="accordion-body">
-                    Vous pouvez facilement localiser en ligne l'emplacement d'une agence, il vous suffit d'utiliser notre localisateur.
-                  </div>
-                </div>
-              </div>
-
-            </div>
-          </div>
-
-          <div class="col-lg-6">
-
-            <!-- F.A.Q List 2-->
-            <div class="accordion accordion-flush" id="faqlist2">
-
-              <div class="accordion-item">
-                <h2 class="accordion-header">
-                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2-content-1">
-                    Comment puis-je savoir si un transfert d'argent est disponible pour retrait?
-                  </button>
-                </h2>
-                <div id="faq2-content-1" class="accordion-collapse collapse" data-bs-parent="#faqlist2">
-                  <div class="accordion-body">
-                   Vous reservez une message contenant votre nom et prenom ainsi que le numéro de contrôle du transfert d'argent (MTCN).
-                  </div>
-                </div>
-              </div>
-
-              <div class="accordion-item">
-                <h2 class="accordion-header">
-                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2-content-2">
-                    Quand puis-je me rendre dans une agence SEND MONEY?
-                  </button>
-                </h2>
-                <div id="faq2-content-2" class="accordion-collapse collapse" data-bs-parent="#faqlist2">
-                  <div class="accordion-body">
-                    Chaque agence SEND MONEY a ses propres horaires d'ouverture. Généralement, il s'agit des heures d'ouverture des banques.
-                    Trouver une agence SEND MONEY à proximité.
-                  </div>
-                </div>
-              </div>
-
-              <div class="accordion-item">
-                <h2 class="accordion-header">
-                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2-content-3">
-                    Comment dois-je faire pour envoyer de l'argent en ligne?
-                  </button>
-                </h2>
-                <div id="faq2-content-3" class="accordion-collapse collapse" data-bs-parent="#faqlist2">
-                  <div class="accordion-body">
-                   Pour envoyer de l'argent, Il faut se rendres auprès de l'une de nos agences et déposer par espéce.
-                  </div>
-                </div>
-              </div>
-
-            </div>
-          </div>
-
-        </div>
-
-      </div>
-
-    </section><!-- End F.A.Q Section -->
+    <!-- End F.A.Q Section -->
 
     <!-- ======= Portfolio Section ======= -->
 
@@ -285,4 +175,10 @@
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
+{% block js %}
+ <script type="text/javascript">
+// var res = '{{ res }}';
+// alert(res);
+</script>
+{% endblock %}
 {% endblock %}

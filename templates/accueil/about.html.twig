@@ -1,29 +1,73 @@
-<section id="about" class="about">
+{% extends 'base_home.html.twig' %}
 
-      <div class="container" data-aos="fade-up">
-        <div class="row gx-0">
+{% block title %}Hello AccueilController!{% endblock %}
+{% block stylesheets %}
+    <!-- Bootstrap core CSS -->
+    {# <link href="{{asset('accueil/vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet"> #}
 
-          <div class="col-lg-6 d-flex flex-column justify-content-center" data-aos="fade-up" data-aos-delay="200">
-            <div class="content">
-              <h3>QUI NOUS SOMMES</h3>
-              <h2>Expedita voluptas omnis cupiditate totam eveniet nobis sint iste. Dolores est repellat corrupti reprehenderit.</h2>
-              <p>
-                Quisquam vel ut sint cum eos hic dolores aperiam. Sed deserunt et. Inventore et et dolor consequatur itaque ut voluptate sed et. Magnam nam ipsum tenetur suscipit voluptatum nam et est corrupti.
-              </p>
-              <div class="text-center text-lg-start">
-                <a href="#" class="btn-read-more d-inline-flex align-items-center justify-content-center align-self-center">
-                  <span>Read More</span>
-                  <i class="bi bi-arrow-right"></i>
-                </a>
+    <!-- Custom styles for this template -->
+    <link href="{{asset('accueil/css/simple-sidebar.css')}}" rel="stylesheet">
+{% endblock %}
+    
+{% block body %}
+  <div class="d-flex" id="wrapper">
+
+        <!-- Sidebar -->
+        {% include "accueil/sidebar.html.twig" %}
+        <!-- /#sidebar-wrapper -->
+        <!-- Page Content -->
+    <div id="page-content-wrapper">
+      <div class="container-fluid">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+              <a href="{{path('accueil')}}">Accueil</a>
+            </li>
+            <li class="breadcrumb-item active">A propos</li>
+          </ol>
+        <section id="about" class="about">
+            <div class="container" data-aos="fade-up">
+            <div class="row gx-0">
+
+              <div class="col-lg-6 d-flex flex-column justify-content-center" data-aos="fade-up" data-aos-delay="200">
+                <div class="content">
+                  <h3>QUI NOUS SOMMES</h3>
+                  <h2>SEND MONEY est une plateforme de transfert d'argent inter-agence</h2>
+                  <p>
+                    Quisquam vel ut sint cum eos hic dolores aperiam. Sed deserunt et. Inventore et et dolor consequatur itaque ut voluptate sed et. Magnam nam ipsum tenetur suscipit voluptatum nam et est corrupti.
+                  </p>
+                  
+                    Quisquam vel ut sint cum eos hic dolores aperiam. Sed deserunt et. Inventore et et dolor consequatur itaque ut voluptate sed et. Magnam nam ipsum tenetur suscipit voluptatum nam et est corrupti.
+                    Quisquam vel ut sint cum eos hic dolores aperiam. Sed deserunt et. Inventore et et dolor consequatur itaque ut voluptate sed et. Magnam nam ipsum tenetur suscipit voluptatum nam et est corrupti.
+                  </p>
+                  
+                </div>
               </div>
+
+              <div class="col-lg-6 d-flex align-items-center" data-aos="zoom-out" data-aos-delay="200">
+                <img src="{{asset('accueil/img/about.jpg')}}" class="img-fluid" alt="">
+              </div>
+
             </div>
           </div>
 
-          <div class="col-lg-6 d-flex align-items-center" data-aos="zoom-out" data-aos-delay="200">
-            <img src="{{asset('accueil/img/about.jpg')}}" class="img-fluid" alt="">
-          </div>
-
-        </div>
+        </section>
       </div>
+    </div>
+        <!-- /#page-content-wrapper -->
+  </div>
+{% endblock %}
 
-    </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+   

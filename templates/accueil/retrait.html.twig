@@ -1,0 +1,48 @@
+{% extends 'base_home.html.twig' %}
+
+{% block title %}Hello AccueilController!{% endblock %}
+{% block stylesheets %}
+    <!-- Bootstrap core CSS -->
+    {# <link href="{{asset('accueil/vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet"> #}
+
+    <!-- Custom styles for this template -->
+    <link href="{{asset('accueil/css/simple-sidebar.css')}}" rel="stylesheet">
+{% endblock %}
+    
+{% block body %}
+  <div class="d-flex" id="wrapper">
+
+        <!-- Sidebar -->
+        {% include "accueil/sidebar.html.twig" %}
+        <!-- /#sidebar-wrapper -->
+        <!-- Page Content -->
+    <div id="page-content-wrapper">
+        <div class="container-fluid">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+              <a href="{{path('accueil')}}">Accueil</a>
+            </li>
+            <li class="breadcrumb-item active">retrait</li>
+          </ol>
+
+
+        </div>
+    </div>
+        <!-- /#page-content-wrapper -->
+  </div>
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   

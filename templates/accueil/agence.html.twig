@@ -1,0 +1,93 @@
+{% extends 'base_home.html.twig' %}
+
+{% block title %}Hello AccueilController!{% endblock %}
+{% block stylesheets %}
+
+<script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+    <style type="text/css">
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 100%;
+      }
+
+      /* Optional: Makes the sample page fill the window. */
+     
+    </style>
+    <script>
+      let map;
+
+      function initMap() {
+        map = new google.maps.Map(document.getElementById("map"), {
+          center: { lat: -34.397, lng: 150.644 },
+          zoom: 8,
+        });
+      }
+    </script>
+ 
+    <!-- Bootstrap core CSS -->
+    {# <link href="{{asset('accueil/vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet"> #}
+
+    <!-- Custom styles for this template -->
+    <link href="{{asset('accueil/css/simple-sidebar.css')}}" rel="stylesheet">
+{% endblock %}
+    
+{% block body %}
+  <div class="d-flex" id="wrapper">
+
+        <!-- Sidebar -->
+        {% include "accueil/sidebar.html.twig" %}
+        <!-- /#sidebar-wrapper -->
+        <!-- Page Content -->
+    <div id="page-content-wrapper">
+        <div class="container-fluid">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+              <a href="{{path('accueil')}}">Accueil</a>
+            </li>
+            <li class="breadcrumb-item active">agence</li>
+          </ol>
+          <h4> <center> Rechercher des agences </center> </h4> <br>
+         
+        <div class="container">
+             <form>
+                 <div class="row">
+                    <div class="col-4">
+                        <input type="text" class="form-control" name="" id=""  placeholder="">
+                        <small id="helpId" class="form-text text-muted">taper l'adresse</small>
+                    </div>
+                    <div class="col-2">
+                        <button type="button" class="btn btn-primary"> Rechercher</button>
+                    </div>
+                    <div class="col-12" id="map"> 
+                        
+                    </div>
+                </div>
+            </form>
+         </div>
+        </div>
+    </div>
+        <!-- /#page-content-wrapper -->
+  </div>
+  {% block javascripts %}
+   
+   <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDHL53Qdx6d__vmo3rg8dzkZ30yvPqkglI&callback=initMap&libraries=&v=weekly"
+      async defer
+    ></script>
+     
+  {% endblock %}
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+

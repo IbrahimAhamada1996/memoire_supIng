@@ -54,9 +54,9 @@
                             <td>{{ville.id}}</td>
                             <td>{{ville.libelle}}</td>
                             <td>
-                                
                                 <a href='{{path('update_ActionVille',{'id':ville.id})}}'><button type="button" class="btn btn-primary"><i class="far fa-edit"></i></button><a>
-                                <a href='{{path('ville_delete',{'id':ville.id})}}'><button type="button" class="btn btn-danger"><i class="far fa-trash-alt"></i></button><a>
+                                <a href='#'><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal"><i class="far fa-trash-alt"></i></button><a>
+                                {% include "ville/delete_modale.html.twig" %}
                             </td>
                             
                         </tr>

@@ -26,7 +26,7 @@ class CompteBancaireController extends AbstractController
       * @Route("/admin/update/{id}/compte" , name="update_ActionCompte")
      * @Route("/admin/compte/new", name="create_actionCompte")
      */
-    public function actionCompte(Request $request,Compte $compte=null, NumeroCompte $numeroCompte): Response
+    public function actionCompte(Request $request,Compte $compte=null, $id=0,NumeroCompte $numeroCompte): Response
     {
         $manager = $this->getDoctrine()->getManager();
         
@@ -38,15 +38,27 @@ class CompteBancaireController extends AbstractController
         $form->handleRequest($request);
         // $solde  = $manager->getRepository(Compte::class)->findBy(['id'=>$id]);
         //  $addSolde = $solde[0]->getSolde() + (float)$request->request->get('compte')['solde'];
+        $numeroCompteRep = $manager->getRepository(Compte::class)->find($id);
+        // dump($numeroCompteRep->getDate());
+        // dd($numeroCompteRep->getNumeroCompte());
+
         if($form->isSubmitted() && $form->isValid()){
-            
+            if (null != $numeroCompteRep) {
+                $compte->setDate($numeroCompteRep->getDate());
+                $compte->setNumeroCompte($numeroCompteRep->getNumeroCompte());
+                $compte->setSolde($compte->getSolde(),1);
+                $manager->persist($compte);
+                $manager->flush();
+                $this->addFlash('succes','la mise à jour du compte se dérouler avec success');
+            }else {
+                
                 $compte->setDate(new \DateTime());
                 $compte->setNumeroCompte($numeroCompte->numero());
                 $manager->persist($compte);
                 $manager->flush();
                 $this->addFlash('succes','l\'enregistrement a été bien reçu');
-
-
+            }
+        
             // return $this->redirectToRoute('compte_list');
 
         }elseif($form->isSubmitted() && !$form->isValid()) {

@@ -118,7 +118,8 @@
                       <tr>
                         <td> 
                          <a href='{{path('update_ActionSeuilTransfert',{'id':seuilTransfert.id})}}'><button type="submit" class="btn btn-success"><i class="far fa-edit"></i></button> </a>
-                         <a href='{{path('compte_delete',{'id':seuilTransfert.id})}}'><button type="submit" class="btn btn-success"><i class="far fa-trash-alt"></i></button> </a>
+                         <a href='#'><button type="submit" class="btn btn-success" data-toggle="modal" data-target="#deleteModal"><i class="far fa-trash-alt"></i></button> </a>
+                         {% include "seuil_transfert/delete_modale.html.twig" %}
                          </td>
                       </tr>
                      

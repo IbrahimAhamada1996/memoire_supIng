@@ -97,7 +97,7 @@ class RetraitController extends AbstractController
                 $transfert = $manager->getRepository(Transfert::class)->findBy(['codeTransfert'=>$codeTransfert])[0]->setEtatTransfert(true);
                 
                 
-                $updateSolde = $user->getCompte()->getSolde() - $transfert->getMontant() + $beneficeService->tabBenefice($retrait->getMontant())['retrait_agent'];
+                $updateSolde = $user->getCompte()->getSolde() + $transfert->getMontant() + $beneficeService->tabBenefice($retrait->getMontant())['retrait_agent'];
                 $compte = $manager->getRepository(Compte::class)->find($user->getCompte()->setSolde($updateSolde,1));
                 
                 $compteSuperAdmin->getCompte()->setSolde($beneficeService->tabBenefice($retrait->getMontant())['retrait_operateur']);

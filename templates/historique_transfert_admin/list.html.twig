@@ -58,7 +58,7 @@
                   {% if transferts is empty %}
                   <h2> Aucune Transfert éffectué </h2>
                     {% else %}
-                      {% for transfert in transferts | sort %}
+                      {% for transfert in transferts %}
                     <tr>
                         <td>{{transfert.id}}</td>
                         <td>{{transfert.user.prenom}} {{transfert.user.nom}}</td>

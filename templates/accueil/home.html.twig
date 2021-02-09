@@ -50,7 +50,7 @@
             <div class="count-box">
               <i class="bi bi-emoji-smile"></i>
               <div>
-                <span data-purecounter-start="0" data-purecounter-end="232" data-purecounter-duration="1" class="purecounter"></span>
+                <span data-purecounter-start="0" data-purecounter-end="{{(transferts | length )+(retraits | length)}}" data-purecounter-duration="1" class="purecounter"></span>
                 <p>Clients satisfaits</p>
               </div>
             </div>
@@ -60,7 +60,7 @@
             <div class="count-box">
               <i class="fas fa-home" style="color: #ee6c20;"></i>  
               <div>
-                <span data-purecounter-start="0" data-purecounter-end="521" data-purecounter-duration="1" class="purecounter"></span>
+                <span data-purecounter-start="0" data-purecounter-end="{{agences | length}}" data-purecounter-duration="1" class="purecounter"></span>
                 <p>Agences</p>
               </div>
             </div>
@@ -70,7 +70,7 @@
             <div class="count-box">
              <i class="fas fa-city" style="color: #15be56;"></i> 
               <div>
-                <span data-purecounter-start="0" data-purecounter-end="1463" data-purecounter-duration="1" class="purecounter"></span>
+                <span data-purecounter-start="0" data-purecounter-end="{{villes | length}}" data-purecounter-duration="1" class="purecounter"></span>
                 <p>Villes (Sénégal)</p>
               </div>
             </div>
@@ -80,7 +80,7 @@
             <div class="count-box">
               <i class="bi bi-people" style="color: #bb0852;"></i>
               <div>
-                <span data-purecounter-start="0" data-purecounter-end="15" data-purecounter-duration="1" class="purecounter"></span>
+                <span data-purecounter-start="0" data-purecounter-end="{{ agents | length}}" data-purecounter-duration="1" class="purecounter"></span>
                 <p>Agents</p>
               </div>
             </div>
@@ -177,8 +177,7 @@
 
 {% block js %}
  <script type="text/javascript">
-// var res = '{{ res }}';
-// alert(res);
+
 </script>
 {% endblock %}
 {% endblock %}

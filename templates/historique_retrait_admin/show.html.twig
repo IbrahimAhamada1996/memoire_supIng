@@ -106,7 +106,8 @@
                         <th scope="col" >Agence</th>
                         <td scope="col">{{ retrait.user.agence}}</th>
                         <th scope="col" > Son compte</th>
-                        <td scope="col">{{ retrait.user.compte.solde | number_format }} FCFA</th>
+                        <td scope="col">{% if null != retrait.user.compte %}{{ retrait.user.compte.solde | number_format }} FCFA{% else %}rien{% endif %}
+                         </th>
                   </tbody>
                 </table>
               </div>

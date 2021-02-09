@@ -51,14 +51,14 @@ class TransfertController extends AbstractController
         $compteSuperAdmin = $manager->getRepository(User::class)->findAll();
         foreach ($compteSuperAdmin as $key => $value) {
             if ($value->getChoiceroles() === "ROLE_SUPER_ADMIN") {
-                dump("ok");
+                
                 $compteSuperAdmin = $manager->getRepository(User::class)->findAll()[$key];
             }
         }
         // dd($compteSuperAdmin->getCompte()->setSolde(600));
 
         if ($form->isSubmitted() && $form->isValid()) {
-            if ($user->getCompte()->getSolde() >= $transfert->getMontant()) {
+            if ($user->getCompte()->getSolde() >= $transfert->getMontant()) { 
                
                 $impression = true;
                 $cache = false;

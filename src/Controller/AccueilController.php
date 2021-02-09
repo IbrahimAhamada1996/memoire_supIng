@@ -2,9 +2,15 @@
 
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Entity\Agence;
+use App\Entity\User;
+use App\Entity\Ville;
+use App\Entity\Retrait;
+use App\Entity\Transfert;
+use Doctrine\Common\Collections\Expr\Value;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class AccueilController extends AbstractController
 {
@@ -13,11 +19,30 @@ class AccueilController extends AbstractController
      */
     public function index(): Response
     {
-        $name = "salut mes amie";
+        $transfert = $this->getDoctrine()->getRepository(Transfert::class)->findAll();
+        $retrait = $this->getDoctrine()->getRepository(Retrait::class)->findAll();
+        $agences = $this->getDoctrine()->getRepository(Agence::class)->findAll();
+        $villes = $this->getDoctrine()->getRepository(Ville::class)->findAll();
+        $users = $this->getDoctrine()->getRepository(User::class)->findAll();
+        $agents = [];
+        foreach ($users as $key => $value) {
+            foreach ($value->getRoles() as $k => $v) {
+                if ($v == 'ROLE_OPERATEUR') {
+                    $agents[] = $value->getRoles()[$k];
+                }
+                
+            }
+           
+        }
+      
+        
+       dump($agences);
         return $this->render('accueil/home.html.twig', [
-            'controller_name' => 'AccueilController',
-            'name'=> $name,
-            'res'=> "hello world",
+            'transferts'=> $transfert,
+            'retraits' => $retrait,
+            'agents'=> $agents,
+            'villes'=> $villes,
+            'agences'=>$agences,
         ]);
     }
 

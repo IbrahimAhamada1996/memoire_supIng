@@ -77,7 +77,8 @@
                       <td> <a href='{{path('user_show',{'id':compte.user.id})}}'>{{compte.user}} </a></td>
                       <td>    
                         <a href='{{path('update_ActionCompte',{'id':compte.id})}}'><button type="button" class="btn btn-primary"><i class="far fa-edit"></i></button><a>
-                        <a href='{{path('tarif_delete',{'id':compte.id})}}'><button type="button" class="btn btn-danger"><i class="far fa-trash-alt"></i></button><a>
+                        <a href='#'><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal"><i class="far fa-trash-alt"></i></button><a>
+                        {% include "compte_bancaire/delete_modale.html.twig" %}
                       </td>
                   </tr>
                   {% endfor %}

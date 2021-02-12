@@ -38,7 +38,7 @@
             <div class="col-4">
               <form method='get'>
                 <div class='form-group'>
-                  <input type="search" class="form-control" required="required" autocomplete="off"  name="codeTransfert" placeholder="Tapez Le CODE" aria-label="Tapez votre matricule" aria-describedby="button-search">
+                  <input type="search" class="form-control" required="required" autocomplete="off"  name="codeTransfert" placeholder="Entrer le MTCN" aria-label="Tapez votre matricule" aria-describedby="button-search">
                 </div> 
                 <button type="submit" class="btn btn-success">Verification</button>
               </form>
@@ -48,7 +48,7 @@
                 <table class="table table-bordered table-info">
                   <thead>
                     <tr>
-                      <th scope="col" style="color: green" colspan="2">Le code <b> {{retrait.codeTransfert}} <b>est valide</th>
+                      <th scope="col" style="color: green" colspan="2"><b> {% if null != retrait.codeTransfert %}Le MTCN {{retrait.codeTransfert}} est valide{% endif %} <b></th>
                       
                     </tr>
                   </thead>

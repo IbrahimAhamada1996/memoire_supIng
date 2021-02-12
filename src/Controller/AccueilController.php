@@ -7,7 +7,6 @@ use App\Entity\User;
 use App\Entity\Ville;
 use App\Entity\Retrait;
 use App\Entity\Transfert;
-use Doctrine\Common\Collections\Expr\Value;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -35,9 +34,7 @@ class AccueilController extends AbstractController
            
         }
       
-        
-       dump($agences);
-        return $this->render('accueil/home.html.twig', [
+            return $this->render('accueil/home.html.twig', [
             'transferts'=> $transfert,
             'retraits' => $retrait,
             'agents'=> $agents,

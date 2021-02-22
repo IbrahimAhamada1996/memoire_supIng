@@ -1,0 +1,46 @@
+.container{
+    margin-left: 100px;
+    margin-top: 50px;
+}
+.table{
+    border: 1px solid black;
+    width: 70%;
+
+}
+.table .thead{
+    border-bottom: 1px solid black;
+   
+}
+.table ul{
+    list-style-type: none;
+    padding: 0;
+    margin:0
+}
+ .date{
+    text-align: right;
+}
+.logo{
+    text-align: left;
+}
+.signature{
+    text-decoration: underline;
+}
+td{
+    padding: 12px;
+    border: 1px solid black;
+}
+.infoTrans{
+    border-left: 11px black;
+    
+}
+.tr td{
+    text-indent: 50%;
+    font-size: 100px;
+}
+.titre{
+    text-align: center;
+    font-size: 25px;
+}
+ul li{
+    padding: 10px;
+}

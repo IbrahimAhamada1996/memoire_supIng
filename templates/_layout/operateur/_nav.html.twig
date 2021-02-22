@@ -1,7 +1,7 @@
 
 <nav class="navbar navbar-expand navbar-light bg-light static-top">
 
-<a class="navbar-brand mr-1" href="{{path('operateur_home')}}">SendMoney</a>
+<a class="navbar-brand mr-1" href="{{path('operateur_home')}}">S-Money</a>
 
 <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
   <i class="fas fa-bars"></i>
@@ -10,12 +10,12 @@
 <!-- Navbar Search -->
 <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
   <div class="input-group">
-    <input type="text" class="form-control" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+    {# <input type="text" class="form-control" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
     <div class="input-group-append">
       <button class="btn btn-primary" type="button">
         <i class="fas fa-search"></i>
       </button>
-    </div>
+    </div> #}
   </div>
 </form>
 
@@ -29,7 +29,7 @@
       {% if app.user.image != null %}
               <img class="card-img-top" src="{{ vich_uploader_asset(app.user, 'imageFile')}}" alt=" image" style="width:50px">
               {% else %}
-                {% if app.user.sex == 'Feminin' %}
+                {% if app.user.sex == 'F' %}
                         <img class="card-img-top" src="{{asset('images/femme.jfif')}}" alt=" image" style="width:50px">
                         {% else %}
                           <img class="card-img-top" src="{{asset('images/homme.png')}}" alt=" image" style="width:50px">
@@ -43,9 +43,6 @@
       <p> Prénom: {{app.user.prenom}}</p>
       <p> Nom: {{app.user.nom}}</p>
       <p> Email: {{app.user.email}}</p>
-      <div class="dropdown-divider"></div>
-      <a class="dropdown-item" href="#">Settings</a>
-      <a class="dropdown-item" href="#">Activity Log</a>
       <div class="dropdown-divider"></div>
       <a class="dropdown-item" href="{{path('app_logout')}}" data-toggle="modal" data-target="#logoutModal">Logout</a>
     </div>

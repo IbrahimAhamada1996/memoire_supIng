@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello TarifController!{% endblock %}
+{% block title %}Les tarifs | S-Money!{% endblock %}
 
 {% block body %}
   <body id="page-top">
@@ -17,7 +17,7 @@
           <!-- Breadcrumbs-->
           <ol class="breadcrumb">
             <li class="breadcrumb-item">
-              <a href="{{path('operateur_home')}}">Dashboard</a>
+              <a href="{{path('operateur_home')}}">Accueil</a>
             </li>
             
             <li class="breadcrumb-item active">tarif</li>
@@ -38,6 +38,7 @@
                           <th>Borne Inférieure</th>
                           <th>Borne Supérieure</th>
                           <th>Valeur</th>
+                          <th>Actions</th
                         </tr>
                       </thead>
                       <tfoot>
@@ -47,15 +48,23 @@
                           <th>Borne Inférieure</th>
                           <th>Borne Supérieure</th>
                           <th>Valeur</th>
+                          <th>Actions</th>
                         </tr>
                       </tfoot>
                       <tbody>
                         {% for tarif in tarifs %}
                           <tr>
                             <td>#{{tarif.id}}</td>
-                            <td>{{tarif.min}}</td>
-                            <td>{{tarif.max}}</td>
-                            <td>{{tarif.tarifClient}}</td>
+                            <td>{{tarif.min | format_number}}</td>
+                            <td>{{tarif.max | format_number}}</td>
+                            <td>{{tarif.tarifClient | format_number}}</td>
+                            <td>
+                                
+                                <a href='{{path('update_ActionTarif',{'id':tarif.id})}}'><button type="button" class="btn btn-primary"><i class="far fa-edit"></i></button><a>
+                                <a href='#'><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal"><i class="far fa-trash-alt"></i></button><a>
+                                {% include "tarif/delete_modale.html.twig" %}
+                            </td>
+                            
                         </tr>
                         {% endfor %}
                       
@@ -64,7 +73,7 @@
                     </table>
                   </div>
                 </div>
-                <div class="card-footer small text-muted">Updated {{'now' | date("m/d/Y  H:m:s")}}</div>
+                <div class="card-footer small text-muted">Date et l'heure du jour{{'now' | date("d/m/Y  H:m:s")}}</div>
               </div>
          
         </div>

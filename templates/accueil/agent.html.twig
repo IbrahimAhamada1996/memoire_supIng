@@ -1,0 +1,109 @@
+{% extends 'base_home.html.twig' %}
+
+{% block title %}Agent | Accueil!{% endblock %}
+{% block stylesheets %}
+    <!-- Bootstrap core CSS -->
+    {# <link href="{{asset('accueil/vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet"> #}
+
+    <!-- Custom styles for this template -->
+    <link href="{{asset('accueil/css/simple-sidebar.css')}}" rel="stylesheet">
+{% endblock %}
+    
+{% block body %}
+  <div class="d-flex" id="wrapper">
+
+        <!-- Sidebar -->
+        {% include "accueil/sidebar.html.twig" %}
+        <!-- /#sidebar-wrapper -->
+        <!-- Page Content -->
+    <div id="page-content-wrapper">
+        <div class="container-fluid">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+              <a href="{{path('accueil')}}">Accueil</a>
+            </li>
+            <li class="breadcrumb-item active">agent</li>
+          </ol>
+          <div class="row">
+            <div class="col-md-12">
+                <h1> Comment devenir un agent de SEND MONEY?
+            </div>
+            <div class="col-md-12">
+                <ol type="I">
+                     <li> <b>Demande un NINEA</b> </li>
+                    <ul>
+                        <li><b>Qui peut demander un NINEA ?</b></li>
+                        <p>La procédure d'obtention du numéro d’identification national des entreprises et associations (NINEA) doit être initiée : </p>
+                        <ul type="puce">
+                            <li><b>Pour les personnes physiques :</b> par l’intéressé lui-même ou toute personne dûment mandatée. Sont considérés comme personnes physiques : les propriétaires fonciers, les commerçants et exploitant agricoles, ceux qui exercent des professions libérales ainsi que les salariés disposant d’autres sources de revenus. </li>
+                            <li><b>Pour les personnes morales (sociétés et GIE, associations, ONG) :</b> le responsable de la structure. </li>
+                            <p>Les personnes physiques ou morales peuvent être représentées par un cabinet conseil. </p>
+                        </ul>
+                    </ul>
+                    <ul>
+                        <li><b>Quels sont les documents à fournir ?</b></li>
+                        <p>s’adresser au centre des services fiscaux territorialement compétent muni des documents ci-après : </p>
+                        <ul type="puce">
+                            <li>une demande manuscrite </li>
+                            <li>une photocopie de la carte nationale d'identité (pour les personnes physiques) </li>
+                            <li>un timbre fiscal de 1 000 FCFA </li>
+                            <li>une photocopie du certificat d’immatriculation au registre du commerce </li>
+                            <li>une photocopie du contrat de location ou de l’acte de propriété du lieu d’exercice de l’activité </li>
+                            <li>une copie des statuts pour les seuls demandeurs constitués sous la forme sociétaire </li>
+                            <p>
+                                Les demandeurs constitués sous la forme sociétaire devront en plus fournir une copie des statuts.<br>
+                                <b>Combien ça coûte ?</b> <br>
+
+                                En dehors du timbre fiscal joint au dossier, la délivrance du NINEA est gratuite.<br>
+
+                                <b>Quel est le délai de délivrance ?</b> <br>
+                                Environ 3 jours. <br>
+
+                               <b> Où s’adresser ? </b> <br>
+
+                                Au centre des services fiscaux (CSF) du lieu de domicile fiscal de l’intéressé. </br>
+                                Pour les investisseurs qui passent à l’APIX ou à l’ADEPME, la demande est adressée directement à la DGID par ces agences.<br>
+
+                                <b>Pour en savoir plus...</b><br>
+                                A l'Agence nationale de la statistique et de la démographie (ANSD)
+                                Ou à la direction générale des Impôts et des Domaines (DGID)                              
+                            </p>
+                        </ul>
+                    </ul>
+                    <li><b>Qui doit procéder à une inscription au registre du commerce ?</b> </li>
+                    <ul>
+                        <li><b>Comment faire pout voir une registre de commerce?</b></li>
+                        <p>L'inscription au registre du commerce concerne les personnes physiques (indépendants) et les personnes morales (entreprises) qui créent leur activité commerciale. Sont donc concernés les sociétés à responsabilité limitée (SARL), les entreprises unipersonnelles à responsabilité limitée (EURL), les sociétés anonymes (SA), les sociétés commerciales, les sociétés civiles et les groupements d'intérêt économique (GIE). La personne qui crée son activité commerciale sous le statut d'auto-entrepreneur est exemptée de l'inscription au registre du commerce. Elle devra alors faire figurer sur ses documents comptables, notamment sur ses factures, la mention "société en dispense d'immatriculation". </p>
+                         <li><b>Comment procéder à l'inscription au registre du commerce ?</b></li>
+                        <p>L'inscription au registre du commerce se fait auprès du greffe du tribunal de commerce. Toutefois, selon les localités géographiques, le centre de formalités des entreprises (CFE) ou la chambre de commerce et d'industrie (CCI) peuvent se charger de transmettre la demande du commerçant au tribunal de commerce. Cette demande doit émaner du responsable légal de la structure commerciale ou d'un mandataire habilité. Le dossier comprend un formulaire déclaratif à remplir par le responsable, à disposition au Greffe, ainsi que les pièces justificatives correspondant à la situation de la structure. Les statuts de la société sont également à soumettre lors de l'inscription au registre du commerce. S'ils sont erronés ou invalides, l'inscription ne pourra être accordée et une lettre mentionnant les erreurs à rectifier sera adressée au demandeur. Celui-ci devra corriger les statuts et déposer à nouveau son dossier complet.
+                            Lorsque l'inscription au registre du commerce est acceptée, le Greffe du tribunal de commerce attribue un numéro d'identification unique pour l'entreprise ou l'entrepreneur (numéro Siren). Ce numéro permet d'accéder aux informations sur l'entreprise et figure sur le K-bis. </p>
+                        
+                    </ul>
+                    <li><b>Le fond </b> </li>
+                    <li><b>Intallation des terminaux </b> </li>
+                    <li><b>Intallation de WIFI ou DSL</b> </li>
+                    
+                </ol>
+            </div>
+          </div>
+
+        </div>
+    </div>
+        <!-- /#page-content-wrapper -->
+  </div>
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   

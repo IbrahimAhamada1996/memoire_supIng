@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello AdminController!{% endblock %}
+{% block title %}Admin | S-Money{% endblock %}
 
 {% block body %}
   <body id="page-top">
@@ -18,7 +18,7 @@
           <!-- Breadcrumbs-->
           <ol class="breadcrumb">
             <li class="breadcrumb-item">
-              <a href="{{path('admin_home')}}">Dashboard</a>
+              <a href="{{path('admin_home')}}">Accueil</a>
             </li>
             <li class="breadcrumb-item active">Accueil</li>
           </ol>
@@ -30,13 +30,31 @@
                   <div class="card-body-icon">
                   <i class="fas fa-user-tie"></i>
                   </div>
-                  <div class="mr-5">{% if users | length == 1 %} 1 utilisateur 
+                  <div class="mr-5">
+                  {% if users['agent'] | length == 1 %} 1 Agent 
                     {% else %}
-                      {{users | length}} utilisateurs
-                    {% endif %}</div>
+                      {{users['agent'] | length}} Agents
+                    {% endif %}
+                    <br>
+                    {% if users['employe'] | length == 1 %} 1 Employé 
+                    {% else %}
+                      {% if users['employe'] | length > 1 %}
+                        {{users['employe'] | length}} Employés
+                      {% endif %}
+                        Aucun Employé 
+                    {% endif %}
+                    <br>
+                     {% if users['admin'] | length == 1 %} 1 administrateur 
+                    {% else %}
+                      {% if users['admin'] | length > 1 %}
+                        {{users['admin'] | length}} Administrateur
+                      {% endif %}
+                        Aucun Administrateur 
+                    {% endif %}
+                  </div>
                 </div>
                 <a class="card-footer text-white clearfix small z-1" href="{{path('users_list')}}">
-                  <span class="float-left">View Details</span>
+                  <span class="float-left">Voir plus</span>
                   <span class="float-right">
                   <i class="fas fa-angle-right"></i>
                   </span>
@@ -56,7 +74,7 @@
                    </div>
                 </div>
                 <a class="card-footer text-white clearfix small z-1" href="{{path('agence_list')}}">
-                  <span class="float-left">voire plus</span>
+                  <span class="float-left">Voir plus</span>
                   <span class="float-right">
                   <i class="fas fa-angle-right"></i>
                   </span>
@@ -81,7 +99,7 @@
                   {% endif %} (aujourd'hui)</div>
                 </div>
                 <a class="card-footer text-white clearfix small z-1" href="{{path('historique_admin_transfert')}}">
-                  <span class="float-left">View Details</span>
+                  <span class="float-left">Voir plus</span>
                   <span class="float-right">
                     <i class="fas fa-angle-right"></i>
                   </span>
@@ -108,7 +126,7 @@
                   {% endif %} (aujourd'hui)</div>
                 </div>
                 <a class="card-footer text-white clearfix small z-1" href="{{path('historique_admin_retrait')}}">
-                  <span class="float-left">View Details</span>
+                  <span class="float-left">Voir plus</span>
                   <span class="float-right">
                     <i class="fas fa-angle-right"></i>
                   </span>

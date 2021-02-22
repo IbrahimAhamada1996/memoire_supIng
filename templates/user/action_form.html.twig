@@ -1,16 +1,25 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello UserController!{% endblock %}
+{% block title %}{% if editMode %} Modifier {% else %}Ajouter{% endif %} un utilisateur| S-Money{% endblock %}
 {% form_theme formUser 'bootstrap_4_layout.html.twig' %}
 {% block body %}
   <body id="page-top">
+    {% if is_granted('ROLE_ADMIN') %}
+      {{include('_layout/admin/_nav.html.twig')}}
+      <div id="wrapper">
 
-    {{include('_layout/admin/_nav.html.twig')}}
-    <div id="wrapper">
+        <!-- Sidebar -->
+      {{include('_layout/admin/_siderbar.html.twig')}}
+      {% else %}
+        {% if is_granted('ROLE_OPERATEUR_EMPLOYE') %}
+          {{include('_layout/operateur/_nav.html.twig')}}
+          <div id="wrapper">
 
-      <!-- Sidebar -->
-     {{include('_layout/admin/_siderbar.html.twig')}}
-
+            <!-- Sidebar -->
+          {{include('_layout/operateur/_siderbar.html.twig')}}
+        {% endif %}
+      
+    {% endif %}
       <div id="content-wrapper">
 
         <div class="container-fluid">
@@ -18,7 +27,7 @@
           <!-- Breadcrumbs-->
           <ol class="breadcrumb">
             <li class="breadcrumb-item">
-              <a href="/admin">Dashboard</a>
+              <a href="{{path('admin_home')}}">Accueil</a>
             </li>
             <li class="breadcrumb-item">
               <a href="{{path('users_list')}}">utilisateurs</a>
@@ -108,12 +117,15 @@
                   
                 </div>
                 <div class="form-row align-items-end">
-                 
-                   <div class="form-group col-md-6">
+                 {% if is_granted('ROLE_SUPER_ADMIN') %}
+                 <div class="form-group col-md-6">
                       
                   {{form_row(formUser.roles, {'label':'Rôles','attr': {'placeholder':"Choisissez le rôle "}})}}
           
                   </div>
+                 {% endif %}
+                
+                   
                    <div class="form-group col-md-6">
                       
                   {{form_row(formUser.imageFile, {'label':'votre image'})}}

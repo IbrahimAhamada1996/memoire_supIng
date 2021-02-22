@@ -5,22 +5,29 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Form\UserType;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Security\Core\Security;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Validator\Constraints\Date;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
-use Symfony\Component\Security\Core\User\UserInterface;
 
-class UserController extends AbstractController
+class EmployerController extends AbstractController
 {
-     
     /**
-     * @Route("/admin/update/{id}/user" , name="update_ActionUser")
-     * @Route("/admin/new/user", name="create_ActionUser")
+     * @Route("/employer", name="employer")
      */
-    public function actionUser (Request $request, User $user=NULL, UserPasswordEncoderInterface $encoder){
+    public function index(): Response
+    {
+        return $this->render('employer/index.html.twig', [
+            'controller_name' => 'EmployerController',
+        ]);
+    }
+    
+    /**
+     * @Route("/operateur/update/{id}/employer/compte" , name="update_ActionEmployer")
+     * @Route("/operateur/new/employer/compte", name="create_ActionEmployer")
+     */
+    public function actionEmployer (Request $request, User $user=NULL, UserPasswordEncoderInterface $encoder, UserInterface $userInterface){
         
         $manager = $this->getDoctrine()->getManager();
         if (!$user) { 
@@ -28,10 +35,11 @@ class UserController extends AbstractController
         }
 
         $form = $this->createForm(UserType::class, $user);
-        $form->handleRequest($request);  
+        $form->handleRequest($request); 
         
         if ($form->isSubmitted() && $form->isValid()) {
             
+            $user->setRoles(['ROLE_OPERATEUR_EMPLOYE']);
             $passwordHash = $encoder->encodePassword($user, $user->getPassword());
             $user->setPassword($passwordHash);
             $user->setDateCreation(new \DateTime());
@@ -40,7 +48,7 @@ class UserController extends AbstractController
             $manager->persist($user);
             $manager->flush();
             $this->addFlash('succes','l\'enregistrement a été bien reçu');
-            return $this->redirectToRoute('users_list');
+            return $this->redirectToRoute('create_ActionEmployer');
             
         }elseif($form->isSubmitted() && !$form->isValid()) {
             $this->addFlash( 'danger','Reéssaye encore!!');
@@ -52,38 +60,26 @@ class UserController extends AbstractController
             'user'=>$user
         ]);
     }
-    /**
-     *@Route("/admin/users/list", name="users_list")
+
+     /**
+     *@Route("/operateur/users/list", name="users_list_employer")
      */
-    public function list(){
-        $rep = $this->getDoctrine()->getRepository(User::class);
-        $userAll = $rep->findAll();
-     
-        
-        return $this->render("user/list.html.twig",[
-            'users'=>$userAll
+    public function listEmployer(UserInterface $userInterface){
+        $employers = $this->getDoctrine()->getRepository(User::class)->findAll();
+        // dd($employers);
+        return $this->render("user/list_agent.html.twig",[
+            'users'=>$employers
         ]);
     }
-    
+
     /**
-     *@Route("/admin/users/{id}/show", name="user_show")
+     *@Route("/operateur/employer/{id}/show", name="user_show_employer")
      */
-    public function show(User $user){
+    public function showEmployer(User $employer){
        
 
-        return $this->render("user/show.html.twig",[
-            'user'=>$user
+        return $this->render("user/show_agent.html.twig",[
+            'user'=>$employer
         ]);
     }
-    /**
-     * @Route("admin/user/{id}/delete" ,name="user_delete")
-     */
-    public function delete(User $user){
-       $manager = $this->getDoctrine()->getManager();
-       $manager->remove($user);
-       $manager->flush();
-       return $this->redirectToRoute("users_list");
-    }
-
-     
 }

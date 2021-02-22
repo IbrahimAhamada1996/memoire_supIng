@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello AgenceController!{% endblock %}
+{% block title %}Les agences | S-Money{% endblock %}
 
 {% block body %}
   <body id="page-top">
@@ -17,12 +17,12 @@
           <!-- Breadcrumbs-->
           <ol class="breadcrumb">
             <li class="breadcrumb-item">
-              <a href="/admin">Dashboard</a>
+              <a href="{{path('admin_home')}}">Accueil</a>
             </li>
           
             <li class="breadcrumb-item active">agences</li>
           </ol>
-        
+
           <!-- les tarifs -->
             <center><h2> List des agences des operateurs </h2></center>
             <div class="card mb-3">
@@ -35,9 +35,9 @@
                   <thead>
                     <tr>
                       <th>ID</th>
-                      <th>Nom</th>
+                      <th>Nom de l'agence</th>
                       <th>adresse</th>
-                      <th>agence</th>
+                      <th>Ville</th>
                       <th>Actions</th>
                     </tr>
                   </thead>
@@ -45,9 +45,9 @@
                   <tr>
                       <tr>
                       <th>ID</th>
-                      <th>Nom</th>
+                      <th>Nom de l'agence </th>
                       <th>adresse</th>
-                      <th>agence</th>
+                      <th>Ville</th>
                       <th>Actions</th>
                     </tr>
                   </tfoot>
@@ -58,12 +58,18 @@
                     {% for agence in agences %}
                        <tr>
                        <td>#{{agence.id}}</td>
-                        <td>{{agence.nomAgence}}</td>
+                        <td>{{agence.nomAgence}}
+                            {% for user in agence.user %}
+                              <ul>
+                              <li><a href='{{path('user_show',{'id':user.id})}}'>{{user.prenom}} {{user.nom}}</a></li>
+                              </ul>
+                            {% endfor %}
+                        </td>
                         <td>{{agence.adresse}}</td>
                         <td>{{agence.ville}}</td>
                         
                         <td>
-                            <a href='{{path('agence_show',{'id':agence.id})}}'><button type="button" class="btn btn-info"><i class="far fa-eye"></i></button><a>
+                            {# <a href='{{path('agence_show',{'id':agence.id})}}'><button type="button" class="btn btn-info"><i class="far fa-eye"></i></button><a> #}
                             <a href='{{path('update_ActionAgence',{'id':agence.id})}}'><button type="button" class="btn btn-primary"><i class="far fa-edit"></i></button><a>
                             <a href='#'><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal"><i class="far fa-trash-alt"></i></button><a>
                             {% include "agence/delete_modale.html.twig" %}
@@ -78,7 +84,7 @@
                 </table>
               </div>
             </div>
-            <div class="card-footer small text-muted">Updated {{'now' | date("m/d/Y  H:m:s")}}</div>
+            <div class="card-footer small text-muted">Date et l'heure du jour {{'now' | date("d/m/Y  H:m:s")}}</div>
           </div>
          
         </div>

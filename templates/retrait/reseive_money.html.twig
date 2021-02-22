@@ -1,7 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello TransfertController!{% endblock %}
-
+{% block title %}Retrait | S-Money{% endblock %}
+{% block stylesheets %}
+    <link href="{{asset('admin/css/modal_recu.css')}}" rel="stylesheet">
+{% endblock %}
 {% block body %}
   <body id="page-top">
 
@@ -19,7 +21,7 @@
           <!-- Breadcrumbs-->
           <ol class="breadcrumb">
             <li class="breadcrumb-item">
-              <a href="{{path('operateur_home')}}">Dashboard</a>
+              <a href="{{path('operateur_home')}}">Accueil</a>
             </li>
             <li class="breadcrumb-item active">Retrait</li>
           </ol>
@@ -75,7 +77,10 @@
                     {{form_start(formRetrait)}}
                       <button type="submit" class="btn btn-success">Valider</button>
                       {% if impression == true %}
-                       <a href="{{path('pdf_recuRetrait')}}"  <button type="submit" class="btn btn-success">Imprimer</button> </a>
+                       <a href="#" data-toggle="modal" data-target="#deleteModal" ><button type="button" class="btn btn-success" >Imprimer</button> </a>
+                       {% if null != dataRetrait %}
+                       {% include "recu/modal_retrait.html.twig" %}
+                       {% endif %}
                       {% endif %}
                     {{form_end(formRetrait)}}
                   {% endif %}

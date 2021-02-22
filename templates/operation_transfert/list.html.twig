@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello OperationController!{% endblock %}
+{% block title %}vos opérations des transferts | S-Money {% endblock %}
 
 {% block body %}
    <body id="page-top">
@@ -16,7 +16,7 @@
           <!-- Breadcrumbs-->
           <ol class="breadcrumb">
             <li class="breadcrumb-item">
-              <a href="{{path('operateur_home')}}">Dashboard</a>
+              <a href="{{path('operateur_home')}}">Accueil</a>
             </li>
             <li class="breadcrumb-item active">trasferts</li>
           </ol>
@@ -32,25 +32,23 @@
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                   <thead>
                     <tr>
-                      <th>ID</th>
+                      <th>Date</th>
                       <th>Nom <br> Expediteur</th>
                       <th>Prenom <br>Expediteur</th>
                       <th>Nom <br>Bénéficiaire</th>
                       <th>Prenom <br>Bénéficiaire</th>
                       <th>Montant transferer</th>
-                      <th>Date</th>
                       <th>Actions</th>
                     </tr> 
                   </thead>
                   <tfoot>
                     <tr>
-                      <th>ID</th>
+                      <th>Date</th>
                       <th>Nom <br> Expediteur</th>
                       <th>Prenom <br>Expediteur</th>
                       <th>Nom <br>Bénéficiaire</th>
                       <th>Prenom <br>Bénéficiaire</th>
                       <th>Montant transferer</th>
-                      <th>Date</th>
                       <th>Actions</th>
                     </tr>
                   </tfoot>
@@ -60,16 +58,20 @@
                     {% else %}
                       {% for transfert in transferts | sort %}
                     <tr>
-                        <td>{{transfert.id}}</td>
+                        
+                       <td>{{transfert.dateTransfert | date('d/m/Y') }}</td>
                         <td>{{transfert.nomExpediteur}}</td>
                         <td>{{transfert.prenomExpediteur}}</td>
                         <td>{{transfert.nomBeneficiaire}}</td>
                         <td>{{transfert.prenomBeneficiaire}}</td>
                         <td>{{transfert.Montant | number_format}} FCFA</td>
-                        <td>{{transfert.dateTransfert | date('Y/m/d') }}</td>
                         <td>
                           <a href='{{path('historique_operateur_transfert_show',{'id':transfert.id})}}'><button type="button" class="btn btn-info"><i class="far fa-eye"></i></button><a>
-                          <a href='{{path('update_ActionTransfert',{'id':transfert.id})}}'><button type="button" class="btn btn-primary"><i class="far fa-edit"></i></button><a>
+                          {% if transfert.etatTransfert == false %}
+                             <a href='{{path('update_ActionTransfert',{'id':transfert.id})}}'><button type="button" class="btn btn-primary"><i class="far fa-edit"></i></button><a>
+                          {% endif %}
+                          
+                         
                         </td> 
                     </tr>
                      {% endfor %}
@@ -79,14 +81,9 @@
                 </table>
               </div>
             </div>
-            <div class="card-footer small text-muted">Updated {{'now' | date("m/d/Y  H:m:s")}}</div>
+            <div class="card-footer small text-muted">Date et l'heur du jour {{'now' | date("d/m/Y  H:m:s")}}</div>
           </div>
-         
-
-          <p class="small text-center text-muted my-5">
-            <em>More table examples coming soon...</em>
-          </p>
-
+  
         </div>
         <!-- /.container-fluid -->
 

@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello VilleController!{% endblock %}
+{% block title %}Les villes | S-Money{% endblock %}
 
 {% block body %}
   
@@ -18,10 +18,10 @@
           <!-- Breadcrumbs-->
           <ol class="breadcrumb">
             <li class="breadcrumb-item">
-              <a href="/admin">Dashboard</a>
+              <a href="{{path('admin_home')}}">Accueil</a>
             </li>
             
-            <li class="breadcrumb-item active">ville</li>
+            <li class="breadcrumb-item active">villes</li>
           </ol>
         
           <!-- les tarifs -->
@@ -35,7 +35,6 @@
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                       <thead>
                         <tr>
-                          <th>ID</th>
                           <th>ville</th>
                           <th>Actions</th>
                         </tr>
@@ -43,7 +42,6 @@
                       <tfoot>
                       <tr>
                           <tr>
-                          <th>ID</th>
                           <th>ville</th>
                           <th>Actions</th>
                         </tr>
@@ -51,15 +49,13 @@
                       <tbody>
                         {% for ville in villes %}
                           <tr>
-                            <td>{{ville.id}}</td>
                             <td>{{ville.libelle}}</td>
                             <td>
                                 <a href='{{path('update_ActionVille',{'id':ville.id})}}'><button type="button" class="btn btn-primary"><i class="far fa-edit"></i></button><a>
                                 <a href='#'><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal"><i class="far fa-trash-alt"></i></button><a>
                                 {% include "ville/delete_modale.html.twig" %}
-                            </td>
-                            
-                        </tr>
+                            </td> 
+                          </tr>
                         {% endfor %}
                       
                       
@@ -67,7 +63,7 @@
                     </table>
                   </div>
                 </div>
-                <div class="card-footer small text-muted">Updated {{'now' | date("m/d/Y  H:m:s")}}</div>
+                <div class="card-footer small text-muted">Date et l'heure du jour {{'now' | date("d/m/Y  H:m:s")}}</div>
               </div>
          
         </div>

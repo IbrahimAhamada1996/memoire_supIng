@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello UserController!{% endblock %}
+{% block title %}détail d' un utilisateur | S-Money{% endblock %}
 
 {% block body %}
   <body id="page-top">
@@ -18,7 +18,7 @@
           <!-- Breadcrumbs-->
           <ol class="breadcrumb">
             <li class="breadcrumb-item">
-              <a href="{{path('admin_home')}}">Dashboard</a>
+              <a href="{{path('admin_home')}}">Accueil</a>
             </li>
             <li class="breadcrumb-item ">
               <a href="{{path('users_list')}}">utilisateurs </a>
@@ -45,7 +45,7 @@
                     <div class="card-body">
                       <h4 class="card-title">{% if user.sex !='F' %}Mr {% else %}
                         Mme {% endif %}  {{user.prenom | title}} {{user.nom | title }}</h4>
-                      <p class="card-text">stauts:
+                      <p class="card-text"><i>stauts</i>:
                       {% if user.getChoiceroles() == 'ROLE_SUPER_ADMIN' %}
                         <b>Super administrateur</b>
                         {% else %}
@@ -75,7 +75,7 @@
                     </tr>
                     <tr>
                         <th scope="col">Date de naissance</th>
-                        <td scope="col"> {{user.dateNaiss | date("m/d/Y")}} </th>
+                        <td scope="col"> {{user.dateNaiss | date("d/m/Y")}} </th>
                         <th scope="col">Lieu de naissance</th>
                         <td scope="col"> {{user.lieuNaiss}} </th>
                     </tr>
@@ -95,7 +95,7 @@
                           </tr>
                           <tr>
                               <th scope="col"> Date de creation : </th>
-                              <th scope="col" ><center>{{user.compte.date | date("m/d/Y") }} </center></th>
+                              <th scope="col" ><center>{{user.compte.date | date("d/m/Y") }} </center></th>
                                <th scope="col" colspan="2"><center>{{user.compte.solde | number_format}} FCFA</center></th>          
                           </tr>
                       
@@ -114,17 +114,19 @@
                         <th scope="col">Non</th>
                         <td scope="col"> {{user.agence.nomAgence}} </th>
                         <th scope="col">Montant actuel </th>
-                        <td scope="col"> {{user.compte.solde | number_format}} FCFA</th>
+                        <td scope="col"> <b> {{user.compte.solde | number_format}} FCFA </b></th>
                     </tr>
                     <tr>
                         <th scope="col">Ville</th>
                         <td scope="col"> {{user.agence.ville.libelle}} </th>
                         <th scope="col">Date de création du compte</th>
-                        <td scope="col"> {{user.compte.date | date("m/d/Y", "Africa/Dakar")}} </th>
+                        <td scope="col"> {{user.compte.date | date("d/m/Y", "Africa/Dakar")}} </th>
                     </tr>
                     <tr>
                         <th scope="col">Adresse</th>
                         <td scope="col"> {{user.agence.adresse}} </th>
+                        <th scope="col">N° de compte</th>
+                        <td scope="col"> {{user.compte.numeroCompte}} </th>
                     </tr>
                      {% else %}
                        <tr> 

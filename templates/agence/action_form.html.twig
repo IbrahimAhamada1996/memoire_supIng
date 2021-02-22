@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello AgenceController!{% endblock %}
+{% block title %}{% if editMode %}  modifier {% else %}Ajouter {% endif %} un agence | S-Money{% endblock %}
 
 {% form_theme formAgence 'bootstrap_4_layout.html.twig' %}
 {% block body %}
@@ -19,16 +19,24 @@
           <!-- Breadcrumbs-->
           <ol class="breadcrumb">
             <li class="breadcrumb-item">
-              <a href="{{path('admin_home')}}">Dashboard</a>
+              <a href="{{path('admin_home')}}">Accueil</a>
             </li>
             <li class="breadcrumb-item">
-              <a href="{{path('agence_list')}}">Villes</a>
+              <a href="{{path('agence_list')}}">Agences</a>
             </li>
             <li class="breadcrumb-item active">agence</li>
           </ol>
 
           <!-- les tarifs -->
-            <center><h2> Ajouter une agence </h2></center>
+            <center><h2>  {% if editMode %}  Modifier {% else %}Ajouter {% endif %} un agence</h2></center>
+            <div class="col-12">
+              {% for message in app.flashes('succes') %}
+              <div class="alert alert-success"> {{message}} </div> 
+              {% endfor %}
+                  {% for message in app.flashes('danger') %}
+              <div class="alert alert-danger"> {{message}} </div> 
+              {% endfor %}
+           </div>
           {{form_start(formAgence,{'methode':'GET'})}}
 
             <div class="row">

@@ -1,0 +1,71 @@
+<div class="modal fade bd-example-modal-xl" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Imprimer le reçu du transfert</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body" >
+        
+                <div class="container">
+                    <div class="row ">  
+                        <table class="table">
+                            <thead >
+                                <tr class="thead">
+                                    <th class="logo">S-Money</th><th class="date">Date:  {{transfert[0].dateTransfert | date("d/m/Y")}}</th>
+                                </tr>
+                            </thead>
+                        
+                            <tr>
+                                <td class="titre">Information d'expediteur</td>
+                                <td class="titre">Information du transfert</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <ul>
+                                        <li> -Prénom : {{transfert[0].prenomExpediteur |upper}}</li>
+                                        <li> -Nom : {{transfert[0].nomExpediteur |upper}}</li>
+                                        <li> -Téléphone : {{transfert[0].phoneExpediteur}}</li>
+
+                                    </ul>
+                                </td>
+                                    <td rowspan="3" class="infoTrans">
+                                        <ul>
+                                            <li> -Montant : {{(transfert[0].montant + transfert[0].tarif.tarifClient) | number_format}} FCFA</li>
+                                            <li> -Tarif : {{transfert[0].tarif.tarifClient | number_format}} FCFA</li>
+                                            <li> -Montant reçu : <b> {{transfert[0].montant | number_format}} FCFA</b></li>
+                                            <li> -Code : <b> {{transfert[0].codeTransfert}}</b></li>
+                                            <li> -Agence : {{transfert[0].user.agence.nomAgence |capitalize}}</li>
+                                            <li>
+                                                <div class="signature">-Signature:</div>
+                                            </li>
+                                        </ul>
+                                    </td>
+                            </tr>
+                                <tr>
+                                
+                                    <td class="titre">Information bénéficiaire</td>     
+                            </tr>
+                                <tr>
+                                <td>
+                                    <ul>
+                                        <li> -Prénom : {{transfert[0].prenomBeneficiaire |upper}}</li>
+                                        <li> -Nom : {{transfert[0].nomBeneficiaire |upper}}</li>
+                                        <li> -Téléphone :{{transfert[0].phoneBeneficiaire}}</li>
+
+                                    </ul>
+                                </td>     
+                            </tr>
+                        </table>
+                    </div>   
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">Non</button>
+                <a class="btn btn-danger" href="{{path('pdf_recuTransfert')}}">Oui</a>
+            </div>
+        </div>
+   </div>
+</div>

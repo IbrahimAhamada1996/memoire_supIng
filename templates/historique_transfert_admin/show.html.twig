@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello UserController!{% endblock %}
+{% block title %}détail d'un transfert | S-Money {% endblock %}
 
 {% block body %}
   <body id="page-top">
@@ -18,7 +18,7 @@
           <!-- Breadcrumbs-->
           <ol class="breadcrumb">
             <li class="breadcrumb-item">
-              <a href="{{path('admin_home')}}">Dashboard</a>
+              <a href="{{path('admin_home')}}">Accueil</a>
             </li>
             <li class="breadcrumb-item ">
               <a href="{{path('historique_admin_transfert')}}">transferts </a>
@@ -100,7 +100,7 @@
                     </tr>
                     <tr>
                         <th scope="col" > Date</th>
-                        <td scope="col">{{ transfert.dateTransfert | date("Y/m/d")}}</th>
+                        <td scope="col">{{ transfert.dateTransfert | date("d/m/Y")}}</th>
                          <th scope="col" > Ville d'envoie</th>
                         <td scope="col">{{ transfert.villeEnvoi}}</th>
                     </tr>

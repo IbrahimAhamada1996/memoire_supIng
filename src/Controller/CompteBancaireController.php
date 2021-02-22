@@ -50,6 +50,7 @@ class CompteBancaireController extends AbstractController
                 $manager->persist($compte);
                 $manager->flush();
                 $this->addFlash('succes','la mise à jour du compte se dérouler avec success');
+                return $this->redirectToRoute('create_actionCompte');
             }else {
                 
                 $compte->setDate(new \DateTime());
@@ -57,6 +58,7 @@ class CompteBancaireController extends AbstractController
                 $manager->persist($compte);
                 $manager->flush();
                 $this->addFlash('succes','l\'enregistrement a été bien reçu');
+                return $this->redirectToRoute('create_actionCompte');
             }
         
             // return $this->redirectToRoute('compte_list');

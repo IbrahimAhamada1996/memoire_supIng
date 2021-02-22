@@ -40,7 +40,7 @@ class VilleController extends AbstractController
             $manager->flush();
             $this->addFlash('succes','l\'enregistrement a été bien reçu');
 
-            // return $this->redirectToRoute('ville_list');
+            return $this->redirectToRoute('create_actionVille');
 
         }elseif($form->isSubmitted() && !$form->isValid()) {
 

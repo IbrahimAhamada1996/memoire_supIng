@@ -64,7 +64,7 @@ class RetraitController extends AbstractController
         $compteSuperAdmin = $manager->getRepository(User::class)->findAll();
         foreach ($compteSuperAdmin as $key => $value) {
             if ($value->getChoiceroles() === "ROLE_SUPER_ADMIN") {
-                dump("ok");
+               
                 $compteSuperAdmin = $manager->getRepository(User::class)->findAll()[$key];
             }
         }
@@ -127,6 +127,7 @@ class RetraitController extends AbstractController
         return $this->render('retrait/reseive_money.html.twig',[
             'retrait' =>$transfert,
             'cache'=>$cache,
+            'dataRetrait'=>$dataRetrait,
             'formRetrait' => $form->createView(),
             'impression'=> $impression,
             

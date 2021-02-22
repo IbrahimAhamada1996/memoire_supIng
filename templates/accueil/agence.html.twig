@@ -1,6 +1,6 @@
 {% extends 'base_home.html.twig' %}
 
-{% block title %}Hello AccueilController!{% endblock %}
+{% block title %}Agence | S-Money{% endblock %}
 {% block stylesheets %}
 
 <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
@@ -50,20 +50,42 @@
           <h4> <center> Rechercher des agences </center> </h4> <br>
          
         <div class="container">
-             <form>
+             <form method="get">
                  <div class="row">
                     <div class="col-4">
-                        <input type="text" class="form-control" name="" id=""  placeholder="">
-                        <small id="helpId" class="form-text text-muted">taper l'adresse</small>
+                        <input type="text" class="form-control" name="ville" id=""  placeholder="">
+                        <small id="helpId" class="form-text text-muted">taper la ville</small>
                     </div>
                     <div class="col-2">
-                        <button type="button" class="btn btn-primary"> Rechercher</button>
+                        <button type="submit" class="btn btn-primary"> Rechercher</button>
                     </div>
-                    <div class="col-12" id="map"> 
-                        
-                    </div>
+                    
                 </div>
             </form>
+            <div class="row">
+              <div class="col-6"> 
+                {% if villes is empty %}
+                  <b style="color:red"> Aucun resultat trouvé </b>
+                {% else %} 
+                  <ul>
+                    {% for ville in villes %}
+                      <li>{{ville.libelle}}</li>
+                         
+                          {% for agence in ville.agence %}
+                            {% if null != agence.nomAgence %}
+                              <b>addresse :</b> {{agence.adresse}},<b> Agence :</b> {{agence.nomAgence}} <br>
+                            {% endif %} 
+                          {% endfor %}
+                        
+                    {% endfor %}
+                 </ul>
+                {% endif %}
+             </div>
+            </div>
+            
+              <div class="col-12" id="map"> 
+                        nnnnnnnn
+             </div>
          </div>
         </div>
     </div>

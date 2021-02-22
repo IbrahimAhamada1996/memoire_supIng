@@ -1,0 +1,69 @@
+<div class="modal fade bd-example-modal-xl" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Imprimer le reçu du retrait</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="container">
+                    <div class="row ">  
+                        <table class="table">
+                            <thead >
+                                <tr class="thead">
+                                    <th class="logo">S-Money</th><th class="date">Date: {{dataRetrait[0].dateRetrait | date("d/m/Y")}} </th>
+                                </tr>
+                            </thead>
+                            <tr>
+                                <td class="titre">Information du bénéficiaire</td>
+                                <td class="titre">Information du retrait </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <ul>
+                                        <li> -Prénom : {{dataRetrait[0].prenomBeneficiaire}}</li>
+                                        <li> -Nom : {{dataRetrait[0].nomBeneficiaire}}</li>
+                                        <li> -Téléphone : {{dataRetrait[0].phoneBeneficiaire}}</li>
+
+                                    </ul>
+                                </td>
+                                    <td rowspan="3" class="infoTrans">
+                                        <ul>
+                                            <li> -Montant : {{dataRetrait[0].montant}} FCFA</li>
+                                            <li> -Tarif : {{dataRetrait[0].tarif}} FCFA</li>
+                                            <li> -Montant reçu : <b> {{(dataRetrait[0].montant - dataRetrait[0].tarif) | number_format }} FCFA </b></li>
+                                            <li> -Code : <b>{{dataRetrait[0].codeRetrait}} </b></li>
+                                            <li> -Agence : {{dataRetrait[0].user.agence.nomAgence}} </li>
+                                            <li>
+                                                <div class="signature">-Signature:</div>
+                                            </li>
+                                        </ul>
+                                    </td>
+                            </tr>
+                            <tr>
+                                
+                               <td class="titre">Information d'expediteur</td>     
+                            </tr>
+                            <tr>
+                                <td>
+                                    <ul>
+                                        <li> -Prénom : {{dataRetrait[0].prenomExpediteur}}</li>
+                                        <li> -Nom : {{dataRetrait[0].nomExpediteur}}</li>
+                                        <li> -Téléphone : {{dataRetrait[0].phoneExpediteur}}</li>
+
+                                    </ul>
+                                </td>         
+                           </tr>
+                    </table>          
+                </div>   
+            </div>
+        </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">Non</button>
+                <a class="btn btn-danger" href="{{path('pdf_recuRetrait')}}">Oui</a>
+            </div>
+        </div>
+    </div>  
+</div>

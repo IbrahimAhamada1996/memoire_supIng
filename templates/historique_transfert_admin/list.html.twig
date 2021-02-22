@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello OperationController!{% endblock %}
+{% block title %}L'historique des transferts | S-Money{% endblock %}
 
 {% block body %}
    <body id="page-top">
@@ -16,7 +16,7 @@
           <!-- Breadcrumbs-->
           <ol class="breadcrumb">
             <li class="breadcrumb-item">
-              <a href="{{path('admin_home')}}">Dashboard</a>
+              <a href="{{path('admin_home')}}">Accueil</a>
             </li>
             <li class="breadcrumb-item active">trasferts</li>
           </ol>
@@ -65,7 +65,7 @@
                         <td>{{transfert.villeEnvoi}}</td>
                         <td>{{transfert.user.agence}}</td>
                         <td>{% if false != transfert.etatTransfert %} Oui {% else %} Non{% endif %}</td>
-                        <td scope="col">{{ transfert.dateTransfert | date("Y/m/d")}}</th>
+                        <td scope="col">{{ transfert.dateTransfert | date("d/m/Y")}}</th>
                         <td>{{transfert.Montant | number_format}} </td>
                         <td>
                           <a href='{{path('historique_admin_transfert_show',{'id':transfert.id})}}'><button type="button" class="btn btn-info"><i class="far fa-eye"></i></button><a>
@@ -78,14 +78,8 @@
                 </table>
               </div>
             </div>
-            <div class="card-footer small text-muted">Updated {{'now' | date("m/d/Y  H:m:s")}}</div>
+            <div class="card-footer small text-muted">Date et l'heure du jour {{'now' | date("d/m/Y  H:m:s")}}</div>
           </div>
-         
-
-          <p class="small text-center text-muted my-5">
-            <em>More table examples coming soon...</em>
-          </p>
-
         </div>
         <!-- /.container-fluid -->
 

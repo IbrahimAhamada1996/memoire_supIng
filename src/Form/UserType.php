@@ -22,9 +22,10 @@ class UserType extends AbstractType
             ->add('email')
             ->add('roles',ChoiceType::class,[
                 'choices'=>[
-                    'ROLE_OPERATEUR'=>'ROLE_OPERATEUR',
-                    'ROLE_ADMIN'=>'ROLE_ADMIN',
-                    'ROLE_SUPER_ADMIN'=> 'ROLE_SUPER_ADMIN'
+                    'Agent'=>'ROLE_OPERATEUR',
+                    'Employé'=>'ROLE_OPERATEUR_EMPLOYE',
+                    'Employé'=>'ROLE_ADMIN_EMPLOYE',
+                    'SUPER ADMIN'=> 'ROLE_SUPER_ADMIN'
                 ],
                 'expanded' => false,
                 'multiple' => true,

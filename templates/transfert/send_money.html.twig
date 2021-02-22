@@ -1,8 +1,12 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello TransfertController!{% endblock %}
+{% block title %}Transfert | S-Money{% endblock %}
 
 {% form_theme formTransfert 'bootstrap_4_layout.html.twig' %}
+{% block stylesheets %}
+    <link href="{{asset('admin/css/modal_recu.css')}}" rel="stylesheet">
+
+{% endblock %}
 {% block body %}
   <body id="page-top">
 
@@ -20,7 +24,7 @@
           <!-- Breadcrumbs-->
           <ol class="breadcrumb">
             <li class="breadcrumb-item">
-              <a href="{{path('operateur_home')}}">Dashboard</a>
+              <a href="{{path('operateur_home')}}">Accueil</a>
             </li>
             <li class="breadcrumb-item active">Envoie</li>
           </ol>
@@ -70,10 +74,6 @@
                     <div class="form-group">
                        {{form_row(formTransfert.montant, {'label':'Montant','attr': {'placeholder':"Montant "}})}}
                     </div>
-                    <div class="form-group">
-                       {{form_row(formTransfert.tarif, {'label':'Choisi l\'intervale du montant'})}}
-                    </div>
-
                   </div>
                  
                   <div class="col-6">
@@ -86,42 +86,19 @@
                     <div class="form-group">
                        {{form_row(formTransfert.phoneBeneficiaire, {'label':'phone','attr': {'placeholder':"numero de téléphone de bénéficiaire "}})}}
                     </div>
-              <pre>
-                {{ dump(impression) }}
-
-                {{ dump(cache) }}
-              </pre>
-                {% if impression == false  and dataTransfert is not empty %}
-                  <table class="table table-bordered table-info">
-                    <thead>
-                      <tr>
-                        <th scope="col" style="color: green" colspan="2">Code: <b> {{dataTransfert[0].codeTransfert}} <b></th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <th scope="col">Nom Complet (Beneficiaire)</th>
-                        <td>{{dataTransfert[0].prenomBeneficiaire}} {{dataTransfert[0].nomBeneficiaire}}</td>
-                      </tr>
-                       <tr>
-                        <th scope="col">Phone (Beneficiaire)</th>
-                        <td>{{dataTransfert[0].phoneBeneficiaire}}</td>
-                      </tr>
-                      <tr>
-                        <th scope="col">Montant</th>
-                        <td colspan="2"><b>{{dataTransfert[0].montant | number_format}} FCFA</b> </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                  
-                 <center> <a href="{{path('pdf_recuTransfert')}}" <button type="button" class="btn btn-success" >Imprimer</button> </a></center>
-                {% endif %}
                   
                   </div>
                 </div>
                     <center> 
-                    <button type="submit" class="btn btn-success">Envoyer</button>
+                    <a href="{{path('transfert_target_recu')}}">
+                     <button type="submit" class="btn btn-success">Transferer</button>
+                    </a>
                     <button type="reset" class="btn btn-success">Annuler</button> 
+                    <a href="#" data-toggle="modal" data-target="#deleteModal" <button type="button" class="btn btn-success" >Imprimer</button> </a>
+                    {% if null != transfert %}
+                    {% include "recu/modal_transfert.html.twig" %}
+                    {% endif %}
+
                     </center> 
               {{form_end(formTransfert)}}
               

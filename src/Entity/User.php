@@ -140,7 +140,6 @@ class User implements UserInterface
      */
     private $compte;
 
-
     public function __construct()
     {
         $this->retraits = new ArrayCollection();
@@ -473,5 +472,6 @@ class User implements UserInterface
         return $this;
     }
 
+   
    
 }

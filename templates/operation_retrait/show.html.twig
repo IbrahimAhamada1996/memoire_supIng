@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello UserController!{% endblock %}
+{% block title %}détail d' retrait | S-Money{% endblock %}
 
 {% block body %}
   <body id="page-top">
@@ -18,10 +18,10 @@
           <!-- Breadcrumbs-->
           <ol class="breadcrumb">
             <li class="breadcrumb-item">
-              <a href="{{path('operateur_home')}}">Dashboard</a>
+              <a href="{{path('operateur_home')}}">Accueil</a>
             </li>
             <li class="breadcrumb-item ">
-              <a href="{{path('historique_operateur_retrait')}}">retraits </a>
+              <a href="{{path('historique_operateur_retrait')}}">retrait</a>
             </li>
             <li class="breadcrumb-item active">{{retrait.prenomBeneficiaire}} {{retrait.nomBeneficiaire}}</li>
           </ol>
@@ -71,7 +71,7 @@
                     </tr>
                      <tr>
                         <th scope="col" > Date</th>
-                        <td scope="col">{{ retrait.dateretrait | date('Y/m/d')}}</th>
+                        <td scope="col">{{ retrait.dateretrait | date('d/m/Y')}}</th>
                     </tr>
                   </tbody>
                 </table>

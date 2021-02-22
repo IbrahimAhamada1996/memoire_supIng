@@ -70,7 +70,8 @@ class Compte
         if (1 == $benefice) {
             $this->solde = $solde;
            
-        }else {
+        }
+        if(null==$benefice) {
             $this->solde += $solde;
         }
        

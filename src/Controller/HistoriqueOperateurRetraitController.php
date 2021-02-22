@@ -33,7 +33,7 @@ class HistoriqueOperateurRetraitController extends AbstractController
         $rep = $this->getDoctrine()->getRepository(Retrait::class);
         $retraits = $rep->findBy([
             'user' => $user,
-        ]);
+        ],['id'=>'desc']);
         // dd($retraits);
         return $this->render('operation_retrait/list.html.twig', [
             'retraits'=> $retraits,
@@ -41,7 +41,7 @@ class HistoriqueOperateurRetraitController extends AbstractController
     }
 
      /**
-     * @Route("operateur/historique/{id}/transfert", name="historique_operateur_retrait_show")
+     * @Route("operateur/historique/{id}/retrait", name="historique_operateur_retrait_show")
      */
     public function show(Retrait $retrait): Response
     {

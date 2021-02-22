@@ -1,6 +1,7 @@
 security:
     role_hierarchy:       
         ROLE_SUPER_ADMIN: [ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
+        ROLE_OPERATEUR: [ROLE_OPERATEUR_EMPLOYE, ROLE_ALLOWED_TO_SWITCH]
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     enable_authenticator_manager: false
     encoders:
@@ -44,4 +45,4 @@ security:
         - { path: '^/login', roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: '^/admin/users', roles: ROLE_SUPER_ADMIN }
         - { path: ^/admin, roles: ROLE_ADMIN }
-        - { path: ^/operateur, roles: ROLE_OPERATEUR }
+        - { path: ^/operateur, roles: ROLE_OPERATEUR_EMPLOYE }

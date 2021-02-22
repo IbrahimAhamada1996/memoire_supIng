@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello TarifController!{% endblock %}
+{% block title %}{% if editMode %}Modifier{% else %}ajouter{% endif %} une Tarif | S-Money{% endblock %}
 {% form_theme formTarif 'bootstrap_4_layout.html.twig' %}
 {% block body %}
   
@@ -19,7 +19,7 @@
           <!-- Breadcrumbs-->
           <ol class="breadcrumb">
             <li class="breadcrumb-item">
-              <a href="{{path('admin_home')}}">Dashboard</a>
+              <a href="{{path('admin_home')}}">Accueil</a>
             </li>
             <li class="breadcrumb-item">
               <a href="{{path('tarifs_list')}}">Tarifs</a>

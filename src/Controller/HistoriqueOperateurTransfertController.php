@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use App\Entity\Retrait;
 use App\Entity\Transfert;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -29,7 +28,7 @@ class HistoriqueOperateurTransfertController extends AbstractController
         $rep = $this->getDoctrine()->getRepository(Transfert::class);
         $transferts = $rep->findBy([
             'user' => $user,
-        ]);
+        ],['id'=>'desc']);
         // dd($transferts);
         return $this->render('operation_transfert/list.html.twig', [
             'transferts'=> $transferts,
@@ -39,7 +38,7 @@ class HistoriqueOperateurTransfertController extends AbstractController
      /**
      * @Route("operateur/historique/{id}/transfert", name="historique_operateur_transfert_show")
      */
-    public function show(UserInterface $user,Transfert $transfert): Response
+    public function show(Transfert $transfert): Response
     {
        
         // dd($retraits);

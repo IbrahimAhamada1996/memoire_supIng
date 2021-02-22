@@ -38,8 +38,8 @@ class AgenceController extends AbstractController
             $manager->persist($agence);
             $manager->flush();
             $this->addFlash('succes','l\'enregistrement a été bien reçu');
-
-            // return $this->redirectToRoute('agence_list');
+            return $this->redirectToRoute('create_actionAgence');
+            
         }elseif ($form->isSubmitted() && !$form->isValid()) {
             $this->addFlash( 'danger','Reéssaye encore!!');
         }

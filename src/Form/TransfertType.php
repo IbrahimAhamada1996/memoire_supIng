@@ -27,7 +27,7 @@ class TransfertType extends AbstractType
             // ->add('etatTransfert')
             // ->add('user')
             // ->add('seuilTransfert')
-            ->add('tarif')
+            // ->add('tarif')
         ;
     }
 

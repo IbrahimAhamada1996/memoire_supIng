@@ -2,14 +2,17 @@
 
 namespace App\Controller;
 
-use App\Entity\Agence;
 use App\Entity\User;
 use App\Entity\Ville;
+use App\Entity\Agence;
 use App\Entity\Retrait;
 use App\Entity\Transfert;
+use App\Entity\VilleSearch;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\DomCrawler\Form;
 
 class AccueilController extends AbstractController
 {
@@ -102,10 +105,25 @@ class AccueilController extends AbstractController
      /**
      * @Route("/agence", name="accueil_agence")
      */
-    public function agence(): Response
+    public function agence(Request $request): Response
+    {   $cliquer = false;
+        $q = $request->query->get('ville');
+     
+        $rep = $this->getDoctrine()->getRepository(Ville::class);
+        $villes = $rep->findBy(['libelle'=>$q]);
+        return $this->render('accueil/agence.html.twig', [
+            'villes' => $villes
+           
+        ]);
+    }
+
+      /**
+     * @Route("/agent", name="accueil_agent")
+     */
+    public function agent(): Response
     {
       
-        return $this->render('accueil/agence.html.twig', [
+        return $this->render('accueil/agent.html.twig', [
             'controller_name' => 'AccueilController',
            
         ]);

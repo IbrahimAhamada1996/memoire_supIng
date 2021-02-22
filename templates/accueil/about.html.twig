@@ -1,6 +1,6 @@
 {% extends 'base_home.html.twig' %}
 
-{% block title %}Hello AccueilController!{% endblock %}
+{% block title %}À propos | S-Money{% endblock %}
 {% block stylesheets %}
     <!-- Bootstrap core CSS -->
     {# <link href="{{asset('accueil/vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet"> #}
@@ -22,30 +22,44 @@
             <li class="breadcrumb-item">
               <a href="{{path('accueil')}}">Accueil</a>
             </li>
-            <li class="breadcrumb-item active">A propos</li>
+            <li class="breadcrumb-item active">À propos</li>
           </ol>
         <section id="about" class="about">
             <div class="container" data-aos="fade-up">
             <div class="row gx-0">
 
-              <div class="col-lg-6 d-flex flex-column justify-content-center" data-aos="fade-up" data-aos-delay="200">
+              <div class="col-lg-12 d-flex flex-column justify-content-center" data-aos="fade-up" data-aos-delay="200">
                 <div class="content">
-                  <h3>QUI NOUS SOMMES</h3>
+                  <h3>QUI NOUS SOMMES?</h3>
                   <h2>SEND MONEY est une plateforme de transfert d'argent inter-agence</h2>
                   <p>
-                    Quisquam vel ut sint cum eos hic dolores aperiam. Sed deserunt et. Inventore et et dolor consequatur itaque ut voluptate sed et. Magnam nam ipsum tenetur suscipit voluptatum nam et est corrupti.
+                    Il est une entreprise d'origine Sénégal du secteur des paiements, 
+                    spécialisée dans les transferts d'argent nationaux pour les particuliers et 
+                    les entreprises.
                   </p>
                   
-                    Quisquam vel ut sint cum eos hic dolores aperiam. Sed deserunt et. Inventore et et dolor consequatur itaque ut voluptate sed et. Magnam nam ipsum tenetur suscipit voluptatum nam et est corrupti.
-                    Quisquam vel ut sint cum eos hic dolores aperiam. Sed deserunt et. Inventore et et dolor consequatur itaque ut voluptate sed et. Magnam nam ipsum tenetur suscipit voluptatum nam et est corrupti.
+                   Nous sommes fiers d'offrir à nos clients la meilleure expérience en matière de transfert
+                   d'argent national. Notre offre, développée à l'ère du numérique, associe nos applications
+                  à un réseau national inégalé de points de vente physiques, rapprochant ainsi le plus possible 
+                  les paiements des communautés. Nous procurons la couverture, la sécurité, la tranquillité 
+                  d'esprit et une grande fonctionnalité pour les marchés où nous sommes présents. 
+                  Le transfert d'argent à l'intérieur d'un pays est un levier clé pour l'économie : 
+                  payer les fournisseurs, les travailleurs, es partenaires, les pigistes de la manière la plus 
+                  facile possible est un levier clé de la croissance économique. Ceci reste cependant un point 
+                  faible tant pour les économies développées que pour les économies émergentes. 
+                  SEND MONEY apporte la solution. Au-delà des paiements commerciaux, le soutien et 
+                  la solidarité communautaires sont également essentiels pour de nombreuses sociétés en Afrique 
+                  et dans le monde entier. Nous sommes fiers de rendre cela possible plus facilement et à 
+                  moindre coût. Dans de nombreux villes et villages, SEND MONEY est un nom et un verbe, 
+                  le synonyme de transfert d'argent
                   </p>
                   
                 </div>
               </div>
 
-              <div class="col-lg-6 d-flex align-items-center" data-aos="zoom-out" data-aos-delay="200">
+              {# <div class="col-lg-6 d-flex align-items-center" data-aos="zoom-out" data-aos-delay="200">
                 <img src="{{asset('accueil/img/about.jpg')}}" class="img-fluid" alt="">
-              </div>
+              </div> #}
 
             </div>
           </div>

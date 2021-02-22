@@ -18,9 +18,26 @@ class AdminController extends AbstractController
     public function index(): Response
     {
         // dd(new \DateTime());
-        $repUser = $this->getDoctrine()->getRepository(User::class);
-        $users =  $repUser->findAll();
+        $users = $this->getDoctrine()->getRepository(User::class)->findAll();
+        $usersTab = ['agent'=>[],'employe'=>[],'admin'=>[]];
+        foreach ($users as $key => $value) {
+            foreach ($value->getRoles() as $k => $v) {
+                if ($v == 'ROLE_OPERATEUR') {
+                    $usersTab['agent'][] = $value->getRoles()[$k];
 
+                }
+                if ($v == 'ROLE_ROLE_ADMIN_EMPLOYE') {
+                    $usersTab['employe'][] = $value->getRoles()[$k];
+
+                }
+                if ($v == 'ROLE_SUPER_ADMIN') {
+                    $usersTab['admin'][] = $value->getRoles()[$k];
+
+                }
+            }
+           
+        }
+        // dd($usersTab);
         $repAgence = $this->getDoctrine()->getRepository(Agence::class);
         $agences = $repAgence->findAll();
        
@@ -32,7 +49,7 @@ class AdminController extends AbstractController
     //    dd($retraits);
 
         return $this->render('admin/home.html.twig', [
-            'users' => $users,
+            'users' => $usersTab,
             'agences' => $agences,
             'transferts' => $transferts,
             'retraits' => $retraits,

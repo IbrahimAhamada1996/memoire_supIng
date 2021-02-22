@@ -66,7 +66,7 @@ class TarifController extends AbstractController
         $tarifAll = $rep->findAll();
         dump($tarifAll);
         
-        return $this->render("tarif/list.html.twig",[
+        return $this->render("tarif/list_admin.html.twig",[
             'tarifs'=>$tarifAll,
         ]);
     }
@@ -97,7 +97,7 @@ class TarifController extends AbstractController
     public function listOperateur(){
         $rep = $this->getDoctrine()->getRepository(Tarif::class);
         $tarifAll = $rep->findAll();
-        dump($tarifAll);
+      
         
         return $this->render("tarif/list_operateur.html.twig",[
             'tarifs'=>$tarifAll,

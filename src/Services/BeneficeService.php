@@ -15,6 +15,7 @@ class BeneficeService {
     private $beneficeTransfert_operateur;
     private $beneficeRetrait_operateur;
     private $tarif;
+    private $key;
     private $tabMin = [];
     private $tabMax = [];
     private $tabTarif = [];
@@ -69,7 +70,8 @@ class BeneficeService {
         foreach ($tarifs as $key => $value) {
             
             if ($montant >= $value->getMin() && $montant <= $value->getMax()) {
-               $this->tarif = $value->getTarifClient() ;    
+               $this->tarif = $value->getTarifClient() ;
+               $this->key = $key;
             }
         }
         //    dd($this->tarif);
@@ -101,9 +103,11 @@ class BeneficeService {
         $benefices['retrait_agent'] = $this->beneficeRetrait_agent;
         $benefices['transfert_operateur'] = $this->beneficeTransfert_operateur;
         $benefices['retrait_operateur'] = $this->beneficeRetrait_operateur;
+        $benefices['key'] = $this->key;
         
         return $benefices;
     }
+
 
     
 }

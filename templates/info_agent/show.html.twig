@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello OperationController!{% endblock %}
+{% block title %}vos informations  | S-Money{% endblock %}
 
 {% block body %}
    <body id="page-top">
@@ -16,9 +16,9 @@
           <!-- Breadcrumbs-->
           <ol class="breadcrumb">
             <li class="breadcrumb-item">
-              <a href="{{path('operateur_home')}}">Dashboard</a>
+              <a href="{{path('operateur_home')}}">Accueil</a>
             </li>
-            <li class="breadcrumb-item active">Depense</li>
+            <li class="breadcrumb-item active">détail</li>
           </ol>
 
           <center><h2> Détail de l'utilisateur </h2></center>
@@ -39,14 +39,19 @@
                     <div class="card-body">
                       <h4 class="card-title">{% if user.sex !='F' %}Mr {% else %}
                         Mme {% endif %}  {{user.prenom | title}} {{user.nom | title }}</h4>
-                      <p class="card-text">stauts:
+                      <p class="card-text"><i>stauts</i>:
                       {% if user.getChoiceroles() == 'ROLE_SUPER_ADMIN' %}
                         <b>Super administrateur</b>
                         {% else %}
                           {% if user.getChoiceroles() == 'ROLE_ADMIN' %}
-                            <b>Super administrateur</b>
+                            <b> administrateur</b>
                             {% else %}
-                                 <b>Agent </b>
+                              {% if user.getChoiceroles() == 'ROLE_OPERATEUR_EMPLOYE' %}
+                                  <b>Employé </b>
+                                  {% else %}
+                                  <b>Agent </b>
+                              {% endif %}
+                               
                           {% endif %}
                           
                        {% endif %}</p>

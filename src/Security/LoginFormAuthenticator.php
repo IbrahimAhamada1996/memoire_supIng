@@ -102,7 +102,7 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
        // throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
        if ($this->security->isGranted('ROLE_ADMIN')) {
             return new RedirectResponse($this->urlGenerator->generate('admin_home'));
-       }elseif ($this->security->isGranted('ROLE_OPERATEUR')) {
+       }elseif ($this->security->isGranted('ROLE_OPERATEUR') || $this->security->isGranted('ROLE_OPERATEUR_EMPLOYE')) {
             return new RedirectResponse($this->urlGenerator->generate('operateur_home'));
        }
         

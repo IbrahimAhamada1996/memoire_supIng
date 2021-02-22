@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello UserController!{% endblock %}
+{% block title %}détail d'une transfert | S-Money{% endblock %}
 
 {% block body %}
   <body id="page-top">
@@ -18,7 +18,7 @@
           <!-- Breadcrumbs-->
           <ol class="breadcrumb">
             <li class="breadcrumb-item">
-              <a href="{{path('operateur_home')}}">Dashboard</a>
+              <a href="{{path('operateur_home')}}">Accueil</a>
             </li>
             <li class="breadcrumb-item ">
               <a href="{{path('historique_operateur_transfert')}}">transferts </a>
@@ -58,8 +58,8 @@
                         <th scope="col" colspan="4"> <center>Informations opération </center></th>
                     </tr>
                     <tr>
-                        <th scope="col" > Code</th>
-                        <td scope="col"> {{transfert.codeTransfert}} </th>
+                        <th scope="col" > Date</th>
+                        <td scope="col">{{ transfert.dateTransfert | date('d/m/Y')}}</th>
                         <th scope="col" > Montant</th>
                         <td scope="col"> {{transfert.montant | number_format}} FCFA </th>
                     </tr>
@@ -67,12 +67,9 @@
                         <th scope="col" > Tarif</th>
                         <td scope="col">{{  transfert.tarif.tarifClient}} FCFA </th>
                         <th scope="col" > Montant reçu</th>
-                        <td scope="col"> {{transfert.montant- transfert.tarif.tarifClient | number_format}} FCFA </th>
+                        <td scope="col"> {{(transfert.montant- transfert.tarif.tarifClient) | number_format}} FCFA </th>
                     </tr>
-                     <tr>
-                        <th scope="col" > Date</th>
-                        <td scope="col">{{ transfert.dateTransfert | date('Y/m/d')}}</th>
-                    </tr>
+
                   </tbody>
                 </table>
               </div>

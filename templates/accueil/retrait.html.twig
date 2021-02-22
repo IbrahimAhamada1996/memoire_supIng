@@ -1,6 +1,6 @@
 {% extends 'base_home.html.twig' %}
 
-{% block title %}Hello AccueilController!{% endblock %}
+{% block title %}Retrait | S-Money{% endblock %}
 {% block stylesheets %}
     <!-- Bootstrap core CSS -->
     {# <link href="{{asset('accueil/vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet"> #}
@@ -24,7 +24,23 @@
             </li>
             <li class="breadcrumb-item active">retrait</li>
           </ol>
-
+           <div class="row">
+              <div class="col-12"><center><h5>Coment retirer de l'argent ?<h5></center></div>
+           </div>
+          <div class="container">
+            <div class="row">
+                <div class="col-6">
+                <p>
+                     Vous reservez une message contenant votre nom et prenom ainsi que le numéro de contrôle du transfert d'argent (MTCN).
+                                            
+                </p>
+                
+                </div>
+                <div class="col-6">
+                    <img src="{{asset('accueil/img/retrait.jpg')}}" alt="photo de transfert">
+                </div>
+            </div>
+          </div>
 
         </div>
     </div>

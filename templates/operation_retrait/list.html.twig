@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello OperationController!{% endblock %}
+{% block title %}vos opérations des retraits | S-Money {% endblock %}
 
 {% block body %}
   <body id="page-top">
@@ -16,7 +16,7 @@
           <!-- Breadcrumbs-->
           <ol class="breadcrumb">
             <li class="breadcrumb-item">
-              <a href="/admin">Dashboard</a>
+              <a href="{{path('operateur_home')}}">Accueil</a>
             </li>
             <li class="breadcrumb-item active">retraits</li>
           </ol>
@@ -67,7 +67,7 @@
                         <td>{{retrait.prenomExpediteur}}</td>
                         <td>{{retrait.codeRetrait}}</td>
                         <td>{{(retrait.Montant - retrait.tarif) | number_format}} FCFA</td>
-                        <td>{{retrait.dateRetrait | date('Y/m/d') }}</td>
+                        <td>{{retrait.dateRetrait | date('d/m/Y') }}</td>
                         <td>
                           <a href='{{path('historique_operateur_retrait_show',{'id':retrait.id})}}'><button type="button" class="btn btn-info"><i class="far fa-eye"></i></button><a>
                         </td>
@@ -78,7 +78,7 @@
                 </table>
               </div>
             </div>
-            <div class="card-footer small text-muted">Updated {{'now' | date("m/d/Y  H:m:s")}}</div>
+            <div class="card-footer small text-muted">Date et l'heur du jour  {{'now' | date("d/m/Y  H:m:s")}}</div>
           </div>
          
 

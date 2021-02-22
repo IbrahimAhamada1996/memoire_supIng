@@ -1,6 +1,6 @@
 {% extends 'base_home.html.twig' %}
 
-{% block title %}Hello AccueilController!{% endblock %}
+{% block title %}Transfert | S-Money{% endblock %}
 {% block stylesheets %}
     <!-- Bootstrap core CSS -->
     {# <link href="{{asset('accueil/vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet"> #}
@@ -24,21 +24,31 @@
                     </li>
                     <li class="breadcrumb-item active">transfert</li>
                 </ol>
-                <div class="row">
-                    <div class="col-12"><center><h5>Les étapes à suivre pour éffectuer une transferer d'argent<h5></center></div>
-                </div>
-                <div class="row">
-                    <div class="col-8 col-sm-8">
-                        <ol type="I">
-                            <li></li>
-                            <li></li>
-                            <li></li>
-                            <li></li>
-                            <li></li>
-                        </ol>
-                    
+                <div class="container">
+                    <div class="row">
+                        <div class="col-6">
+                        <p>
+                                Nous sommes fiers d'offrir à nos clients la meilleure expérience en matière 
+                                de transfert d'argent national. Notre offre, développée à l'ère du numérique, 
+                                associe nos applications à un réseau national inégalé de points de vente physiques, 
+                                rapprochant ainsi le plus possible les paiements des communautés. Nous procurons 
+                                la couverture, la sécurité, la tranquillité d'esprit et une grande fonctionnalité 
+                                pour les marchés où nous sommes présents. Le transfert d'argent à l'intérieur d'un
+                                pays est un levier clé pour l'économie : payer les fournisseurs, les travailleurs,
+                                es partenaires, les pigistes de la manière la plus facile possible est un levier 
+                                clé de la croissance économique. Ceci reste cependant un point faible tant pour
+                                les économies développées que pour les économies émergentes. SEND MONEY apporte la solution. 
+                                Au-delà des paiements commerciaux, le soutien et la solidarité communautaires sont également
+                                essentiels pour de nombreuses sociétés en Afrique et dans le monde entier. 
+                                Nous sommes fiers de rendre cela possible plus facilement et à moindre coût. Dans de nombreux 
+                                villes et villages, SEND MONEY est un nom et un verbe, le synonyme de transfert d'argent
+                        </p>
+                        
+                        </div>
+                        <div class="col-6">
+                            <img src="{{asset('accueil/img/transfert.jpg')}}" alt="photo de transfert">
+                        </div>
                     </div>
-                   
                 </div>
             </div>
         </div>

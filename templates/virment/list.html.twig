@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello compteController!{% endblock %}
+{% block title %}La liste des virements | S-Money{% endblock %}
 
 {% block body %}
   <body id="page-top">
@@ -17,7 +17,7 @@
           <!-- Breadcrumbs-->
           <ol class="breadcrumb">
             <li class="breadcrumb-item">
-              <a href="/admin">Dashboard</a>
+              <a href="{{path('admin_home')}}">Accueil</a>
             </li>
             
             <li class="breadcrumb-item active">utilisateurs</li>
@@ -93,7 +93,7 @@
                 </table>
               </div>
             </div>
-            <div class="card-footer small text-muted">Updated {{'now' | date("m/d/Y  H:m:s")}}</div>
+            <div class="card-footer small text-muted">Date et l'heure du jour {{'now' | date("d/m/Y  H:m:s")}}</div>
           </div>
          
         </div>

@@ -5,10 +5,8 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Entity\Tarif;
 use App\Entity\Compte;
-use App\Form\CompteType;
 use App\Entity\Transfert;
 use App\Form\TransfertType;
-use App\Entity\SeuilTransfert;
 use App\Services\CodeGenerate;
 use App\Services\BeneficeService;
 use Symfony\Component\HttpFoundation\Request;
@@ -24,42 +22,44 @@ class TransfertController extends AbstractController
      */
     public function index(): Response
     {
+
         return $this->render('transfert/index.html.twig', [
             'controller_name' => 'TransfertController',
         ]);
     }
 
-     /**
+    /**
      * @Route("/operateur/update/{id}/compte" , name="update_Compte")
      * @Route("/operateur/update/{id}/transfert" , name="update_ActionTransfert")
      * @Route("operateur/operation/transfert", name="operation_send")
      */
     public function send(Request $request, Transfert $transfert=NULL, UserInterface $user, CodeGenerate $codeGenerate,BeneficeService $beneficeService)
     {   
+        $cache = true;
+        $manager = $this->getDoctrine()->getManager();
+        $impression = false;
+
         if (!$transfert) {
             $transfert = new Transfert();
         }
-        
-        $impression = false;
       
-        $cache = true;
-        $manager = $this->getDoctrine()->getManager();
         $transfert = new Transfert();
         $form = $this->createForm(TransfertType::class,$transfert);
         $form->handleRequest($request);
-   
         $compteSuperAdmin = $manager->getRepository(User::class)->findAll();
+        // $compteAgent = null;
         foreach ($compteSuperAdmin as $key => $value) {
+            
             if ($value->getChoiceroles() === "ROLE_SUPER_ADMIN") {
                 
                 $compteSuperAdmin = $manager->getRepository(User::class)->findAll()[$key];
-            }
+            }  
         }
-        // dd($compteSuperAdmin->getCompte()->setSolde(600));
-
+      
         if ($form->isSubmitted() && $form->isValid()) {
+            
             if ($user->getCompte()->getSolde() >= $transfert->getMontant()) { 
-               
+                $k = $manager->getRepository(Tarif::class)->findAll()[$beneficeService->tabBenefice($transfert->getMontant())['key']];
                 $impression = true;
                 $cache = false;
                 // $tarif = new Tarif();
@@ -68,10 +68,11 @@ class TransfertController extends AbstractController
                 $transfert->setCodeTransfert($codeGenerate->generate());
                 $transfert->setUser($user);
                 $transfert->setvilleEnvoi($user->getAgence()->getVille()->getLibelle());
+                $transfert->setTarif($k);
                 
-              
+                
                 $updateSolde = $user->getCompte()->getSolde() - $transfert->getMontant() + $beneficeService->tabBenefice($transfert->getMontant())['transfert_agent'];
-             
+                
                 $compte = $manager->getRepository(Compte::class)->find($user->getCompte()->setSolde($updateSolde,1));
             
                 $compteSuperAdmin->getCompte()->setSolde($beneficeService->tabBenefice($transfert->getMontant())['transfert_operateur']);
@@ -86,25 +87,31 @@ class TransfertController extends AbstractController
 
                 $this->addFlash( 'danger','Votre solde est insuffisant');
             }
-           
-       
-        }elseif($form->isSubmitted() && !$form->isValid()) {
-            $this->addFlash( 'danger','Reéssaye encore!!');
-            // $montantServiceReq = $request->query->get('montant');
-            // $montantServicePost = $request->get('montant');
 
+        }elseif ($form->isSubmitted() && !$form->isValid()) {
+            $this->addFlash( 'danger','Reéssaye encore!!');
         }
         
-        $data = $this->getDoctrine()->getManager();
-        $dataTransfert  = $data->getRepository(Transfert::class)->findBy([
+        $dataTransfert  = $manager->getRepository(Transfert::class)->findBy([
                 'user' => $user,],['id' =>'desc',],1,0);
-     
         return $this->render('transfert/send_money.html.twig',[
                 'formTransfert'=> $form->createView(),
                 'dataTransfert' => $dataTransfert,
                 'cache' => $cache,
-                'transfert' => $data->getRepository(Transfert::class)->findBy(['user' => $user]),
-                'impression' => $impression,
+                'transfert' => $manager->getRepository(Transfert::class)->findBy(['user' => $user]),
+                'impression' => $impression,  
         ]);
     }
+
+    /**
+     * @Route("/operateur/transfert/transfert/show", name="transfert_target_recu")
+     */
+    public function target_recu()
+    {
+       return  $this->render("recu/transfert.html.twig",[
+
+        ]);
+     }        
+              
 }
+

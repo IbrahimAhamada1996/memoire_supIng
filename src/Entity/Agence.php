@@ -36,18 +36,23 @@ class Agence
 
     /**
      * @ORM\ManyToOne(targetEntity=Ville::class, inversedBy="agence")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $ville;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $numeroAgence;
 
     public function __construct()
     {
         $this->user = new ArrayCollection();
     }
 
-    public function __toString(){
-        return $this->nomAgence;
-    }
+    // public function __toString(){
+    //     return $this->nomAgence;
+    // }
 
     public function getId(): ?int
     {
@@ -116,6 +121,18 @@ class Agence
     public function setVille(?Ville $ville): self
     {
         $this->ville = $ville;
+
+        return $this;
+    }
+
+    public function getNumeroAgence(): ?string
+    {
+        return $this->numeroAgence;
+    }
+
+    public function setNumeroAgence(string $numeroAgence): self
+    {
+        $this->numeroAgence = $numeroAgence;
 
         return $this;
     }

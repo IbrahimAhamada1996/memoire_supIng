@@ -7,7 +7,7 @@ security:
     encoders:
 
         App\Entity\User:
-            algorithm: auto
+            algorithm: bcrypt
   
     providers:
         app_user_provider:

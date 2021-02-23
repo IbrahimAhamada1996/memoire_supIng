@@ -20,6 +20,7 @@ class AgenceType extends AbstractType
                 'class'=> Ville::class,
                 'choice_label' => 'libelle'
             ])
+           
         ;
     }
 

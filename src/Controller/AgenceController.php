@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Agence;
 use App\Form\AgenceType;
+use App\Services\NumeroAgenceService;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -25,7 +26,7 @@ class AgenceController extends AbstractController
      * @Route("/admin/update/{id}/agence" , name="update_ActionAgence")
      * @Route("/admin/agence/new", name="create_actionAgence")
      */
-    public function actionAgence(Request $request,Agence $agence=null): Response
+    public function actionAgence(Request $request,Agence $agence=null, NumeroAgenceService $numeroAgenceService): Response
     {
         $manager = $this->getDoctrine()->getManager();
         if (!$agence) {
@@ -35,6 +36,7 @@ class AgenceController extends AbstractController
         $form = $this->createForm(AgenceType::class,$agence);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
+            $agence->setNumeroAgence($numeroAgenceService->numeroAgence());
             $manager->persist($agence);
             $manager->flush();
             $this->addFlash('succes','l\'enregistrement a été bien reçu');

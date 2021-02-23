@@ -58,7 +58,7 @@ class UserType extends AbstractType
                 'required' => false,
             ])
             ->add('agence')
-            ->add('compte')
+            // ->add('compte')
         ;
     }
 

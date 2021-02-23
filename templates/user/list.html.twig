@@ -78,13 +78,9 @@
                                 {% endif %}
                             {% endif %}
                           </td>
-                          <pre>
-                            {{ dump(user.agence != null) }}
-                          </pre>
-                          
                           <td>{{user.nom}}</td>
                           <td>{{user.prenom}}</td>
-                          {# <td>{% if user.agence != null %}{{user.agence.nomAgence}} {% else %} pas d'agence{% endif %}</td> #}
+                          <td>{% if user.agence != null %}{{user.agence.nomAgence}} {% else %} pas d'agence{% endif %}</td>
                           <td>
                             {% if user.getChoiceroles() =='ROLE_SUPER_ADMIN' %}
                               Super Admin

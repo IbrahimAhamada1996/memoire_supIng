@@ -26,7 +26,8 @@
             
           </ol>
 
-          <!-- Icon Cards-->
+          {% if null != app.user.compte %}
+               <!-- Icon Cards-->
           <div class="row">
             <div class="col-xl-3 col-sm-6 mb-3">
               <div class="card text-white bg-primary o-hidden h-100">
@@ -62,22 +63,23 @@
             </div>
             
           </div>
+         {% else %}
+           <div class="row">
+              <div class="alert alert-danger col-12"><center>
+                <h4> Vous n'avez pas de compte chez S-Money.</h4><br>
+                 Vous ne pouvez pas faire de transaction . <br>
+                 Pour plus d'information {% if null != telAdmin %}veuillez nous contacter sur le numéro de téléphone ☎️{{telAdmin}} {% else %} Rendez-vous chez nous {% endif %} <br>
+                  MERCI !!!
+                  
+               <center></div>
+           </div>
+         {% endif %}
+     
+         
 
-              <!-- Button trigger modal -->
-    
-
-              
-
-          <!-- Area Chart Example-->
-          
-
-          <!-- DataTables Example -->
-          {# {{include('operateur/operation_list.html.twig')}} #}
           
 
         </div>
-        <!-- /.container-fluid -->
-
         <!-- Sticky Footer -->
         {{include('_layout/_footer.html.twig')}}
 

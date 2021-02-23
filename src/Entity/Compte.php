@@ -27,7 +27,7 @@ class Compte
 
     /**
      * @ORM\Column(type="float", nullable=true)
-     * @Assert\Positive
+     * @Assert\PositiveOrZero
      * 
      */
     private $solde;

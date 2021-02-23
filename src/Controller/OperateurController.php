@@ -4,6 +4,7 @@ namespace App\Controller;
 
 
 
+use App\Entity\User;
 use Symfony\Contracts\Cache\CacheInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -17,9 +18,17 @@ class OperateurController extends AbstractController
      */
     public function index(): Response
     {
-        
+        $users = $this->getDoctrine()->getRepository(User::class)->findAll();
+        foreach ($users as $key => $value) {
+           foreach ($value->getRoles() as $k => $v) {
+               if ($v == "ROLE_SUPER_ADMIN") {
+                   $telAdmin = $value->getTel();
+               };
+           }
+        }
+        // dd($telAdmin);
         return $this->render('operateur/home.html.twig', [
-            'controller_name' => 'OperateurController',
+            'telAdmin'=>$telAdmin,
         ]);
     }
 

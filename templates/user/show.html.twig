@@ -98,6 +98,12 @@
                               <th scope="col" ><center>{{user.compte.date | date("d/m/Y") }} </center></th>
                                <th scope="col" colspan="2"><center>{{user.compte.solde | number_format}} FCFA</center></th>          
                           </tr>
+                          {% else %}
+                          <tr> 
+                          <th scope="col" colspan="4">
+                            <h3 scope="col"> <i style="color:red">Pas de compte bancaire <i></h3>
+                          </th>
+                          </tr>
                       
                         {% endif %} 
                       {% endif %}
@@ -133,8 +139,7 @@
                        <th scope="col" colspan="4">
                         <h3 scope="col"> <i style="color:red">Pas de compte bancaire <i></h3>
                        </th>
-                        
-                        
+                       
                     </tr>
                     {% endif %}
                      

@@ -50,9 +50,9 @@ class Agence
         $this->user = new ArrayCollection();
     }
 
-    // public function __toString(){
-    //     return $this->nomAgence;
-    // }
+    public function __toString(){
+        return "N° $this->numeroAgence | Nom: $this->nomAgence";
+    }
 
     public function getId(): ?int
     {

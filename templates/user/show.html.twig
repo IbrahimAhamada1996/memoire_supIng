@@ -118,19 +118,19 @@
                     </tr>
                     <tr>
                         <th scope="col">Non</th>
-                        <td scope="col"> {{user.agence.nomAgence}} </th>
+                        <td scope="col">{% if null != user.agence %}{{user.agence.nomAgence}} {% else %}<i style="color:red">Rien <i>{% endif %}</th>
                         <th scope="col">Montant actuel </th>
                         <td scope="col"> <b> {{user.compte.solde | number_format}} FCFA </b></th>
                     </tr>
                     <tr>
                         <th scope="col">Ville</th>
-                        <td scope="col"> {{user.agence.ville.libelle}} </th>
+                        <td scope="col"> {% if null != user.agence %}{{user.agence.ville.libelle}} {% else %}<i style="color:red">Rien <i>{% endif %} </th>
                         <th scope="col">Date de création du compte</th>
                         <td scope="col"> {{user.compte.date | date("d/m/Y", "Africa/Dakar")}} </th>
                     </tr>
                     <tr>
                         <th scope="col">Adresse</th>
-                        <td scope="col"> {{user.agence.adresse}} </th>
+                        <td scope="col"> {% if null != user.agence %}{{user.agence.adresse}} {% else %}<i style="color:red">Rien <i>{% endif %} </th>
                         <th scope="col">N° de compte</th>
                         <td scope="col"> {{user.compte.numeroCompte}} </th>
                     </tr>

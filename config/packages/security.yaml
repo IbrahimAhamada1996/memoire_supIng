@@ -43,6 +43,6 @@ security:
     # Note: Only the *first* access control that matches will be used
     access_control:
         - { path: '^/login', roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: '^/admin/users', roles: ROLE_SUPER_ADMIN }
-        - { path: ^/admin, roles: ROLE_ADMIN }
+        # - { path: '^/admin/users', roles: ROLE_SUPER_ADMIN }
+        # - { path: ^/admin, roles: ROLE_ADMIN }
         - { path: ^/operateur, roles: ROLE_OPERATEUR_EMPLOYE }

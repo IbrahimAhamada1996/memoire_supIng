@@ -24,11 +24,11 @@
             <li class="breadcrumb-item">
               <a href="{{path('tarifs_list')}}">Tarifs</a>
             </li>
-            <li class="breadcrumb-item active">{% if editMode %}Modifier{% else %}ajouter{% endif %}</li>
+            <li class="breadcrumb-item active">{% if editMode %}Modifier{% else %}Ajouter{% endif %}</li>
           </ol>
 
           <!-- les tarifs -->
-            <center><h2> {% if editMode %}Modifier{% else %}ajouter{% endif %} une Tarif </h2></center>
+            <center><h2> {% if editMode %}Modifier{% else %}Ajouter{% endif %} une Tarif </h2></center>
           <div class="col-12">
               {% for message in app.flashes('succes') %}
               <div class="alert alert-success"> {{message}} </div> 

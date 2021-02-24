@@ -55,20 +55,22 @@ class TransfertController extends AbstractController
                 $compteSuperAdmin = $manager->getRepository(User::class)->findAll()[$key];
             }  
         }
-      
+    //   dd($seuilTransfertService->seuil());
         if ($form->isSubmitted() && $form->isValid()) {
             
             if ($user->getCompte()->getSolde() >= $transfert->getMontant()) { 
                 $k = $manager->getRepository(Tarif::class)->findAll()[$beneficeService->tabBenefice($transfert->getMontant())['key']];
                 $impression = true;
                 $cache = false;
-                // $tarif = new Tarif();
                 
+              
+                $transfert->setSeuilTransfert($seuilTransfertService->seuil());
                 $transfert->setDateTransfert(new \DateTime());
                 $transfert->setCodeTransfert($codeGenerate->generate());
                 $transfert->setUser($user);
                 $transfert->setvilleEnvoi($user->getAgence()->getVille()->getLibelle());
                 $transfert->setTarif($k);
+              
                 
                 
                 $updateSolde = $user->getCompte()->getSolde() - $transfert->getMontant() + $beneficeService->tabBenefice($transfert->getMontant())['transfert_agent'];
@@ -79,7 +81,7 @@ class TransfertController extends AbstractController
                 $manager->persist($compteSuperAdmin);
                 $manager->persist($compte);
                 $manager->persist($transfert);
-    
+
                 $manager->flush();
                 $this->addFlash('succes','Le transfert se dérouler avec succès');
                 return $this->redirectToRoute('operation_send');

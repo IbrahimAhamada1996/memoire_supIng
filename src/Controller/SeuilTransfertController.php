@@ -51,8 +51,7 @@ class SeuilTransfertController extends AbstractController
         }
         $rep = $this->getDoctrine()->getRepository(SeuilTransfert::class);
         $seuilTransfertAll = $rep->findAll();
-        // dd($seuilTransfertAll);
-         dump($caheForm);
+       
         return $this->render('seuil_transfert/action_form.html.twig', [
             'formSeuilTransfert' => $form->createView(),
             'editMode'=> $seuilTransfert->getId()!== null,
@@ -62,7 +61,7 @@ class SeuilTransfertController extends AbstractController
     }
 
     /**
-     * @Route("admin/seuil transfert/{id}/delete" ,name="compte_delete")
+     * @Route("admin/seuil transfert/{id}/delete" ,name="seuilTransfert_delete")
      */
     public function delete(SeuilTransfert $seuil){
         $manager = $this->getDoctrine()->getManager();

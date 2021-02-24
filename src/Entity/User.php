@@ -136,7 +136,7 @@ class User implements UserInterface
     private $agence;
 
     /**
-     * @ORM\OneToOne(targetEntity=Compte::class, mappedBy="user", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity=Compte::class, mappedBy="user")
      */
     private $compte;
 

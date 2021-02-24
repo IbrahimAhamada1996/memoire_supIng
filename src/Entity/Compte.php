@@ -33,7 +33,7 @@ class Compte
     private $solde;
 
     /**
-     * @ORM\OneToOne(targetEntity=User::class, inversedBy="compte", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity=User::class, inversedBy="compte")
      */
     private $user;
 

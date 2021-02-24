@@ -2,7 +2,7 @@
 
 namespace App\Entity;
 
-use App\Validator\Constraints as SeuilAssert;
+
 use App\Entity\SeuilTransfert;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\TransfertRepository;
@@ -28,8 +28,8 @@ class Transfert
     private $villeEnvoi;
 
     /**
-     * 
-     * @SeuilAssert\SeuilGenerale
+     * @MyAssert\MontantTarif
+     * @MyAssert\SeuilGenerale
      * @ORM\Column(type="float")
      */
     private $montant;

@@ -25,8 +25,12 @@ class SeuilGeneraleValidator extends ConstraintValidator
     {
   
        $em = $this->container->get('doctrine.orm.entity_manager');
-       $item = $em->getRepository(SeuilTransfert::class)->findAll()[0];
-      
+       $item = $em->getRepository(SeuilTransfert::class)->findAll();
+       
+       foreach ($item as $v) {
+           $item = $v;
+       }
+    
        if ($item->getMin() > $value || $item->getMax() < $value) {
         $this->context->buildViolation($constraint->message)
             ->setParameter('{{ string }}', $value)

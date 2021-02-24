@@ -24,10 +24,18 @@ class UserFixtures extends Fixture
         // $product = new Product();
         // $manager->persist($product);
         $user = new User();
-        $user->setEmail("Ibrahim@gmail.com");
+        $user->setNom("ibranhim");
+        $user->setPrenom("Ahamada");
+        $user->setEmail("admin@gmail.com");
+        $user->setSex("M");
+        $user->setRoles(['ROLE_SUPER_ADMIN']);
+        $user->setDateNaiss(new \DateTime());
+        $user->setLieuNaiss("Dakar");
+        $user->setDateCreation(new \DateTime());
+        $user->setTel("+221 77 823 63 34");
         $user->setPassword($this->passwordEncoder->encodePassword(
                             $user,
-                            'ibrahim'
+                            'admin'
                         ));
                         
          

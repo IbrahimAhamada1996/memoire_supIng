@@ -3,27 +3,6 @@
 {% block title %}Agence | S-Money{% endblock %}
 {% block stylesheets %}
 
-<script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
-    <style type="text/css">
-      /* Always set the map height explicitly to define the size of the div
-       * element that contains the map. */
-      #map {
-        height: 100%;
-      }
-
-      /* Optional: Makes the sample page fill the window. */
-     
-    </style>
-    <script>
-      let map;
-
-      function initMap() {
-        map = new google.maps.Map(document.getElementById("map"), {
-          center: { lat: -34.397, lng: 150.644 },
-          zoom: 8,
-        });
-      }
-    </script>
  
     <!-- Bootstrap core CSS -->
     {# <link href="{{asset('accueil/vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet"> #}
@@ -64,16 +43,17 @@
             </form>
             <div class="row">
               <div class="col-6"> 
-                {% if villes is empty %}
-                  <b style="color:red"> Aucun resultat trouvé </b>
+                {% if villes is empty and null != param %}
+                  <div class="alert alert-danger"> À {{param | title}}, on a pas encore d'agence. Veuillez entrer une autre villle !!!</div>
                 {% else %} 
                   <ul>
                     {% for ville in villes %}
                       <li>{{ville.libelle}}</li>
-                         
                           {% for agence in ville.agence %}
                             {% if null != agence.nomAgence %}
                               <b>addresse :</b> {{agence.adresse}},<b> Agence :</b> {{agence.nomAgence}} <br>
+                              {% else %}
+                                <b style="color:red"> Aucune agence trouvée </b>
                             {% endif %} 
                           {% endfor %}
                         
@@ -82,23 +62,12 @@
                 {% endif %}
              </div>
             </div>
-            
-              <div class="col-12" id="map"> 
-                        nnnnnnnn
-             </div>
          </div>
         </div>
     </div>
         <!-- /#page-content-wrapper -->
   </div>
-  {% block javascripts %}
-   
-   <script
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDHL53Qdx6d__vmo3rg8dzkZ30yvPqkglI&callback=initMap&libraries=&v=weekly"
-      async defer
-    ></script>
-     
-  {% endblock %}
+ 
 {% endblock %}
 
 

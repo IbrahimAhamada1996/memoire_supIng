@@ -108,11 +108,12 @@ class AccueilController extends AbstractController
     public function agence(Request $request): Response
     {   $cliquer = false;
         $q = $request->query->get('ville');
-     
+    
         $rep = $this->getDoctrine()->getRepository(Ville::class);
         $villes = $rep->findBy(['libelle'=>$q]);
         return $this->render('accueil/agence.html.twig', [
-            'villes' => $villes
+            'villes' => $villes,
+            'param'=> $q,
            
         ]);
     }

@@ -9,11 +9,13 @@ use App\Entity\Transfert;
 use App\Form\TransfertType;
 use App\Services\CodeGenerate;
 use App\Services\BeneficeService;
+use App\Services\SeuilTransfertService;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\String\UnicodeString;
 
 class TransfertController extends AbstractController
 {
@@ -33,7 +35,7 @@ class TransfertController extends AbstractController
      * @Route("/operateur/update/{id}/transfert" , name="update_ActionTransfert")
      * @Route("operateur/operation/transfert", name="operation_send")
      */
-    public function send(Request $request, Transfert $transfert=NULL, UserInterface $user, CodeGenerate $codeGenerate,BeneficeService $beneficeService)
+    public function send(Request $request, Transfert $transfert=NULL, UserInterface $user, CodeGenerate $codeGenerate,BeneficeService $beneficeService,SeuilTransfertService $seuilTransfertService)
     {   
         $cache = true;
         $manager = $this->getDoctrine()->getManager();
@@ -55,7 +57,7 @@ class TransfertController extends AbstractController
                 $compteSuperAdmin = $manager->getRepository(User::class)->findAll()[$key];
             }  
         }
-    //   dd($seuilTransfertService->seuil());
+        
         if ($form->isSubmitted() && $form->isValid()) {
             
             if ($user->getCompte()->getSolde() >= $transfert->getMontant()) { 
@@ -83,6 +85,16 @@ class TransfertController extends AbstractController
                 $manager->persist($transfert);
 
                 $manager->flush();
+               
+                $telAgence = str_replace(' ','',$user->getTel()) ;
+                $telBeneficiaire = str_replace(' ','',$request->request->get('transfert')['phoneBeneficiaire']);
+                $montant = $request->request->get('transfert')['montant'];
+                $nomCompleteExp = $request->request->get('transfert')['prenomExpediteur']." ".$request->request->get('transfert')['nomExpediteur'];
+                $message = "S-Money:Vous avez reçu une somme de $montant FCFA de la part de  {$nomCompleteExp}";
+                $message = urlencode($message);
+                $url="http://192.168.1.18:13013/cgi-bin/sendsms?username=admin&password=passer&from=$telAgence&to=$telBeneficiaire&text=$message";
+                file($url);
+                
                 $this->addFlash('succes','Le transfert se dérouler avec succès');
                 return $this->redirectToRoute('operation_send');
             }else {

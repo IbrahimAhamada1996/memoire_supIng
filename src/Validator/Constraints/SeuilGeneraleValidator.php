@@ -30,7 +30,7 @@ class SeuilGeneraleValidator extends ConstraintValidator
        foreach ($item as $v) {
            $item = $v;
        }
-    
+    // dd($item);
        if ($item->getMin() > $value || $item->getMax() < $value) {
         $this->context->buildViolation($constraint->message)
             ->setParameter('{{ string }}', $value)

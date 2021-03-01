@@ -28,7 +28,7 @@ class Transfert
     private $villeEnvoi;
 
     /**
-     * @MyAssert\MontantTarif
+     * 
      * @MyAssert\SeuilGenerale
      * @ORM\Column(type="float")
      */

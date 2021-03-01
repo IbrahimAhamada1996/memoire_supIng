@@ -34,7 +34,7 @@
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                   <thead>
                     <tr>
-                      <th>ID</th>
+                      <th>N° compte</th>
                       <th>Photo</th>
                       <th>Name</th>
                       <th>prenom</th>
@@ -46,7 +46,7 @@
                   <tfoot>
                   <tr>
                       <tr>
-                      <th>ID</th>
+                      <th>N° compte</th>
                       <th>Photo</th>
                       <th>Name</th>
                       <th>prenom</th>
@@ -63,25 +63,25 @@
 
                       {% for compte in comptes %}
                         <tr>
-                         <td>#{{compte.id}}</td>
+                         <td>{% if compte.solde != null  %}{{compte.numeroCompte}} {% else %}Rien{% endif %}</td>
                          <td>
                            {# <img class="card-img-top" src="{{ vich_uploader_asset(compte, 'imageFile')}}" alt="image" style="width:100px"> #}
-                          
-                           {% if compte.user.image != null %}
-                  
-                            <img class="card-img-top" src="{{ vich_uploader_asset(compte.user, 'imageFile')}}" alt=" image" style="width:100px">
-                            {% else %}
-                              {% if compte.user.sex == 'F' %}
-                                      <img class="card-img-top" src="{{asset('images/femme.jfif')}}" alt=" image" style="width:100px">
-                                      {% else %}
-                                        <img class="card-img-top" src="{{asset('images/homme.png')}}" alt=" image" style="width:100px">
-                                {% endif %}
+                            {% if compte.user != null  %}
+                              {% if compte.user.image != null %}
+                                <img class="card-img-top" src="{{ vich_uploader_asset(compte.user, 'imageFile')}}" alt=" image" style="width:100px">
+                              {% else %}
+                                {% if compte.user.sex == 'F' %}
+                                        <img class="card-img-top" src="{{asset('images/femme.jfif')}}" alt=" image" style="width:100px">
+                                        {% else %}
+                                          <img class="card-img-top" src="{{asset('images/homme.png')}}" alt=" image" style="width:100px">
+                                  {% endif %}
+                              {% endif %}
                             {% endif %}
                           </td>
-                          <td>{{compte.user.nom}}</td>
-                          <td>{{compte.user.prenom}}</td>
-                          <td>{{compte.user.agence}}</td>
-                          <td>{{compte.solde}}</td>
+                          <td>{% if compte.user != null  %}{{compte.user.nom}} {% else %}Rien{% endif %}</td>
+                          <td>{% if compte.user != null  %}{{compte.user.prenom}} {% else %}Rien{% endif %}</td>
+                          <td>{% if compte.user != null  %}{{compte.user.agence}} {% else %}Rien{% endif %}</td>
+                          <td>{% if compte.solde != null  %}{{compte.solde}} FCFA{% else %}Rien{% endif %}</td>
                           <td>
                             <a href='{{path('update_ActionCompte',{'id': compte.id})}}'><button type="button" class="btn btn-info"><i class="fas fa-plus"></i> Virement</button><a>   
                           </td> 

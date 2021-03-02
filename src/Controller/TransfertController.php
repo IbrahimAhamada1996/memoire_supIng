@@ -88,12 +88,14 @@ class TransfertController extends AbstractController
                
                 $telAgence = str_replace(' ','',$user->getTel()) ;
                 $telBeneficiaire = str_replace(' ','',$request->request->get('transfert')['phoneBeneficiaire']);
-                $montant = $request->request->get('transfert')['montant'];
+                $montant = (float)$request->request->get('transfert')['montant'] - $beneficeService->tarif((float)$request->request->get('transfert')['montant']);
                 $nomCompleteExp = $request->request->get('transfert')['prenomExpediteur']." ".$request->request->get('transfert')['nomExpediteur'];
                 $message = "S-Money:Vous avez reçu une somme de $montant FCFA de la part de  {$nomCompleteExp}";
                 $message = urlencode($message);
+                
+               
                 $url="http://192.168.1.18:13013/cgi-bin/sendsms?username=admin&password=passer&from=$telAgence&to=$telBeneficiaire&text=$message";
-                file($url);
+                // file($url);
                 
                 $this->addFlash('succes','Le transfert se dérouler avec succès');
                 return $this->redirectToRoute('operation_send');

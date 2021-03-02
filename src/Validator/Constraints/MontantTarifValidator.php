@@ -29,8 +29,11 @@ class MontantTarifValidator extends ConstraintValidator
         $items = $em->getRepository(Tarif::class)->findAll();
         
         foreach ($items as $key => $v) {
-            if ($items[$key]->getMin() > $value || $items[$key]->getMax() < $value) {
-                
+               
+            if ($items[$key]->getMin() < $value and $items[$key]->getMax() < $value) {
+                dump($items[$key]->getMin());
+                dump($items[$key]->getMax());
+                dump($value);
                 $this->context->buildViolation($constraint->message)
                 ->setParameter('{{ string }}', $value)
                 ->addViolation();
@@ -38,6 +41,7 @@ class MontantTarifValidator extends ConstraintValidator
             }
            
         }
+        dd("eee");
         
     }
 }

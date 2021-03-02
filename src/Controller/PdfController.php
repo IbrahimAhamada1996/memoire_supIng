@@ -14,16 +14,16 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class PdfController extends AbstractController
 {
      /**
-     * @Route("/recue", name="recue")
+     * @Route("/operateur/recue", name="recue")
      */
     public function index(UserInterface $user): Response
       {  
          $data = $this->getDoctrine()->getManager();
         $transfert  = $data->getRepository(Transfert::class)->findBy([
             'user' => $user,],['id' =>'desc',],1,0);
-            
+          
         return $this->render('recu/transfert.html.twig', [
-            'transfert' => $transfert,
+            'dataTransfert' => $transfert,
         ]);
     }
 
@@ -36,9 +36,9 @@ class PdfController extends AbstractController
         $data = $this->getDoctrine()->getManager();
         $dataTransfert  = $data->getRepository(Transfert::class)->findBy([
             'user' => $user,],['id' =>'desc',],1,0); 
-
+            $this->addFlash('succes',"L'impression s'est déroulée avec succès");
         $html = $this->renderView('recu/transfert.html.twig', array(
-            'transfert' => $dataTransfert,
+            'dataTransfert' => $dataTransfert,
         ));
 
         return new PdfResponse(

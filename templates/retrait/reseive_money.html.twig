@@ -57,19 +57,19 @@
                   <tbody>
                     <tr>
                       <th scope="col">Prénom</th>
-                      <td scope="col">{{retrait.prenomBeneficiaire}}</th>
+                      <td scope="col">{% if null != retrait.prenomBeneficiaire %}{{retrait.prenomBeneficiaire}}{% endif %}</th>
                     </tr>
                     <tr>
                       <th scope="col">Nom</th>
-                      <td>{{retrait.nomBeneficiaire}}</td>
+                      <td>{% if null != retrait.nomBeneficiaire %}{{retrait.nomBeneficiaire}}{% endif %}</td>
                     </tr>
                     <tr>
                       <th scope="col">Phone</th>
-                      <td>{{retrait.phoneBeneficiaire}}</td>
+                      <td>{% if null != retrait.phoneBeneficiaire %} {{retrait.phoneBeneficiaire}}{% endif %}</td>
                     </tr>
                     <tr>
                       <th scope="col">Montant</th>
-                      <td colspan="2"><b> {{retrait.montant | number_format }} FCFA</b> </td>
+                      <td colspan="2"><b> {% if null != retrait.montant %}{{(retrait.montant - retrait.tarif.tarifClient )| number_format }}  FCFA{% endif %}</b> </td>
                     </tr>
                   </tbody>
                 </table>

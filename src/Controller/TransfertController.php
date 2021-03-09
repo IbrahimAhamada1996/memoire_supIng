@@ -20,7 +20,7 @@ use Symfony\Component\String\UnicodeString;
 class TransfertController extends AbstractController
 {
     /**
-     * @Route("/operateur/transfert", name="transfert")
+     * @Route("/agent/transfert", name="transfert")
      */
     public function index(): Response
     {
@@ -31,9 +31,9 @@ class TransfertController extends AbstractController
     }
 
     /**
-     * @Route("/operateur/update/{id}/compte" , name="update_Compte")
-     * @Route("/operateur/update/{id}/transfert" , name="update_ActionTransfert")
-     * @Route("operateur/operation/transfert", name="operation_send")
+     * @Route("/agent/update/{id}/compte" , name="update_Compte")
+     * @Route("/agent/update/{id}/transfert" , name="update_ActionTransfert")
+     * @Route("/agent/operation/transfert", name="operation_send")
      */
     public function send(Request $request, Transfert $transfert=NULL, UserInterface $user, CodeGenerate $codeGenerate,BeneficeService $beneficeService,SeuilTransfertService $seuilTransfertService)
     {   
@@ -120,7 +120,7 @@ class TransfertController extends AbstractController
     }
 
     /**
-     * @Route("/operateur/transfert/transfert/show", name="transfert_target_recu")
+     * @Route("/agent/transfert/transfert/show", name="transfert_target_recu")
      */
     public function target_recu()
     {

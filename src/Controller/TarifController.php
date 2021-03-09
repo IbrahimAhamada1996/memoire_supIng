@@ -92,7 +92,7 @@ class TarifController extends AbstractController
     }
 
      /**
-     *@Route("/operateur/tarifs/list", name="tarifs_list_operateur")
+     *@Route("/agent/tarifs/list", name="tarifs_list_operateur")
      */
     public function listOperateur(){
         $rep = $this->getDoctrine()->getRepository(Tarif::class);

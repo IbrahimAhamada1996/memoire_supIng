@@ -11,7 +11,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class HistoriqueOperateurTransfertController extends AbstractController
 {
     /**
-     * @Route("/operateur/historique/operateur", name="historique_operateur")
+     * @Route("/agent/historique/operateur", name="historique_operateur")
      */
     public function index(): Response
     {
@@ -21,7 +21,7 @@ class HistoriqueOperateurTransfertController extends AbstractController
     }
 
     /**
-     * @Route("operateur/historique/transfert", name="historique_operateur_transfert")
+     * @Route("/agent/historique/transfert", name="historique_operateur_transfert")
      */
     public function transfert(UserInterface $user): Response
     {
@@ -36,7 +36,7 @@ class HistoriqueOperateurTransfertController extends AbstractController
     }
 
      /**
-     * @Route("operateur/historique/{id}/transfert", name="historique_operateur_transfert_show")
+     * @Route("/agent/historique/{id}/transfert", name="historique_operateur_transfert_show")
      */
     public function show(Transfert $transfert): Response
     {

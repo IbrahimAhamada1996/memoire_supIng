@@ -19,7 +19,7 @@ class RetraitController extends AbstractController
    
 
      /**
-     * @Route("/operateur/operation/retrait", name="operation_reseive")
+     * @Route("/agent/operation/retrait", name="operation_reseive")
      */
     public function retrait(Request $request, UserInterface $user ,BeneficeService $beneficeService)
     {

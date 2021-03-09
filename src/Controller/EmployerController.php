@@ -13,15 +13,7 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class EmployerController extends AbstractController
 {
-    /**
-     * @Route("/employer", name="employer")
-     */
-    public function index(): Response
-    {
-        return $this->render('employer/index.html.twig', [
-            'controller_name' => 'EmployerController',
-        ]);
-    }
+   
     
     /**
      * @Route("/operateur/update/{id}/employer/compte" , name="update_ActionEmployer")

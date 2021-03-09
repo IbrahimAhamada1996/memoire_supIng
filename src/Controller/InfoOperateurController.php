@@ -10,7 +10,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 class InfoOperateurController extends AbstractController
 {
     /**
-     * @Route("/operateur/depense", name="depense")
+     * @Route("/agent/depense", name="depense")
      */
     public function index(): Response
     {
@@ -20,7 +20,7 @@ class InfoOperateurController extends AbstractController
     }
 
      /**
-     * @Route("/operateur/info/agent", name="info_agent_show")
+     * @Route("/agent/info", name="info_agent_show")
      */
     public function show(UserInterface $userInterface): Response
     {

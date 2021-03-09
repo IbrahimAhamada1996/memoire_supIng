@@ -13,7 +13,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class RecuController extends AbstractController
 {
     /**
-     * @Route("/operateur/recu", name="recu")
+     * @Route("/agent/recu", name="recu")
      */
     public function index(): Response
     {
@@ -23,7 +23,7 @@ class RecuController extends AbstractController
     }
 
      /**
-     * @Route("operateur/operation/imprimer", name="recu_imprimer")
+     * @Route("agent/operation/imprimer", name="recu_imprimer")
      */
     public function imprimer(Request $request, UserInterface $user): Response
     {

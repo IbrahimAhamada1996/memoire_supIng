@@ -4,14 +4,15 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\UserType;
+use App\Form\UserAdminType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Security;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Validator\Constraints\Date;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
-use Symfony\Component\Security\Core\User\UserInterface;
 
 class UserController extends AbstractController
 {
@@ -20,14 +21,17 @@ class UserController extends AbstractController
      * @Route("/admin/update/{id}/user" , name="update_ActionUser")
      * @Route("/admin/new/user", name="create_ActionUser")
      */
-    public function actionUser (Request $request, User $user=NULL, UserPasswordEncoderInterface $encoder){
-        
+    public function actionUser (Request $request, User $user=NULL, UserPasswordEncoderInterface $encoder,Security $security){
+        // dd($security->isGranted("ROLE_SUPER_ADMIN"));
         $manager = $this->getDoctrine()->getManager();
         if (!$user) { 
             $user= new User();
         }
-
-        $form = $this->createForm(UserType::class, $user);
+        if ($security->isGranted("ROLE_SUPER_ADMIN")) {
+            $form = $this->createForm(UserAdminType::class, $user);
+        }else{
+            $form = $this->createForm(UserType::class, $user);
+        }
         $form->handleRequest($request);  
         
         if ($form->isSubmitted() && $form->isValid()) {

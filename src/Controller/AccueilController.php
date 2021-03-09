@@ -119,7 +119,7 @@ class AccueilController extends AbstractController
     }
 
       /**
-     * @Route("/agent", name="accueil_agent")
+     * @Route("/devenir-agent", name="accueil_agent")
      */
     public function agent(): Response
     {

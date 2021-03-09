@@ -14,7 +14,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class OperateurController extends AbstractController
 {
     /**
-     * @Route("/operateur", name="operateur_home")
+     * @Route("/agent", name="operateur_home")
      */
     public function index(): Response
     {

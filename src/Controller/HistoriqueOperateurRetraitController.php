@@ -15,7 +15,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class HistoriqueOperateurRetraitController extends AbstractController
 {
     /**
-     * @Route("/operateur", name="operateur_home")
+     * @Route("/agent", name="operateur_home")
      */
     public function index(): Response
     {
@@ -26,7 +26,7 @@ class HistoriqueOperateurRetraitController extends AbstractController
     }
 
     /**
-     * @Route("operateur/historique/retrait", name="historique_operateur_retrait")
+     * @Route("agent/historique/retrait", name="historique_operateur_retrait")
      */
     public function retrait(UserInterface $user): Response
     {
@@ -41,7 +41,7 @@ class HistoriqueOperateurRetraitController extends AbstractController
     }
 
      /**
-     * @Route("operateur/historique/{id}/retrait", name="historique_operateur_retrait_show")
+     * @Route("agent/historique/{id}/retrait", name="historique_operateur_retrait_show")
      */
     public function show(Retrait $retrait): Response
     {

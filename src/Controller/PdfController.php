@@ -14,7 +14,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class PdfController extends AbstractController
 {
      /**
-     * @Route("/operateur/recue", name="recue")
+     * @Route("/agent/recue", name="recue")
      */
     public function index(UserInterface $user): Response
       {  
@@ -29,7 +29,7 @@ class PdfController extends AbstractController
 
     /**
      * 
-     * @Route("/operateur/operation/transfert/reu", name="pdf_recuTransfert")
+     * @Route("/agent/operation/transfert/reu", name="pdf_recuTransfert")
      */
     public function recuTransfert(Pdf $knpSnappyPdf, UserInterface $user)
     {   
@@ -49,7 +49,7 @@ class PdfController extends AbstractController
 
      /**
      * 
-     * @Route("/operateur/operation/retrait/reu", name="pdf_recuRetrait")
+     * @Route("/agent/operation/retrait/reu", name="pdf_recuRetrait")
      */
     public function recuRetrait(Pdf $knpSnappyPdf, UserInterface $user)
     {   

@@ -68,10 +68,16 @@ class BeneficeService {
         $tarifs = $this->container()->getRepository(Tarif::class)->findAll();
        
         foreach ($tarifs as $key => $value) {
-            
+        //    dump($tarifs);
+
             if ($montant >= $value->getMin() && $montant <= $value->getMax()) {
                $this->tarif = $value->getTarifClient() ;
                $this->key = $key;
+            //    dump($value->getId());
+            //    dump($value->getMin());
+            //    dump($value->getMax());
+            //    dump($key);
+               break;
             }
         }
         //    dd($this->tarif);

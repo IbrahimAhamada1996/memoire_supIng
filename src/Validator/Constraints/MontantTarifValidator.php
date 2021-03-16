@@ -30,7 +30,7 @@ class MontantTarifValidator extends ConstraintValidator
         
         foreach ($items as $key => $v) {
                
-            if ($items[$key]->getMin() < $value and $items[$key]->getMax() < $value) {
+            if ($items[$key]->getMin() > $value and $items[$key]->getMax() < $value) {
                 dump($items[$key]->getMin());
                 dump($items[$key]->getMax());
                 dump($value);
@@ -41,7 +41,7 @@ class MontantTarifValidator extends ConstraintValidator
             }
            
         }
-        dd("eee");
+        // dd("eee");
         
     }
 }

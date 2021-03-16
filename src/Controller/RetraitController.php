@@ -112,12 +112,13 @@ class RetraitController extends AbstractController
                 $telAgence = str_replace(' ','',$user->getTel()) ;
                 $telExpediteur = str_replace(' ','',$transfert->getPhoneExpediteur());
                 $montant = $transfert->getMontant() - $transfert->getTarif()->getTarifClient();
-                $nomCompleteExp = $transfert->getPrenomExpediteur()." ".$transfert->getNomExpediteur();
-                $message = "S-Money: {$nomCompleteExp} vient de recuperer la somme de $montant FCFA que vous avez transferer";
+                $nomCompleteExp = $transfert->getPrenomBeneficiaire()." ".$transfert->getNomBeneficiaire();
+                
+                $message = "S-Money: {$nomCompleteExp} vient de recuperer la somme de $montant FCFA que vous lui avez transferer";
                 $message = urlencode($message);
 
-                $url="http://192.168.1.18:13013/cgi-bin/sendsms?username=admin&password=passer&from=$telAgence&to=$telExpediteur&text=$message";
-                // file($url);
+                $url="http://192.168.1.17:13013/cgi-bin/sendsms?username=admin&password=passer&from=$telAgence&to=$telExpediteur&text=$message";
+                file($url);
                 $this->addFlash('succes',"L'operation s'est dérouler avec succès");
                 $impression = true;
             }

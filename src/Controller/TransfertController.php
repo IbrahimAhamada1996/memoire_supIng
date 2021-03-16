@@ -61,7 +61,10 @@ class TransfertController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             
             if ($user->getCompte()->getSolde() >= $transfert->getMontant()) { 
+                // dump($beneficeService->tabBenefice($transfert->getMontant())['key']);
+                // dump($beneficeService);
                 $k = $manager->getRepository(Tarif::class)->findAll()[$beneficeService->tabBenefice($transfert->getMontant())['key']];
+                
                 $impression = true;
                 $cache = false;
                 
@@ -90,12 +93,14 @@ class TransfertController extends AbstractController
                 $telBeneficiaire = str_replace(' ','',$request->request->get('transfert')['phoneBeneficiaire']);
                 $montant = (float)$request->request->get('transfert')['montant'] - $beneficeService->tarif((float)$request->request->get('transfert')['montant']);
                 $nomCompleteExp = $request->request->get('transfert')['prenomExpediteur']." ".$request->request->get('transfert')['nomExpediteur'];
-                $message = "S-Money:Vous avez reçu une somme de $montant FCFA de la part de  {$nomCompleteExp}";
+               
+                // dd($mtcn);
+                $message = "S-Money:Vous avez reçu une somme de $montant FCFA de la part de  {$nomCompleteExp}. MTCN: {$transfert->getCodeTransfert()}";
                 $message = urlencode($message);
                 
                
-                $url="http://192.168.1.18:13013/cgi-bin/sendsms?username=admin&password=passer&from=$telAgence&to=$telBeneficiaire&text=$message";
-                // file($url);
+                $url="http://192.168.1.17:13013/cgi-bin/sendsms?username=admin&password=passer&from=$telAgence&to=$telBeneficiaire&text=$message";
+                file($url);
                 
                 $this->addFlash('succes','Le transfert se dérouler avec succès');
                 return $this->redirectToRoute('operation_send');

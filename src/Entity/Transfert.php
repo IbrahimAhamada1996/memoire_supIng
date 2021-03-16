@@ -30,6 +30,7 @@ class Transfert
     /**
      * 
      * @MyAssert\SeuilGenerale
+     * @MyAssert\MontantTarif
      * @ORM\Column(type="float")
      */
     private $montant;
@@ -58,7 +59,7 @@ class Transfert
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @MyAssert\Tel
+     * 
      */
     private $phoneExpediteur;
 
@@ -192,7 +193,15 @@ class Transfert
 
     public function setPhoneExpediteur(string $phoneExpediteur): self
     {
-        $this->phoneExpediteur = $phoneExpediteur;
+        if (!preg_match("#^(+221)#",$phoneExpediteur)) {
+            $this->phoneExpediteur = "+221 "+$phoneExpediteur;
+            dd($this->phoneBeneficiaire);
+        }else{
+
+            $this->phoneExpediteur = $phoneExpediteur;
+            dd($this->phoneBeneficiaire);
+        }
+    
 
         return $this;
     }

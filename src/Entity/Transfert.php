@@ -59,7 +59,7 @@ class Transfert
 
     /**
      * @ORM\Column(type="string", length=255)
-     * 
+     * @MyAssert\Tel
      */
     private $phoneExpediteur;
 
@@ -192,14 +192,13 @@ class Transfert
     }
 
     public function setPhoneExpediteur(string $phoneExpediteur): self
-    {
-        if (!preg_match("#^(+221)#",$phoneExpediteur)) {
-            $this->phoneExpediteur = "+221 "+$phoneExpediteur;
-            dd($this->phoneBeneficiaire);
-        }else{
-
+    {   
+        if (strpos("+221",$phoneExpediteur)) {
             $this->phoneExpediteur = $phoneExpediteur;
-            dd($this->phoneBeneficiaire);
+        }else{
+            
+            $this->phoneExpediteur = "+221 ".$phoneExpediteur;
+           
         }
     
 
@@ -297,7 +296,14 @@ class Transfert
 
     public function setPhoneBeneficiaire(string $phoneBeneficiaire): self
     {
-        $this->phoneBeneficiaire = $phoneBeneficiaire;
+        
+        if (strpos("+221",$phoneBeneficiaire)) {
+            $this->phoneBeneficiaire = $phoneBeneficiaire;
+        }else{
+            
+            $this->phoneExpediteur = "+221 ".$phoneBeneficiaire; 
+        }
+    
 
         return $this;
     }

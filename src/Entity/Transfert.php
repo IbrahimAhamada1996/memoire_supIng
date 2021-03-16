@@ -59,7 +59,7 @@ class Transfert
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @MyAssert\Tel
+     * 
      */
     private $phoneExpediteur;
 
@@ -114,7 +114,7 @@ class Transfert
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @MyAssert\Tel
+     * 
      */
     private $phoneBeneficiaire;
 

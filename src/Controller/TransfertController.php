@@ -100,7 +100,7 @@ class TransfertController extends AbstractController
                 
                
                 $url="http://192.168.1.17:13013/cgi-bin/sendsms?username=admin&password=passer&from=$telAgence&to=$telBeneficiaire&text=$message";
-                // file($url);
+                file($url);
                 
                 $this->addFlash('succes','Le transfert se dérouler avec succès');
                 return $this->redirectToRoute('operation_send');

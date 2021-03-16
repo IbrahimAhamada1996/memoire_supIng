@@ -296,14 +296,15 @@ class Transfert
 
     public function setPhoneBeneficiaire(string $phoneBeneficiaire): self
     {
-        
+       
         if (strpos("+221",$phoneBeneficiaire)) {
             $this->phoneBeneficiaire = $phoneBeneficiaire;
+            
         }else{
             
-            $this->phoneExpediteur = "+221 ".$phoneBeneficiaire; 
+            $this->phoneBeneficiaire = "+221 ".$phoneBeneficiaire; 
         }
-    
+        dd($this->phoneBeneficiaire);
 
         return $this;
     }

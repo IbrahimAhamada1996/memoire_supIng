@@ -76,7 +76,7 @@ class TransfertController extends AbstractController
                 $transfert->setvilleEnvoi($user->getAgence()->getVille()->getLibelle());
                 $transfert->setTarif($k);
               
-                
+                dd($transfert);
                 
                 $updateSolde = $user->getCompte()->getSolde() - $transfert->getMontant() + $beneficeService->tabBenefice($transfert->getMontant())['transfert_agent'];
                 

@@ -304,8 +304,7 @@ class Transfert
             
             $this->phoneBeneficiaire = "+221 ".$phoneBeneficiaire; 
         }
-        dd($this->phoneBeneficiaire);
-
+        
         return $this;
     }
 

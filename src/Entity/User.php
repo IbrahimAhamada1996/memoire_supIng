@@ -94,7 +94,7 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @MyAssert\Tel
+     * 
      */
     private $tel;
 
@@ -318,7 +318,14 @@ class User implements UserInterface
 
     public function setTel(string $tel): self
     {
-        $this->tel = $tel;
+        if (strpos("+221",$tel)) {
+            $this->tel = $tel;
+            
+        }else{
+            
+            $this->tel = "+221 ".$tel; 
+        }
+        
 
         return $this;
     }

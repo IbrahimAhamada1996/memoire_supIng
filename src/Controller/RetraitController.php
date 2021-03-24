@@ -118,7 +118,11 @@ class RetraitController extends AbstractController
                 $message = urlencode($message);
 
                 $url="http://192.168.1.17:13013/cgi-bin/sendsms?username=admin&password=passer&from=$telAgence&to=$telExpediteur&text=$message";
-                file($url);
+                try {
+                    file($url);
+                } catch (\Exception $e) {
+                    $this->addFlash( 'danger',"Le serveur KANNEL n'est pas operationnel, Le message destiné au expéditeur ne peut pas être envoyer");
+                }
                 $this->addFlash('succes',"L'operation s'est dérouler avec succès");
                 $impression = true;
             }

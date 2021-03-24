@@ -83,7 +83,8 @@
                             <li> -Tarif : {{dataRetrait[0].tarif}} FCFA</li>
                             <li> -Montant reçu : <b> {{(dataRetrait[0].montant - dataRetrait[0].tarif) | number_format }} FCFA </b></li>
                             <li> -Code : <b>{{dataRetrait[0].codeRetrait}} </b></li>
-                            <li> -Agence : {{dataRetrait[0].user.agence.nomAgence}} </li>
+                            <li> -Nom agence : {{dataRetrait[0].user.agence.nomAgence}} </li>
+                            <li> -N° agence : {{dataRetrait[0].user.agence.numeroAgence}} </li>
                             <li>
                                 <div class="signature">-Signature:</div>
                             </li>

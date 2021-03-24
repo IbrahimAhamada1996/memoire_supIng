@@ -100,7 +100,12 @@ class TransfertController extends AbstractController
                 
                
                 $url="http://192.168.1.17:13013/cgi-bin/sendsms?username=admin&password=passer&from=$telAgence&to=$telBeneficiaire&text=$message";
-                file($url);
+
+                try {
+                    file($url);
+                } catch (\Exception $e) {
+                    $this->addFlash( 'danger',"Le serveur KANNEL n'est pas operationnel, Le message destiné au bénéficiaire ne peut pas être envoyer");
+                }
                 
                 $this->addFlash('succes','Le transfert se dérouler avec succès');
                 return $this->redirectToRoute('operation_send');

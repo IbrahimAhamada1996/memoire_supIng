@@ -36,7 +36,8 @@
                                             <li> -Tarif : {{dataTransfert[0].tarif.tarifClient | number_format}} FCFA</li>
                                             <li> -Montant reçu : <b> {{(dataTransfert[0].montant - dataTransfert[0].tarif.tarifClient) | number_format}} FCFA</b></li>
                                             <li> -Code : <b> {{dataTransfert[0].codeTransfert}}</b></li>
-                                            <li> -Agence : {{dataTransfert[0].user.agence.nomAgence |capitalize}}</li>
+                                            <li> -Nom agence : {{dataTransfert[0].user.agence.nomAgence |capitalize}}</li>
+                                            <li> -N° Agence : {{dataTransfert[0].user.agence.numeroAgence}}</li>        
                                             <li>
                                                 <div class="signature">-Signature:</div>
                                             </li>

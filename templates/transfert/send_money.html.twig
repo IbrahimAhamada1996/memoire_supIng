@@ -5,7 +5,11 @@
 {% form_theme formTransfert 'bootstrap_4_layout.html.twig' %}
 {% block stylesheets %}
     <link href="{{asset('admin/css/modal_recu.css')}}" rel="stylesheet">
-
+    <style>
+      span.etoil{
+        color:red;
+      }
+    </style>
 {% endblock %}
 {% block body %}
   <body id="page-top">
@@ -60,32 +64,38 @@
                   <div class="col-6 ">
 
                     <div class="form-group">
-                        <span style="color:red ">*</span>
+                      <span class="etoil">*</span>
                        {{form_row(formTransfert.prenomExpediteur, {'label':'Prénom','attr': {'placeholder':"Prénom d'expéditeur "}})}}
                     </div>
                     <div class="form-group">
+                      <span class="etoil">*</span>
                       {{form_row(formTransfert.nomExpediteur, {'label':'Nom','attr': {'placeholder':"Nom d'expéditeur "}})}}
                     </div>
                     <div class="form-group">
-                       {{form_row(formTransfert.phoneExpediteur, {'label':'phone','attr': {'placeholder':"numero de téléphone d'expéditeur "}})}}
+                       <span class="etoil">*</span>
+                       {{form_row(formTransfert.phoneExpediteur, {'label':'N° téléphone','attr': {'placeholder':"numero de téléphone d'expéditeur "}})}}
                     </div>
                     <div class="form-group">
                        {{form_row(formTransfert.numeroPieceId, {'label':'N° de piéce','attr': {'placeholder':"Piéce d'entité ou passport "}})}}
                     </div>
                     <div class="form-group">
+                      <span class="etoil">*</span>
                        {{form_row(formTransfert.montant, {'label':'Montant','attr': {'placeholder':"Montant "}})}}
                     </div>
                   </div>
                  
                   <div class="col-6">
                      <div class="form-group">
+                     <span class="etoil">*</span>
                        {{form_row(formTransfert.prenomBeneficiaire, {'label':'Prénom','attr': {'placeholder':"Prénom de bénéficiaire "}})}}
                     </div>
                     <div class="form-group">
+                    <span class="etoil">*</span>
                       {{form_row(formTransfert.nomBeneficiaire, {'label':'Nom','attr': {'placeholder':"Nom de bénéficiaire "}})}}
                     </div>
                     <div class="form-group">
-                       {{form_row(formTransfert.phoneBeneficiaire, {'label':'phone','attr': {'placeholder':"numero de téléphone de bénéficiaire "}})}}
+                    <span class="etoil">*</span>
+                       {{form_row(formTransfert.phoneBeneficiaire, {'label':'N° téléphone','attr': {'placeholder':"numero de téléphone de bénéficiaire "}})}}
                     </div>
                   
                   </div>
